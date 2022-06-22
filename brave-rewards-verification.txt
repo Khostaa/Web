@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: sunil17.com.np
-Token: 9f24bd64734c57446e7498830eb485fdd2a20f28ca94156c9bc70abe99c4e0d5
