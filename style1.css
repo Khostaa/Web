@@ -3,6 +3,7 @@
 }
 
 .flex-container1 > div1{
+    flex-direction: row;
     background-color: #ffd1b3;
     text-align: center;
     width: 40px;
@@ -13,6 +14,7 @@
 
 
  .flex-container2 > p {
+     flex-direction: row;
     width: 32.6%;
     height: 75px;
     background-color: #fff0e6;
