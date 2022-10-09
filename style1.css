@@ -14,7 +14,7 @@
 
 
  .flex-container2 > p {
-     flex-direction: row;
+    flex-direction: row;
     width: 32.6%;
     height: 75px;
     background-color: #fff0e6;
