@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <!-- for responsive website-->
-        <meta name="viewport" content="width-device-width, intial-scale=1.0">
+        <meta name="viewport" content="width=device-width, intial-scale=1.0">
         <!-- title -->
         <title>Khosta</title>
         <!-- for logo at the side of title -->
@@ -30,35 +30,6 @@
       <a href="https://github.com/Khostaa" target="blank"> <img align="left" height= "27px" width="27px" src="img/github.svg"/></a>
       <a href="https://sunil17.medium.com" target="blank"> <img align="left" height= "27px" width="27px" src="img/medium.svg"/></a>
    </div>
-        <!-- Messenger Chat Plugin Code -->
-    <div id="fb-root"></div>
 
-    <!-- Your Chat Plugin code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "105671975464349");
-      chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v15.0'
-        });
-      };
-
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
     </body>
 </html>
