@@ -1,17 +1,8 @@
-h2{
-    font-size: 3rem;
-    font-weight: bold;
-    text-align: center;
-}
-.counter{
-    align-items: left;
-    flex-direction: column;
-}
-.countdown{
-    display: flex;
-    justify-content: space-evenly;
-    text-align: center;
-}
-.day,.hour,.minute,.second{
-    font-size: 2rem;
+/* body src: https://www.magicpattern.design/tools/css-backgrounds */
+body{
+    background-color: #f6f6f6;
+    opacity: 1;
+    background-image:  radial-gradient(#000000 1.1500000000000001px, transparent 1.1500000000000001px), radial-gradient(#000000 1.1500000000000001px, #f6f6f6 1.1500000000000001px);
+    background-size: 46px 46px;
+    background-position: 0 0,23px 23px;
 }
