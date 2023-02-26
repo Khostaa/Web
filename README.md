@@ -1,3 +1,2 @@
-Learning to host a website via GitHub.
-Wanna see it?
-Click link in Profile
+This is repo for my Personal Website.
+[Sunil] {https://www.sunil17.com.np/}
