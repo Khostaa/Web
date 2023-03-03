@@ -6,13 +6,20 @@
     display: flex;
     justify-content: space-evenly;
     text-align: center;
+    align-items: center;
+    animation: mymove 1s infinite;
 }
-.day,.hour,.minute,.second{
-    font-size: 2rem;
+@keyframes mymove {
+    from {color: #ff0000;}
+    to {color: #000000;}
 }
-
 @media (orientation: landscape)
 {
+    .day,.hour,.minute,.second{
+        font-size: 3rem;
+        color: red;
+        animation: mymove 1s infinite;
+    }
     p{
         font-size : 2rem;
         font-weight: italic;
@@ -23,11 +30,21 @@
         font-size: 3.5rem;
         font-weight: bold;
         text-align: center;
-        color: var(--color-mid-dark);
     }
+    h2:hover{
+        color: #0bd867;
+    }
+
 }
+
 @media (orientation: portrait)
 {
+    .day,.hour,.minute,.second{
+        font-size: 2rem;
+        color: red;
+        animation: mymove 1s infinite;
+
+    }
     p{
         font-size : 1.5rem;
         font-weight: italic;
@@ -38,6 +55,8 @@
         font-size: 2.5rem;
         font-weight: bold;
         text-align: center;
-        color: var(--color-mid-dark);
+    }
+    h2:hover{
+        color: #0bd83e;   
     }
 }
