@@ -15,9 +15,22 @@ h2{
 .day,.hour,.minute,.second{
     font-size: 2rem;
 }
-p{
-    font-size : 2rem;
-    font-weight: italic;
-    text-align: center;
-    align-content: center;
+
+@media (orientation: landscape)
+{
+    p{
+        font-size : 2rem;
+        font-weight: italic;
+        text-align: center;
+        align-content: center;
+    }
+}
+@media (orientation: portrait)
+{
+    p{
+        font-size : 1.5rem;
+        font-weight: italic;
+        text-align: center;
+        align-content: center;
+    }
 }
