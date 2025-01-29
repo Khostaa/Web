@@ -6,3 +6,104 @@ body{
     background-size: 46px 46px;
     background-position: 0 0,23px 23px;
 }
+/* Centering the button */
+.button-container {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    margin: 20px auto;
+}
+
+/* Styling the button */
+#openLinkBtn {
+    background-color: #012a39;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: 2px solid #012a39;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    overflow: hidden;
+    position: relative;
+    transform-origin: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+/* Hover effect */
+#openLinkBtn:hover {
+    background-color: whitesmoke;
+    color: #29ab6d;
+    border: 2px solid #29ab6d;
+    transform: scale(1.1);
+    overflow: hidden;
+}
+body {
+    /* Existing background image properties */
+    position: relative;
+    min-height: 95vh;
+    margin: 0;
+
+    /*font*/
+    font-family: "Englebert", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(4px);
+    z-index: 1;
+}
+
+/* Make all direct children of body appear above the overlay */
+body > * {
+    position: relative;
+    z-index: 2;
+    color: #071d25; /* Light text for contrast */
+}
+
+div p {
+    margin: 10px auto;  /* Reduce top/bottom margin */
+    padding: 5px auto;  /* Add minimal padding */
+}
+
+/* For the social icons container */
+div:nth-of-type(2) {
+    margin-top: 5px;
+}
+
+/* For the icons themselves */
+div p a {
+    margin: auto 5px;  /* Reduce horizontal spacing between icons */
+    display: inline-block;
+}
+/* First div containing intro and email */
+div:first-of-type {
+    margin-top: 50px;
+}
+
+/* Space between email and "Connect with me" */
+div:first-of-type + div {
+    margin-top: 30px;
+}
+
+div p {
+    margin: 10px auto;
+    padding: 5px auto;
+    font-weight: 400;
+}
+.text-on{
+    font-family: "Iceberg", serif;
+
+}
+    

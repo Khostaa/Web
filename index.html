@@ -11,28 +11,47 @@
         <link rel="icon" type= "image/svg" href="img/logo.svg">
         <link rel="stylesheet" href="./css/style.css" type = "text/css">
         <link rel="stylesheet" href="./css/style1.css" type = "text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;500;600&family=Englebert&family=Iceberg&display=swap" rel="stylesheet">
     </head>
 <body >
     <div>
         <p>
-            👋 Hey there! I'm Sunil (aka Khosta).<br>
+            👋 Hey there! I'm Sunil a.k.a. "Khosta".<br>
             📧 mailkhosta@gmail.com<br>
         </p>
     </div>
     <div>
-      <p> Connect with me:</p>
-       <p>
-            <a href="https://www.facebook.com/sunil.poudel17" target="blank" class="facebook"> <img align="center" height= "30px" width="30px" src="img/facebook.svg" alt= "Facebook"/></a>
-            <a href="https://www.instagram.com/sunil_poudel17/" target="blank" class="instagram"> <img align="center" height= "30px" width="30px" src="img/instagram.svg" alt= "Instagram"/></a>
-            <a href="https://x.com/Sunil_Poudel17" target="blank" class="x"> <img align="center" height= "30px" width="30px" src="img/x.svg" alt= "X"/></a>
-            <a href="https://www.linkedin.com/in/khostaa/" target="blank"> <img align="center" height= "30px" width="30px" src="img/linkedin.svg" alt= "Linkedin"/></a>
-            <a href="https://discord.gg/AsnMswFT25" target="blank"> <img align="center" height="30px" width="30px" src="img/discord.svg" alt= "Discord"/></a>
-            <a href="https://github.com/Khostaa" target="blank"> <img align="center" height= "30px" width="30px" src="img/github.svg" alt= "GitHub"/></a>
-            <a href="https://khostaa.medium.com" target="blank"> <img align="center" height= "30px" width="30px" src="img/medium.svg" alt= "Medium"/></a>
+      <p class="text-on"> Connect with me:</p>
+       <p class = "social-links">
+            <a href="https://www.facebook.com/sunil.poudel17" target="blank" class="facebook social-link">
+                <img src="img/facebook.svg" alt="Facebook"/>
+                <span>sunil.poudel17</span>
+            </a>
+            <a href="https://www.instagram.com/sunil_poudel17/" target="blank" class="instagram social-link"> <img align="center" height= "30px" width="30px" src="img/instagram.svg" alt= "Instagram"/><span>sunil_poudel17</span></a>
+            <a href="https://x.com/Sunil_Poudel17" target="blank" class="x social-link"> <img align="center" height= "30px" width="30px" src="img/x.svg" alt= "X"/><span>Sunil_Poudel17</span></a>
+            <a href="https://www.linkedin.com/in/khostaa/" class="linkedin social-link" target="blank"> <img align="center" height= "30px" width="30px" src="img/linkedin.svg" alt= "Linkedin"/><span>khostaa</span></a>
+            <a href="https://discord.gg/AsnMswFT25" class="discord social-link" target="blank"> <img align="center" height="30px" width="30px" src="img/discord.svg" alt= "Discord"/><span>khosta</span></a>
+            <a href="https://github.com/Khostaa" class="github social-link" target="blank"> <img align="center" height= "30px" width="30px" src="img/github.svg" alt= "GitHub"/><span>Khostaa</span></a>
+            <a href="https://khostaa.medium.com" class="medium social-link" target="blank"> <img align="center" height= "30px" width="30px" src="img/medium.svg" alt= "Medium"/><span>Khostaa</span></a>
       </p>
     </div>
+    <!-- Button to Open External Link -->
+    <div class="button-container">
+        <button id="openLinkBtn">Peek at Portfolio</button>
+    </div>
+    <script>
+        document.getElementById("openLinkBtn").addEventListener("click", function() {
+            window.open("https://www.behance.net/khostaa", "_blank");
+        });
+    </script>
+
     <div>
-        <p> Portfolio: 
+        <p class="text-on">
+            know more about me at: 
+        </p>
+        <p>
             <a href="https://www.facebook.com/khostaaa/" target="blank" class="facebook"> <img align="center" height= "30px" width="30px" src="img/facebook.svg" alt= "Facebook"/></a>
             <a href="https://www.instagram.com/khosta.np/" target="blank" class="instagram"> <img align="center" height= "30px" width="30px" src="img/instagram.svg" alt= "Instagram"/></a>
             <a href="https://www.github.com/Khostaa" target="blank"> <img align="center" height= "30px" width="30px" src="img/github.svg" alt= "GitHub"/></a>

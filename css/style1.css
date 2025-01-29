@@ -60,3 +60,81 @@
         color: #0bd83e;   
     }
 }
+
+/* icon animation */
+/* Base styles for social links */
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    background: transparent;
+    border-radius: 50%;
+    padding: 5px;
+    margin: 5px;
+    width: 40px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link img {
+    min-width: 30px;
+    height: 30px;
+}
+
+.social-link span {
+    color: #071d25;
+    padding: 0 15px;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    width: 160px;
+    border-radius: 25px;
+
+}
+
+.social-link:hover span {
+    opacity: 1;
+    transform: translateX(0);
+}
+.social-links{
+    font-family: "Roboto", serif;
+}
+.social-link.facebook:hover {
+    background: rgba(24, 119, 242, 0.8);
+}
+
+.social-link.instagram:hover {
+    background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    border-radius: 15px;
+}
+
+.social-link.x:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+}
+
+.social-link.linkedin:hover {
+    background: rgba(10, 102, 194, 0.8);
+    border-radius: 10px;
+}
+
+.social-link.discord:hover {
+    background: rgba(88, 101, 242, 0.8);
+}
+
+.social-link.github:hover {
+    background: rgba(23, 21, 21, 0.8);
+}
+
+.social-link.medium:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.social-link:hover span {
+    color: white;
+}
