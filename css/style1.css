@@ -138,3 +138,8 @@
 .social-link:hover span {
     color: white;
 }
+
+.social-link.youtube:hover {
+    background: rgba(255, 0, 0, 0.8);
+    border-radius: 10px;
+}

@@ -21,3 +21,21 @@ const countdown = () =>{
   document.querySelector(".second").innerText = textSecond;
 };
 setInterval(countdown,1000);
+
+const toggleSwitch = document.querySelector('#theme-toggle');
+
+// Check for saved theme preference
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+}
+
+toggleSwitch.addEventListener('click', function() {
+    document.body.classList.toggle('dark-mode');
+    
+    // Save preference
+    if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+    } else {
+        localStorage.setItem('darkMode', 'disabled');
+    }
+});

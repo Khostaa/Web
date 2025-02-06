@@ -106,4 +106,416 @@ div p {
     font-family: "Iceberg", serif;
 
 }
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #121212;
+    background-image: radial-gradient(#ffffff 1.15px, transparent 1.15px), radial-gradient(#ffffff 1.15px, #121212 1.15px);
+}
+
+body.dark-mode > * {
+    color: #ffffff;
+}
+
+/* Theme container and text styles */
+.theme-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
+    width: fit-content;
+}
+
+.theme-text {
+    font-size: 1.2rem;
+    color: #071d25;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+body.dark-mode .theme-text {
+    color: #ffffff;
+}
+
+/* Theme switch styles */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f4f4f4;
+    transition: .4s;
+    border-radius: 30px;
+    border: 2px solid #071d25;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.slider .sun {
+    color: #ffd700;
+    width: 18px;
+    height: 18px;
+}
+
+.slider .moon {
+    color: #ffffff;
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #071d25;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #071d25;
+    border-color: #ffffff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+    background-color: #ffffff;
+}
+
+/* Dark mode icon colors */
+body.dark-mode .slider .sun {
+    color: #ffd700;
+}
+
+body.dark-mode .slider .moon {
+    color: #ffffff;
+}
+
+/* Ensure icons stay visible in both modes */
+.slider svg {
+    z-index: 2;
+}
+
+/* Icon color adjustments for dark mode - only for GitHub icon */
+body.dark-mode .github.social-link img {
+    filter: invert(1);
+}
+body.dark-mode .x.social-link img {
+    filter: invert(1);
+}
+body.dark-mode .medium.social-link img {
+    filter: invert(1);
+}
+
+/* Reset filter for other icons */
+.social-link img {
+    filter: none;
+    transition: filter 0.3s ease;
+}
+
+/* Only GitHub icon needs inversion in light mode */
+.github.social-link img {
+    filter: invert(0);
+}
+
+/* Keep hover effects as they are */
+.social-link:hover img {
+    filter: invert(0);
+}
+
+/* Dark mode button styles */
+body.dark-mode #openLinkBtn {
+    background-color: #29ab6d;
+    border-color: #29ab6d;
+    color: white;
+}
+
+body.dark-mode #openLinkBtn:hover {
+    background-color: transparent;
+    color: #29ab6d;
+}
+
+/* Navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 1rem 0;
+}
+
+body.dark-mode .navbar {
+    background-color: rgba(18, 18, 18, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo a {
+    font-family: "Iceberg", serif;
+    font-size: 1.5rem;
+    color: #071d25;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body.dark-mode .nav-logo a {
+    color: #ffffff;
+}
+
+/* Theme container and switch styles */
+.theme-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-text {
+    font-size: 1rem;
+    color: #071d25;
+}
+
+body.dark-mode .theme-text {
+    color: #ffffff;
+}
+
+/* Theme switch styles */
+.theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f4f4f4;
+    transition: .4s;
+    border-radius: 30px;
+    border: 2px solid #071d25;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.slider .sun {
+    color: #ffd700;
+    width: 18px;
+    height: 18px;
+}
+
+.slider .moon {
+    color: #ffffff;
+    width: 18px;
+    height: 18px;
+    margin-left: auto;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #071d25;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #071d25;
+    border-color: #ffffff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(30px);
+    background-color: #ffffff;
+}
+
+/* Dark mode icon colors */
+body.dark-mode .slider .sun {
+    color: #ffd700;
+}
+
+body.dark-mode .slider .moon {
+    color: #ffffff;
+}
+
+/* Ensure icons stay visible in both modes */
+.slider svg {
+    z-index: 2;
+}
+
+/* Adjust main content to account for fixed navbar */
+body {
+    padding-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 768px) {
+    .nav-content {
+        padding: 0 1rem;
+    }
     
+    .theme-text {
+        font-size: 0.9rem;
+    }
+}
+    
+
+@import "https://unpkg.com/open-props/easings.min.css";
+
+.theme-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px auto;
+}
+
+.theme-text {
+    font-size: 1.2rem;
+    color: #071d25;
+}
+
+body.dark-mode .theme-text {
+    color: #ffffff;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    inline-size: 3rem;
+    block-size: 3rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px;
+}
+
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+    transform-origin: center;
+}
+
+.sun-and-moon > :is(.moon, .sun) {
+    fill: #071d25;
+}
+
+body.dark-mode .sun-and-moon > :is(.moon, .sun) {
+    fill: #ffffff;
+}
+
+.sun-and-moon > .sun-beams {
+    stroke: #071d25;
+    stroke-width: 2px;
+}
+
+body.dark-mode .sun-and-moon > .sun-beams {
+    stroke: #ffffff;
+}
+
+body.dark-mode .sun-and-moon > .sun {
+    transform: scale(1.75);
+}
+
+body.dark-mode .sun-and-moon > .sun-beams {
+    opacity: 0;
+}
+
+body.dark-mode .sun-and-moon > .moon > circle {
+    transform: translateX(-7px);
+}
+
+@supports (cx: 1) {
+    body.dark-mode .sun-and-moon > .moon > circle {
+        cx: 17;
+        transform: translateX(0);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .sun-and-moon > .sun {
+        transition: transform .5s var(--ease-elastic-3);
+    }
+
+    .sun-and-moon > .sun-beams {
+        transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3);
+    }
+
+    .sun-and-moon .moon > circle {
+        transition: transform .25s var(--ease-out-5);
+    }
+
+    @supports (cx: 1) {
+        .sun-and-moon .moon > circle {
+            transition: cx .25s var(--ease-out-5);
+        }
+    }
+
+    body.dark-mode .sun-and-moon > .sun {
+        transition-timing-function: var(--ease-3);
+        transition-duration: .25s;
+        transform: scale(1.75);
+    }
+
+    body.dark-mode .sun-and-moon > .sun-beams {
+        transition-duration: .15s;
+        transform: rotateZ(-25deg);
+    }
+
+    body.dark-mode .sun-and-moon > .moon > circle {
+        transition-duration: .5s;
+        transition-delay: .25s;
+    }
+}
+        
