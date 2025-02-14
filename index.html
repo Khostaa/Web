@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <!-- for responsive website-->
-        <meta name="viewport" content="width=device-width, intial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- title -->
         <title>Khosta</title>
         <!-- for logo at the side of title -->
@@ -16,7 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;500;600&family=Englebert&family=Iceberg&display=swap" rel="stylesheet">
     </head>
 <body>
-    <div>
+  <div class="page-wrapper" style="margin: 0 auto; max-width: 1200px; max-height: 800px;">  
         <p class="theme-container">
             <span class="theme-text">Theme</span>
             <button class="theme-toggle" id="theme-toggle" title="Toggles light & dark" aria-label="auto" aria-live="polite">
@@ -39,7 +39,6 @@
                 </svg>
             </button>
         </p>
-    </div>
     <div>
         <p>
             👋 Hey there! I'm Sunil a.k.a. "Khosta".<br>
@@ -94,9 +93,9 @@
             </a>
         </p> 
     </div>
-<!-- 
+
    <section class="Timer">
-     <h2>Countdown Timer till EXAM Ends </h2>
+     <h2>Countdown Timer till EXAM starts </h2>
         <div>
             <div class="countdown">
             <div class="container-day">
@@ -117,14 +116,14 @@
             </div>
             </div>
         </div> 
-    -->
+   
 
       <p> Thanks for Visiting!<br>
           Have a nice day!</p>
     </section>
-    <!-- <script>
+    <script>
         const countdown = () =>{
-        const countDate = new Date('September 7, 2024 16:00:00').getTime();
+        const countDate = new Date('March 18, 2025 13:00:00').getTime();
         const now = new Date().getTime();
         const gap = countDate - now;
 
@@ -146,7 +145,7 @@
        document.querySelector(".second").innerText = textSecond;
      };
     setInterval(countdown,1000);
-   </script> -->
+   </script>
     <script>
         const storageKey = 'theme-preference';
 
@@ -199,5 +198,22 @@
                 reflectPreference();
             });
     </script>
-    </body>
+  </div>
+
+  <script>
+    function scalePage() {
+      const wrapper = document.querySelector('.page-wrapper');
+      // Optionally, if you know your design's natural size (for example 1200px x 800px)
+      // you can use those values directly.
+      const naturalWidth = wrapper.offsetWidth;
+      const naturalHeight = wrapper.offsetHeight;
+      const scaleWidth = window.innerWidth / naturalWidth;
+      const scaleHeight = window.innerHeight / naturalHeight;
+      const scale = Math.min(scaleWidth, scaleHeight);
+      wrapper.style.transform = `scale(${scale})`;
+    }
+    window.addEventListener('load', scalePage);
+    window.addEventListener('resize', scalePage);
+  </script>
+</body>
 </html>
