@@ -1,72 +1,120 @@
 # Khosta — Sunil Paudel
 
-An Astro 7 portfolio, generated as static HTML and deployed through GitHub Pages. The design, native SVG logo, theme switch, and on-demand video embeds are preserved.
+A minimal video editor portfolio built with Astro 7.4.1 and published as a static website through GitHub Pages.
 
-For complete owner documentation, content examples, styling instructions, and publishing guidance, read [SITE-GUIDE.md](SITE-GUIDE.md).
+- **Live website:** [www.sunil17.com.np](https://www.sunil17.com.np/)
+- **Source:** [Khostaa/Web](https://github.com/Khostaa/Web)
+- **Deployments:** [GitHub Actions](https://github.com/Khostaa/Web/actions)
+- **Complete editing guide:** [SITE-GUIDE.md](SITE-GUIDE.md)
 
-## Content
+## Hosting
 
-Edit `src/data/portfolio.json`. Set `showreelUrl`, and add video objects to `videos`:
+GitHub Pages hosts the website. GitHub Actions builds and tests every push to `main`, then publishes the generated `dist/` directory. Cloudflare manages the domain's DNS and proxy. The original ChatGPT Sites preview is a separate copy; it does not synchronize with this repository.
 
-```json
-{ "title": "Film title", "category": "Travel film", "platform": "youtube", "aspectRatio": "16:9", "url": "https://www.youtube.com/watch?v=VIDEO_ID", "thumbnail": "assets/story.jpg", "year": "2026" }
-```
+Keep GitHub Settings → Pages → Source set to **GitHub Actions**, and its custom domain set to **www.sunil17.com.np**. Both `public/CNAME` and `astro.config.mjs` use this domain. No `/Web` base path is needed with the custom domain. Deployment uses temporary GitHub workflow credentials; no permanent deployment token is stored in this project.
 
-Supported platforms: `youtube`, `instagram`, and `tiktok`. Use full public links, expanding shortened TikTok links. Ratios: `9:16`, `16:9`, `4:3`, `1:1`, and `3:4`. Players keep the chosen ratio and load only on click. If a platform requires sign-in or blocks embedding, an original-platform link is provided.
+## Run locally
 
-The existing `assets/reel.jpg`, `assets/story.jpg`, `assets/social.jpg`, and `assets/motion.jpg` names resolve to optimized image variants. Put custom poster files in `public/assets/` and reference them as `/assets/your-poster.jpg`. For automatic optimization of new local images, import them through `astro:assets` as in `src/pages/index.astro`.
+Use Node.js 24 and pnpm 11.25.0, matching the deployment workflow.
 
-Until real video links are provided, the gallery has coming-soon placeholders and the hero plays clearly labeled sample footage. The sample is not Khosta’s work.
-
-Add wishlist entries to `gifts` as `{ "title": "Gift name", "note": "A short note", "url": "https://..." }`. The list is intentionally empty. No payments are collected by the website.
-
-### Social profiles
-
-Edit the `socials` array in `src/data/portfolio.json`:
-
-```json
-"socials": [
-  { "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" },
-  { "label": "YouTube", "url": "https://www.youtube.com/@KhostaTuts" }
-]
-```
-
-The current list contains 11 distinct links imported from https://www.sunil17.com.np/, including clearly labeled creator and personal accounts. Edit URLs/labels, delete objects, or move them to change the order. Set `socials` to `[]` to hide the row. `src/components/SocialLinks.astro` renders valid links below the contact details, with new-tab behavior. The list is a snapshot, not an automatic sync with the old site. See the full guide for all current destinations.
-
-### Fonts
-
-Regular headings and interface text use Inter from Google Fonts. Tan italic text uses locally hosted Libre Caslon Condensed. Its regular/italic WOFF2 files are in `src/assets/fonts/`; `@font-face` rules are in `src/styles/global.css`, and the italic preload is in `src/pages/index.astro`. License and author files are in `public/fonts/`. Update both the CSS and preload when replacing the serif font.
-
-## Development
-
-Use the package manager pinned in `package.json`:
-
-```text
-pnpm install
+```sh
+pnpm install --frozen-lockfile
 pnpm dev
+```
+
+Development runs at http://127.0.0.1:4321. To check production output:
+
+```sh
 pnpm build
 pnpm test
 pnpm preview
 ```
 
-Edit sources in `src/` and `public/`; `dist/` is generated output. The workflow in `.github/workflows/deploy.yml` builds and verifies each push to `main`, then publishes `dist/` to GitHub Pages. In repository Settings → Pages, choose **GitHub Actions** as the source. The custom domain is set in `public/CNAME` and `astro.config.mjs`.
+Run the build before tests: verification reads the generated HTML. Preview also uses the most recent build.
 
-## Performance and behavior
+## What to edit
 
-- Static HTML includes the project gallery and social profile links before JavaScript runs. No client framework or hydrated islands are shipped.
-- Astro generates responsive WebP hero and gallery images with explicit dimensions and lazy gallery loading.
-- Styles and interaction code are bundled/minified with hashed URLs. The tiny appearance initializer is inlined before styles to avoid a theme flash.
-- Theme choice is saved per browser and shared across tabs. Dark is the default. Light mode uses warm off-white, navy, green, and deeper tan for readable text.
-- Native SVG center and ring assets share an aligned viewport. Only the green logo’s center rotates, using a seamless 14-second CSS transform. Tan logos remain static. Off-screen/hidden-tab animation pauses, and reduced-motion preferences disable it.
+| Change | File |
+| --- | --- |
+| Name, email, phone, showreel, work, gifts, social links | `src/data/portfolio.json` |
+| Page copy, navigation, sections, metadata | `src/pages/index.astro` |
+| Work gallery markup | `src/components/WorkGallery.astro` |
+| Social link markup | `src/components/SocialLinks.astro` |
+| Colors, typography, layout, logo animation | `src/styles/global.css` |
+| Filters, players, theme control, copy email | `src/scripts/app.js` |
+| Theme before page paint | `src/scripts/theme.js` |
+| Video URL parsing and aspect ratios | `src/lib/media.js` |
+| Logo SVG files and custom public images | `public/assets/` |
+| Optimized source photos and local fonts | `src/assets/` |
+| Build origin and settings | `astro.config.mjs` |
+| Automatic publishing | `.github/workflows/deploy.yml` |
 
-Fonts: Inter from Google Fonts and locally hosted Libre Caslon Condensed from https://github.com/ertekinno/libre-caslon-condensed. Font license and authors are included under public/fonts/. Illustrative atmosphere images: Unsplash. Demo video: Google sample footage. Visual direction was inspired by https://unchainedagency.com/ without copying its branding or work.
+Edit source files, not generated `dist/` output. The full guide explains adding, removing, reordering, and hiding content and sections.
 
+## Add work
 
+Add objects to the `videos` array in `src/data/portfolio.json`:
 
-## Publish changes
+```json
+{
+  "title": "Film title",
+  "category": "Travel film",
+  "platform": "youtube",
+  "aspectRatio": "16:9",
+  "url": "https://www.youtube.com/watch?v=VIDEO_ID",
+  "thumbnail": "/assets/your-poster.jpg",
+  "year": "2026"
+}
+```
 
-Repository: https://github.com/Khostaa/Web
+Platforms: `youtube`, `instagram`, and `tiktok`. Supported ratios: `9:16`, `16:9`, `4:3`, `1:1`, and `3:4`. Use full public links; expand shortened TikTok links. Players load on click and provide an original-platform link if embedding is blocked. Put your poster in `public/assets/`, or import new source images through Astro for optimization.
 
-Production domain: https://www.sunil17.com.np/
+Set `showreelUrl` to replace the hero's labeled sample reel. The real work list is currently empty, so coming-soon placeholders appear. Sample footage is not presented as Khosta's work.
 
-Commit source changes and push to `main`, then check the Actions tab for build and deployment success. Keep generated `dist/` files out of Git. Existing GitHub Pages DNS records continue to route the domain. The earlier Sites preview is an independent copy and does not update with GitHub pushes. No permanent deployment token is stored here.
+## Wishlist and social links
+
+Add wishlist objects to `gifts`:
+
+```json
+{ "title": "Gift name", "note": "A short note", "url": "https://example.com/item" }
+```
+
+Add social profile objects to `socials`:
+
+```json
+{ "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" }
+```
+
+Delete an object to remove it; move it within the array to change its order. The wishlist is intentionally empty. There are 11 social profile links, including labeled personal accounts. Setting `socials` to `[]` hides the social row. No payments are collected by the website.
+
+## Design and performance
+
+- Green `#2cac6d`, navy `#1d1d35`, and tan `#deb887`, with corresponding light-mode colors.
+- Inter for regular headings and interface text; local Libre Caslon Condensed for tan italic text.
+- Static HTML, responsive WebP images, minified assets, and no hydrated client framework.
+- Theme selection persists in the browser; dark is the default.
+- Only green logo centers rotate clockwise in a seamless 14-second CSS loop. Tan logos stay static. Off-screen and hidden-tab animations pause; reduced-motion settings disable rotation.
+
+## Publish an update
+
+```sh
+pnpm build
+pnpm test
+git add .
+git commit -m "Update portfolio"
+git push origin main
+```
+
+Check the [Actions run](https://github.com/Khostaa/Web/actions) until both build and deployment succeed, then verify the live website. A failed workflow leaves the previous successful deployment in place. To roll back, revert the relevant commit and push the revert. Older website files remain in Git history.
+
+The current verifier includes demo-specific assertions for the empty wishlist, contact email, placeholders, images, and Astro version. Update those assertions when intentionally changing that content; see the complete guide. Keep dependencies, generated output, and credentials out of Git.
+
+## Cloudflare
+
+The existing four `www` A records route to GitHub Pages (185.199.108.153 through 185.199.111.153); the apex CNAME points to `www.sunil17.com.np`. Domain routing, HTTPS, and any proxy settings are managed separately from repository content. Email records support mail delivery and are not deployment artifacts.
+
+GitHub Pages does not need a Cloudflare Worker to build or publish this Astro site. Any Worker serving the domain must be reviewed for other functions before removal.
+
+## Credits
+
+[Inter](https://fonts.google.com/specimen/Inter) is loaded from Google Fonts. [Libre Caslon Condensed](https://github.com/ertekinno/libre-caslon-condensed) is hosted locally, with license and authors under `public/fonts/`. Atmosphere photos: Unsplash. Demo video: Google sample footage. Visual direction inspired by [Unchained Agency](https://unchainedagency.com/).
