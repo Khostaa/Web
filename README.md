@@ -117,4 +117,4 @@ The unused `perf-metrics-f208` Worker and its domain route were removed on 20 Oc
 
 ## Credits
 
-[Inter](https://fonts.google.com/specimen/Inter) is loaded from Google Fonts. [Libre Caslon Condensed](https://github.com/ertekinno/libre-caslon-condensed) is hosted locally, with license and authors under `public/fonts/`. Atmosphere photos: Unsplash. Demo video: Google sample footage. Visual direction inspired by [Unchained Agency](https://unchainedagency.com/).
+[Inter](https://fonts.google.com/specimen/Inter) is loaded from Google Fonts. [Libre Caslon Condensed](https://github.com/ertekinno/libre-caslon-condensed) is hosted locally, with license and authors under `public/fonts/`. Atmosphere photos: Unsplash. Demo video: Google sample footage.
