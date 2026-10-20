@@ -2,7 +2,7 @@
 
 This guide describes the site as it is currently implemented, including the details that are not controlled by the content file.
 
-**Documentation updated:** 20 October 2026. Includes Libre Caslon Condensed, 11 social links, and GitHub Pages deployment.
+**Documentation updated:** 20 October 2026. Includes Libre Caslon Condensed, 11 social links, GitHub Pages deployment, and the completed Cloudflare cleanup.
 
 **Project folder:** `C:\Users\sunil\OneDrive\Documents\sites\khosta-web-github`  
 **Production domain:** https://www.sunil17.com.np/
@@ -675,9 +675,35 @@ In the `<head>` of `index.astro`, edit the title and meta description. Keep the 
 
 `astro.config.mjs → site` is `https://www.sunil17.com.np`. Keep it aligned with `public/CNAME` and the custom domain in GitHub Settings → Pages. There is no `/Web` base path when using the custom domain. Changing the build origin alone does not change DNS.
 
-Cloudflare currently routes `www` to GitHub Pages through four A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`. The apex CNAME points to `www.sunil17.com.np`. Keep mail records separate from website routing. Two TXT records were added during an earlier Sites connection attempt; they do not change routing.
+Cloudflare currently routes `www` to GitHub Pages through four A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, and `185.199.111.153`. The apex CNAME points to `www.sunil17.com.np`. Keep mail records separate from website routing. The obsolete Sites verification TXT records were removed after choosing GitHub Pages.
 
 The original Sites preview remains independent. This GitHub checkout does not use its hosting manifest or credentials.
+
+### Cloudflare configuration after cleanup
+
+On 20 October 2026, the unused Worker `perf-metrics-f208` and its `*sunil17.com.np/*` route were deleted. Cloudflare's Workers & Pages list and this domain's Worker route list are now empty. The website is built and hosted by GitHub Pages; a Cloudflare Worker is not required for deployment.
+
+Three obsolete TXT records were removed:
+
+- `_openai-site-verification.www.sunil17.com.np`: the abandoned Sites ownership check.
+- `_cf-custom-hostname.www.sunil17.com.np`: the abandoned Sites custom-hostname check.
+- The apex TXT value pointing to `Kiddo-Sunil/Web/blob/main/brave-rewards-verification.txt`: an old Brave verification link to a file not present in the current repository.
+
+The remaining 13 DNS records were preserved:
+
+| Purpose | Records retained |
+| --- | --- |
+| GitHub Pages website | Four A records for `www` and the apex CNAME to `www.sunil17.com.np` |
+| Zoho incoming email | Three MX records to `mx.zoho.com`, `mx2.zoho.com`, and `mx3.zoho.com` |
+| Email authentication and ownership | SPF TXT, Zoho verification TXT, and DKIM TXT records at `zmail._domainkey` and `cf2024-1._domainkey` |
+| Google ownership verification | The existing `google-site-verification` TXT record |
+
+Cloudflare's website proxy and HTTPS settings were preserved. Mail and verification records have purposes separate from publishing the portfolio, so they should not be removed just because the website does not read them. Existing Cloudflare API tokens were not changed; the GitHub Pages workflow does not need a Cloudflare token.
+
+### Moving the website to a different domain
+
+Update `astro.config.mjs → site`, `public/CNAME`, and GitHub Settings → Pages → Custom domain together. Configure DNS at the new domain's provider, push the source changes, wait for the Pages deployment and certificate setup, and check the new HTTPS URL. Changing a README link alone does not move the website. When changing hosts, use that host's exact DNS instructions rather than reusing unrelated verification records.
+
 
 ## 17. Build, check, and publish
 
@@ -701,7 +727,7 @@ If you add gifts, change the email, replace the complete set of placeholders wit
 
 ### Publishing this particular site
 
-.github/workflows/deploy.yml runs on pushes to `main` and supports manual runs from the Actions tab. It uses Node 24 and pnpm 11.25.0, builds the Astro site, runs `pnpm test`, uploads the Pages artifact, and deploys it using temporary GitHub workflow credentials.
+`.github/workflows/deploy.yml` runs on pushes to `main` and supports manual runs from the Actions tab. It uses Node 24 and pnpm 11.25.0, builds the Astro site, runs `pnpm test`, uploads the Pages artifact, and deploys it using temporary GitHub workflow credentials.
 
 One-time setup: GitHub Settings → Pages → Build and deployment → Source → **GitHub Actions**. Keep the custom domain `www.sunil17.com.np` and existing Cloudflare routing.
 

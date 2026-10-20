@@ -113,7 +113,7 @@ The current verifier includes demo-specific assertions for the empty wishlist, c
 
 The existing four `www` A records route to GitHub Pages (185.199.108.153 through 185.199.111.153); the apex CNAME points to `www.sunil17.com.np`. Domain routing, HTTPS, and any proxy settings are managed separately from repository content. Email records support mail delivery and are not deployment artifacts.
 
-GitHub Pages does not need a Cloudflare Worker to build or publish this Astro site. Any Worker serving the domain must be reviewed for other functions before removal.
+The unused `perf-metrics-f208` Worker and its domain route were removed on 20 October 2026, along with two abandoned Sites verification TXT records and an obsolete Brave verification TXT record. Website routing, proxy/HTTPS settings, email records, and Google verification were preserved. See the full guide for the retained DNS inventory. GitHub Pages does not require a Cloudflare Worker or Cloudflare deployment token.
 
 ## Credits
 
