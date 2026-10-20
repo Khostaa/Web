@@ -1,0 +1,14 @@
+---
+import { safeUrl } from '../lib/media.js';
+const { links = [] } = Astro.props;
+const profiles = links.filter(link => typeof link.label === 'string' && link.label.trim() && safeUrl(link.url));
+---
+{profiles.length > 0 && (
+  <nav class="social-links" aria-label="Social profiles">
+    {profiles.map(profile => (
+      <a href={profile.url} target="_blank" rel="noopener noreferrer" aria-label={`${profile.label} (opens in a new tab)`}>
+        {profile.label}<span aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </nav>
+)}

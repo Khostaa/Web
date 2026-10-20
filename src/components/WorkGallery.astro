@@ -1,0 +1,33 @@
+---
+import { platforms, defaults, placeholderRatios, videoRatio, parseVideo } from '../lib/media.js';
+const { portfolio, images } = Astro.props;
+const videos = portfolio.videos.filter(video => parseVideo(video.url));
+const lanes = Object.keys(platforms).map(platform => {
+  const matching = videos.filter(video => (video.platform || parseVideo(video.url)?.platform) === platform);
+  return { platform, projects: matching.length ? matching : placeholderRatios[platform].map(aspectRatio => ({ aspectRatio, placeholder: true })) };
+});
+---
+<div class="project-grid" id="projects" data-prerendered>
+  {lanes.map(({ platform, projects }) => (
+    <div class="project-lane">
+      {projects.map(video => {
+        const preset = defaults[platform];
+        const real = !video.placeholder;
+        const ratio = videoRatio(video.aspectRatio || video.ratio, platform, video.url);
+        const imagePath = video.thumbnail || preset.image;
+        const image = images[imagePath];
+        const Cover = real ? 'button' : 'div';
+        return (
+          <article class="project" data-ratio={ratio}>
+            <Cover class:list={['project-cover', { 'has-video': real }]} style={{ aspectRatio: ratio.replace(':', ' / ') }} aria-label={real ? `Play ${video.title}, ${ratio}` : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined}>
+              <img src={image?.src || imagePath} srcset={image?.srcset} sizes="(max-width: 700px) calc(100vw - 38px), 380px" width={image?.width} height={image?.height} alt="" loading="lazy" decoding="async" />
+              <span class="cover-shade"></span><span class="platform-tag">{platforms[platform]}</span><span class="ratio-tag">{ratio}</span>
+              {real ? <span class="play-circle" aria-hidden="true">▶</span> : <><span class="cover-type">{preset.line}<em>{preset.italic}</em></span><span class="coming-badge">COMING SOON</span></>}
+            </Cover>
+            <div class="project-info"><div><h3>{real ? video.title : preset.title}</h3><p>{real ? [video.category, video.year].filter(Boolean).join(' / ') : `${preset.category} / Coming soon`}</p></div><span>{real ? '↗' : '—'}</span></div>
+          </article>
+        );
+      })}
+    </div>
+  ))}
+</div>

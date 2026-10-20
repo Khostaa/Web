@@ -1,0 +1,23 @@
+{
+  "name": "Sunil Paudel",
+  "alias": "Khosta",
+  "email": "mailkhosta@gmail.com",
+  "phone": "+9779825833442",
+  "phoneDisplay": "+977 982 583 3442",
+  "showreelUrl": "",
+  "videos": [],
+  "gifts": [],
+  "socials": [
+    { "label": "YouTube", "url": "https://www.youtube.com/@KhostaTuts" },
+    { "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" },
+    { "label": "Behance", "url": "https://www.behance.net/khostaa" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/khostaa/" },
+    { "label": "Facebook · Khosta", "url": "https://www.facebook.com/khostaaa/" },
+    { "label": "GitHub", "url": "https://github.com/Khostaa" },
+    { "label": "Medium", "url": "https://khostaa.medium.com" },
+    { "label": "X", "url": "https://x.com/Sunil_Poudel17" },
+    { "label": "Discord", "url": "https://discord.gg/AsnMswFT25" },
+    { "label": "Instagram · Personal", "url": "https://www.instagram.com/sunil_poudel17/" },
+    { "label": "Facebook · Personal", "url": "https://www.facebook.com/sunil.poudel17" }
+  ]
+}
