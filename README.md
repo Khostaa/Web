@@ -1,8 +1,8 @@
-# Khosta — revamp
+# Khosta — video editor portfolio
 
-An experimental, screen-by-screen video editor portfolio on the **revamp** branch. Built with Astro 7.4.1, native CSS, and a small browser script.
+A screen-by-screen video editor portfolio published from the **main** branch. Built with Astro 7.4.1, native CSS, and a small browser script.
 
-**Production remains on main:** [www.sunil17.com.np](https://www.sunil17.com.np/). Pushing revamp does not deploy to that domain. The existing GitHub Pages workflow runs only for main.
+**Live website:** [www.sunil17.com.np](https://www.sunil17.com.np/). Pushing revamp does not deploy to that domain. The existing GitHub Pages workflow runs only for main.
 
 ## Experience
 
@@ -55,7 +55,7 @@ git commit -m "Refine revamp"
 git push origin revamp
 ```
 
-Use main only when ready to replace production. Do not merge or push revamp into main merely to preview it. The original Sites preview is independent of both branches.
+The revamp design is now the production design. To release future changes, review and test revamp, merge it into main, then push main. The GitHub Pages workflow builds, verifies and deploys main automatically. The private Sites preview is a separate snapshot and does not synchronize automatically.
 
 ## Assets and credits
 

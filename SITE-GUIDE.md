@@ -1,12 +1,12 @@
-# Khosta revamp — editing guide
+# Khosta — editing guide
 
-Updated 21 October 2026. This guide describes the experimental **revamp** branch, not the existing vertical website on main.
+Updated 21 October 2026. This guide describes the slideshow portfolio released from **main**, with **revamp** retained for future design changes.
 
 ## Branch and hosting
 
-Repository: https://github.com/Khostaa/Web. The custom domain https://www.sunil17.com.np/ is published from **main** by `.github/workflows/deploy.yml`. This workflow does not run on revamp pushes. Preview revamp locally with `pnpm dev`; source changes on this branch do not change production unless explicitly merged into main later.
+Repository: https://github.com/Khostaa/Web. The custom domain https://www.sunil17.com.np/ is published from **main** by `.github/workflows/deploy.yml`. This workflow does not run on revamp pushes. Preview revamp locally with `pnpm dev`; source changes on revamp do not change production until merged into main.
 
-The branch starts with the previously committed portrait, showreel, and saved Cosmos reference. The original Sites preview is independent and will not synchronize automatically.
+The production design includes the portrait, showreel, masonry work wall, gifts and Reach out page. The original Sites preview is independent and will not synchronize automatically.
 
 ## Structure
 
@@ -153,14 +153,14 @@ Production uses the four existing www A records at 185.199.108.153 through 185.1
 
 On 20 October 2026, the unused perf-metrics-f208 Worker and its route were removed, alongside the obsolete _openai-site-verification.www TXT, _cf-custom-hostname.www TXT, and old Brave verification TXT. Thirteen required DNS records remain: five website records, three Zoho MX records, SPF, Zoho verification, two DKIM records, and Google verification. Proxy/HTTPS settings and existing API tokens were preserved. GitHub Pages does not need a Cloudflare Worker or token to deploy.
 
-When ready to make this design production, review it first, merge revamp into main, and let the existing workflow build/test/deploy. A failed workflow preserves the prior publication. Revert the relevant main commit and push the revert to roll back.
+This design is deployed from main. For future releases, review and test changes, merge them into main, and let the existing workflow build/test/deploy. A failed workflow preserves the prior publication. Revert the relevant main commit and push the revert to roll back.
 
 ## Troubleshooting
 
 | Symptom | Check |
 | --- | --- |
 | New content not visible | Rebuild after JSON changes; check which branch is running |
-| Domain still shows the old design | Production uses main; revamp is intentionally separate |
+| Domain still shows the old design | Check the latest main workflow and refresh any cached copy |
 | Blank slideshow | Check browser console, module loading, and screen IDs |
 | Work cover ratio looks wrong | Use a supported aspectRatio; inspect work-wall.js and media dimensions |
 | Missing gallery items | Check format, masonry columns, and URL validation |
