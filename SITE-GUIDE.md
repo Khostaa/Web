@@ -61,7 +61,7 @@ Every video is an object in the videos array. Delete an object to remove work. P
 }
 ```
 
-This example illustrates the schema; contribution tags must describe your actual work. Current titles remain the original supplied/public labels and all tags are empty until you provide them in VIDEO-LABELS.md or chat. Titles and any supplied tags appear on hover or keyboard focus. `category` is the small project-credit line; it is separate from the filter category.
+This example illustrates the schema; contribution tags must describe your actual work. Preferred titles and contribution tags come from VIDEO-LABELS.md. Some entries are filled; unfinished entries retain their current public labels. Titles and any supplied tags appear on hover or keyboard focus. `category` is the small project-credit line; it is separate from the filter category.
 
 - `platform`: youtube, instagram or tiktok.
 - `format`: short or long. Duration/editorial format is independent of orientation; two current short videos are landscape.
@@ -72,7 +72,7 @@ This example illustrates the schema; contribution tags must describe your actual
 - `tags`: an array of your contribution labels. Empty arrays render no tags.
 - `mediaUrl`: optional owned video file for a native video-only player.
 
-The current category assignment is based on visible project subjects: three sports promos, five educational edits, eight social/creative edits and two long films. Change collection freely if a project belongs elsewhere. All short form shows every short video; specific categories include only their own videos. Long form shows the two stationary films. The showreel is separate from these counts.
+The current category assignment is based on visible project subjects: three sports promos, five educational edits, six social/creative edits and two long films. Change collection freely if a project belongs elsewhere. All short form shows every short video; specific categories include only their own videos. Long form shows the two stationary films. The showreel is separate from these counts.
 
 To add an optimized poster, save JPG/PNG/WebP in src/assets/work and set thumbnail to assets/work/filename.ext. index.astro imports the directory automatically. Keep filenames unique. Astro creates responsive local WebP variants, so visitors do not request cover images from social platforms. Existing TikTok posters are real player frames; native Instagram posters were extracted from the supplied video exports. Images use contain sizing so their borders are preserved.
 
@@ -131,3 +131,9 @@ The unused perf-metrics-f208 Worker and its route, obsolete _openai-site-verific
 Build, run tests, then check both themes and desktop/phone sizes. Check intro, showreel opening/closing, category counts, alternating/horizontal motion, pause/focus, stationary long films, contribution labels, the four social destinations and gift country links. On a short screen, Home/Hire me allow internal scrolling to keep content accessible. Inactive screens remain hidden and inert.
 
 If old content persists, check the exact main deployment commit/status, then refresh browser/CDN cache. If a category is empty, check format/collection and URL validity. If a poster is missing, check its asset key and rebuild. If a native video fails, verify H.264/AAC, MIME type/range support and mediaUrl. If glass contrast is weak, adjust surface opacity rather than increasing blur everywhere.
+
+### Apply video-label worksheet changes
+
+Edit VIDEO-LABELS.md, then run `pnpm labels` (or `node scripts/sync-video-labels.mjs`), build and test. The script matches each section by its original video URL, so deleting a worksheet section does not accidentally delete or relabel another project. Remove projects directly from portfolio.json. Blank tags render no contribution badges; completed tags appear on hover/focus. The worksheet is preserved as entered.
+
+Label update: the supplied worksheet titles and contribution tags have been applied. Guras Nani and Imposter challenge were removed at the editor’s request. A project omitted from the worksheet remains in the portfolio unless explicitly removed.

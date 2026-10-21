@@ -8,7 +8,7 @@
   "showreelThumbnail": "assets/showreel.png",
   "videos": [
     {
-      "title": "ICC T20 World Cup | Work done for PSN",
+      "title": "ICC T20 World Cup | PSN Promo",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -16,10 +16,16 @@
       "thumbnail": "assets/work/youtube-Azjv0NRnMA4.jpg",
       "format": "short",
       "collection": "sports",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "NWC | Work done for PSN",
+      "title": "NWC | PSN Promo",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -27,10 +33,16 @@
       "thumbnail": "assets/work/youtube-c8mtXrNnRsE.jpg",
       "format": "short",
       "collection": "sports",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "3 Mistakes | Nirvana Counselling Center",
+      "title": "3 Mistakes to Avoid | Nirvana Counselling Center",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -38,10 +50,15 @@
       "thumbnail": "assets/work/youtube-gxHrEn1mjro.jpg",
       "format": "short",
       "collection": "education",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Nomination Approved | Insta Education and Visa Services",
+      "title": "Nomination Visa Approved | Insta Education and Visa Services",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -49,10 +66,15 @@
       "thumbnail": "assets/work/youtube-0b6M5SWm99Q.jpg",
       "format": "short",
       "collection": "education",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Combined Visa | Insta Education and Visa Services",
+      "title": "Combined Visa Approved | Insta Education and Visa Services",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -60,18 +82,12 @@
       "thumbnail": "assets/work/youtube-1l5ZRg2qxgA.jpg",
       "format": "short",
       "collection": "education",
-      "tags": []
-    },
-    {
-      "title": "Imposter challenge",
-      "platform": "tiktok",
-      "category": "PARADYGM TV · TikTok",
-      "aspectRatio": "9:16",
-      "url": "https://www.tiktok.com/@paradygmtv/video/7532489106115398920",
-      "thumbnail": "assets/work/tiktok-7532489106115398920.png",
-      "format": "short",
-      "collection": "social",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
       "title": "The loudest person at PARADYGM",
@@ -82,21 +98,16 @@
       "thumbnail": "assets/work/tiktok-7530658815037934855.png",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Guras Nani",
-      "platform": "tiktok",
-      "category": "PARADYGM TV · TikTok",
-      "aspectRatio": "9:16",
-      "url": "https://www.tiktok.com/@paradygmtv/video/7527674913390415111",
-      "thumbnail": "assets/work/tiktok-7527674913390415111.png",
-      "format": "short",
-      "collection": "social",
-      "tags": []
-    },
-    {
-      "title": "Can you win against them?",
+      "title": "Who wins | Paradygm InHouse Challenge",
       "platform": "tiktok",
       "category": "PARADYGM TV · TikTok",
       "aspectRatio": "9:16",
@@ -104,10 +115,16 @@
       "thumbnail": "assets/work/tiktok-7523227539209260309.jpg",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "FASAIDEU with the team",
+      "title": "Episode Teaser ft. 'Fasaideu' Team | Paradygm TV",
       "platform": "tiktok",
       "category": "PARADYGM TV · TikTok",
       "aspectRatio": "9:16",
@@ -115,10 +132,13 @@
       "thumbnail": "assets/work/tiktok-7532117307649281288.png",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Find out their dream Miss Nepal | What goes BTS of Miss Nepal?",
+      "title": "What goes BTS of Miss Nepal? | Paradygm TV",
       "platform": "youtube",
       "category": "PARADYGM TV · YouTube",
       "aspectRatio": "16:9",
@@ -126,10 +146,15 @@
       "thumbnail": "assets/work/youtube-Nc7TZD0Gs6E.jpg",
       "format": "long",
       "collection": "long",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design"
+      ]
     },
     {
-      "title": "GD and the gang guesses GEN Z SLANGS | @Ganesh_GD",
+      "title": "1 Million Subscriber Special | Ganesh GD | Paradygm TV",
       "platform": "youtube",
       "category": "PARADYGM TV · YouTube",
       "aspectRatio": "16:9",
@@ -137,10 +162,14 @@
       "thumbnail": "assets/work/youtube-Ay1AsXX3A7A.jpg",
       "format": "long",
       "collection": "long",
-      "tags": []
+      "tags": [
+        "Upto Second last Cut of 35 Min from 2 Hours Shoot",
+        "Color Grading",
+        "Some Graphics"
+      ]
     },
     {
-      "title": "Questions asked in Interview | Nirvana",
+      "title": "Interview Questions | Nirvana Education Consultancy",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -148,10 +177,16 @@
       "thumbnail": "assets/work/youtube-1ZdkExSjrnY.jpg",
       "format": "short",
       "collection": "education",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Community Welfare | Nirvana",
+      "title": "Community Welfare | Nirvana Education Consultancy",
       "platform": "youtube",
       "category": "YouTube Shorts",
       "aspectRatio": "9:16",
@@ -159,10 +194,16 @@
       "thumbnail": "assets/work/youtube-Wk4XjiY39kY.jpg",
       "format": "short",
       "collection": "education",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "One of my recent works",
+      "title": "Small Section of Video | Client Project",
       "platform": "instagram",
       "category": "Instagram Reels",
       "aspectRatio": "9:16",
@@ -171,10 +212,15 @@
       "mediaUrl": "/media/fusion-node-tree.mp4",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Editing",
+        "Pacing",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "EP1 — Let the journey begin",
+      "title": "The Comeback | Personal Project",
       "platform": "instagram",
       "category": "Instagram Reels",
       "aspectRatio": "16:9",
@@ -183,10 +229,15 @@
       "mediaUrl": "/media/let-the-journey-begin.mp4",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Filming",
+        "Editing",
+        "Pacing",
+        "Color Grading"
+      ]
     },
     {
-      "title": "Had fun doing this!",
+      "title": "Stop Motion Animation | Personal Project",
       "platform": "instagram",
       "category": "Instagram Reels",
       "aspectRatio": "16:9",
@@ -195,10 +246,17 @@
       "mediaUrl": "/media/stop-motion.mp4",
       "format": "short",
       "collection": "social",
-      "tags": []
+      "tags": [
+        "Filming",
+        "Editing",
+        "Pacing",
+        "Color Grading",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     },
     {
-      "title": "Oliveira vs Holloway — Live Watch Party",
+      "title": "Oliveira vs Holloway | Watch Party | Kastamandap Events",
       "platform": "instagram",
       "category": "Instagram Reels",
       "aspectRatio": "9:16",
@@ -207,7 +265,14 @@
       "mediaUrl": "/media/ufc-event-promo.mp4",
       "format": "short",
       "collection": "sports",
-      "tags": []
+      "tags": [
+        "Concept",
+        "Research",
+        "Editing",
+        "Pacing",
+        "Sound Design",
+        "Motion Graphics"
+      ]
     }
   ],
   "gifts": [

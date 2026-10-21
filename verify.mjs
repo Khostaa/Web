@@ -93,3 +93,10 @@ assert.deepEqual(content.socials.map(s=>new URL(s.url).hostname),['www.instagram
 assert.equal(content.socials.at(-1).url,'https://wa.me/'+content.phone.replace(/\D/g,''));
 assert.ok(html.includes('id="home-showreel"'));
 assert.ok(!html.includes('paper-sheet'),'Portrait is frameless');
+
+assert.ok(!content.videos.some(v=>v.url.includes('7527674913390415111')),'Removed project is absent from data');
+assert.ok(!html.includes('7527674913390415111'),'Removed project is absent from built page');
+for(const v of content.videos)for(const tag of v.tags)assert.ok(html.includes(tag.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')),'Contribution tag is rendered: '+tag);
+
+assert.ok(!content.videos.some(v=>v.url.includes('7532489106115398920')),'Imposter challenge is removed');
+assert.ok(!html.includes('7532489106115398920'),'Imposter challenge is absent from the built page');

@@ -37,13 +37,6 @@ Reply with the number, preferred title and tags for each video. Keep the title i
 - Preferred title: Combined Visa Approved | Insta Education and Visa Services
 - Contribution tags: Editing, Color Grading, Sound Design, Motion Graphics
 
-### 6. Imposter challenge
-
-[Open video](https://www.tiktok.com/@paradygmtv/video/7532489106115398920) · short form / social
-
-- Preferred title: Imposter challenge | Paradygm Inhouse Challenge
-- Contribution tags: Editing, Pacing, Color Grading, Sound Design
-
 ### 7. The loudest person at PARADYGM
 
 [Open video](https://www.tiktok.com/@paradygmtv/video/7530658815037934855) · short form / social
@@ -56,68 +49,68 @@ Reply with the number, preferred title and tags for each video. Keep the title i
 
 [Open video](https://www.tiktok.com/@paradygmtv/video/7523227539209260309) · short form / social
 
-- Preferred title: Can you win against them?
-- Contribution tags: 
+- Preferred title: Who wins | Paradygm InHouse Challenge
+- Contribution tags: Editing, Pacing, Color Grading, Sound Design, Motion Graphics
 
 ### 10. FASAIDEU with the team
 
 [Open video](https://www.tiktok.com/@paradygmtv/video/7532117307649281288) · short form / social
 
-- Preferred title: FASAIDEU with the team
-- Contribution tags: 
+- Preferred title: Episode Teaser ft. 'Fasaideu' Team | Paradygm TV
+- Contribution tags: Editing, Motion Graphics
 
 ### 11. Find out their dream Miss Nepal | What goes BTS of Miss Nepal?
 
 [Open video](https://www.youtube.com/watch?v=Nc7TZD0Gs6E) · long form / long
 
-- Preferred title: Find out their dream Miss Nepal | What goes BTS of Miss Nepal?
-- Contribution tags: 
+- Preferred title: What goes BTS of Miss Nepal? | Paradygm TV
+- Contribution tags: Editing, Pacing, Color Grading, Sound Design
 
 ### 12. GD and the gang guesses GEN Z SLANGS | @Ganesh_GD
 
 [Open video](https://www.youtube.com/watch?v=Ay1AsXX3A7A) · long form / long
 
-- Preferred title: GD and the gang guesses GEN Z SLANGS | @Ganesh_GD
-- Contribution tags: 
+- Preferred title: 1 Million Subscriber Special | Ganesh GD | Paradygm TV
+- Contribution tags: Upto Second last Cut of 35 Min from 2 Hours Shoot, Color Grading, Some Graphics
 
 ### 13. Questions asked in Interview | Nirvana
 
 [Open video](https://www.youtube.com/shorts/1ZdkExSjrnY) · short form / education
 
-- Preferred title: Questions asked in Interview | Nirvana
-- Contribution tags: 
+- Preferred title: Interview Questions | Nirvana Education Consultancy
+- Contribution tags:  Editing, Pacing, Color Grading, Sound Design, Motion Graphics
 
 ### 14. Community Welfare | Nirvana
 
 [Open video](https://www.youtube.com/shorts/Wk4XjiY39kY) · short form / education
 
-- Preferred title: Community Welfare | Nirvana
-- Contribution tags: 
+- Preferred title: Community Welfare | Nirvana Education Consultancy
+- Contribution tags: Editing, Pacing, Color Grading, Sound Design, Motion Graphics
 
 ### 15. One of my recent works
 
 [Open video](https://www.instagram.com/reel/DV_Hu9kjDkD/) · short form / social
 
-- Preferred title: One of my recent works
-- Contribution tags: 
+- Preferred title: Small Section of Video | Client Project
+- Contribution tags: Editing, Pacing, Sound Design, Motion Graphics
 
 ### 16. EP1 — Let the journey begin
 
 [Open video](https://www.instagram.com/reel/DRet11KCD-P/) · short form / social
 
-- Preferred title: EP1 — Let the journey begin
-- Contribution tags: 
+- Preferred title: The Comeback | Personal Project
+- Contribution tags: Filming,  Editing, Pacing, Color Grading
 
 ### 17. Had fun doing this!
 
 [Open video](https://www.instagram.com/reel/DTKKhwljQxV/) · short form / social
 
-- Preferred title: Had fun doing this!
-- Contribution tags: 
+- Preferred title: Stop Motion Animation | Personal Project
+- Contribution tags: Filming, Editing, Pacing, Color Grading, Sound Design, Motion Graphics
 
 ### 18. Oliveira vs Holloway — Live Watch Party
 
 [Open video](https://www.instagram.com/reel/DVBxybhgbKn/) · short form / sports
 
-- Preferred title: Oliveira vs Holloway — Live Watch Party
-- Contribution tags: 
+- Preferred title: Oliveira vs Holloway | Watch Party | Kastamandap Events
+- Contribution tags: Concept, Research, Editing, Pacing, Sound Design, Motion Graphics
