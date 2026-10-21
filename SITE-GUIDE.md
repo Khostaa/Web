@@ -35,9 +35,9 @@ Work on revamp, commit and push it for review. To publish to the custom domain, 
 
 Edit name, alias, email, phone, phoneDisplay and location in portfolio.json. Keep phone in international form, such as +9779825833442. The WhatsApp URL must use digits only: https://wa.me/9779825833442. The current address matches the call number; update both when changing numbers.
 
-The pill header in index.astro contains the logo, Work, Gifts, Hire me and theme switch. `#about` remains the internal hash for Hire me so old links continue working. Route titles live in app.js. Match new screen IDs in the ids array, normalization, navigation, dots and heading focus behavior.
+The pill header in index.astro places the logo on the left, the theme switch in the center, and Work, Gifts and Hire me on the right. Equal side columns in glass.css keep the switch centered. `#about` remains the internal hash for Hire me so old links continue working. Route titles live in app.js. Match new screen IDs in the ids array, normalization, navigation, dots and heading focus behavior.
 
-The Home heading and description say: Hi! I’m Sunil Paudel, a freelance video editor and a visual storyteller based in Nepal. Change this copy directly in index.astro. The next block contains Watch showreel, then What do you want? and the three choices. The work preview uses a landscape YouTube card and portrait Instagram/TikTok cards. Change homePosters or `.preview-work` styling to choose/reposition them.
+The Home heading and description say: Hi! I’m Sunil Paudel, a freelance video editor and a visual storyteller based in Nepal. Change this copy directly in index.astro. The next block contains Watch showreel, then What do you want? and the three choices: 01 Look at my works, 02 Hire me, 03 Gift me. Keep each choice’s data-preview-choice and matching art-marker number aligned when reordering them. The work preview uses a landscape YouTube card and portrait Instagram/TikTok cards. Change homePosters or `.preview-work` styling to choose/reposition them.
 
 ## Showreel
 

@@ -57,8 +57,8 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
   <a class="skip" href="#work">Skip to work</a>
   <header class="header glass">
     <a class="wordmark" href="#home" aria-label="Khosta home"><span class="brand-logo" aria-hidden="true"></span>khosta</a>
-    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#wishlist">Gifts</a><a class="hire-link" href="#about">Hire me <span aria-hidden="true">↗</span></a></nav>
     <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode" title="Switch to light mode"><span class="theme-thumb" aria-hidden="true"></span><svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#wishlist">Gifts</a><a class="hire-link" href="#about">Hire me <span aria-hidden="true">↗</span></a></nav>
   </header>
   <main class="stage" id="stage">
     <section class="screen home-screen is-active" id="home" aria-labelledby="home-title" data-preview="work">
@@ -67,8 +67,8 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
         <h1 class="intro-title reveal" id="home-title" tabindex="-1">Hi! I’m <em>Sunil Paudel,</em></h1><p class="intro-description reveal">a freelance video editor and a visual storyteller based in Nepal.</p><button id="home-showreel" class="home-showreel glass reveal" aria-label="Watch showreel"><img src={images[portfolio.showreelThumbnail]?.small} width="160" height="90" alt="Showreel: restart."/><span><span class="showreel-play" aria-hidden="true">▶</span> Watch showreel <span aria-hidden="true">↗</span></span></button><h2 class="intent-heading reveal">What do you <em>want?</em></h2>
         <nav class="choices" aria-label="What do you want?">
           <a class="choice is-selected reveal" href="#work" data-preview-choice="work"><span class="choice-number">01</span><span class="choice-thumbnail"><img src={images[homePosters[0].image]?.small || homePosters[0].image} width="48" height="48" alt=""></span><span class="choice-text">Look at my works</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
-          <a class="choice reveal" href="#wishlist" data-preview-choice="wishlist"><span class="choice-number">02</span><span class="choice-thumbnail gift-thumbnail" aria-hidden="true">✳</span><span class="choice-text">Gift me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
-          <a class="choice reveal" href="#about" data-preview-choice="about"><span class="choice-number">03</span><span class="choice-thumbnail about-thumbnail brand-logo logo-static" aria-hidden="true"></span><span class="choice-text">Hire me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+          <a class="choice reveal" href="#about" data-preview-choice="about"><span class="choice-number">02</span><span class="choice-thumbnail about-thumbnail brand-logo logo-static" aria-hidden="true"></span><span class="choice-text">Hire me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+          <a class="choice reveal" href="#wishlist" data-preview-choice="wishlist"><span class="choice-number">03</span><span class="choice-thumbnail gift-thumbnail" aria-hidden="true">✳</span><span class="choice-text">Gift me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
         </nav>
         <p class="home-caption location reveal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> Nepal <span>Available worldwide</span></p>
       </div>
@@ -77,8 +77,8 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
           {homePosters.map((poster,index) => <div class:list={['art-photo', ['art-large','art-small','art-wide'][index]]}><img src={images[poster.image]?.src || poster.image} srcset={images[poster.image]?.srcset} sizes="400px" width={images[poster.image]?.width} height={images[poster.image]?.height} alt="" loading={index ? 'lazy' : 'eager'} /><span class="preview-platform"><PlatformIcon platform={poster.platform} /></span></div>)}
           <span class="art-marker">01 / SELECTED MOMENTS</span>
         </div>
-        <div class="intent-preview preview-wishlist"><div class="gift-note"><span class="eyebrow">A LITTLE SOMETHING</span><span class="gift-drawing">✳</span><p>Good stories.<br><em>Kind gestures.</em></p><span class="note-signature">with a little gratitude, khosta</span></div><span class="art-marker">02 / GOOD ENERGY ONLY</span></div>
-        <div class="intent-preview preview-about"><span class="about-orbit brand-logo" aria-hidden="true"></span><p>Behind<br><em>the cut.</em></p><span class="art-marker">03 / THE PERSON, THE PROCESS</span></div>
+        <div class="intent-preview preview-wishlist"><div class="gift-note"><span class="eyebrow">A LITTLE SOMETHING</span><span class="gift-drawing">✳</span><p>Good stories.<br><em>Kind gestures.</em></p><span class="note-signature">with a little gratitude, khosta</span></div><span class="art-marker">03 / GOOD ENERGY ONLY</span></div>
+        <div class="intent-preview preview-about"><span class="about-orbit brand-logo" aria-hidden="true"></span><p>Behind<br><em>the cut.</em></p><span class="art-marker">02 / THE PERSON, THE PROCESS</span></div>
       </div>
     </section>
 
