@@ -6,7 +6,157 @@
   "phoneDisplay": "+977 982 583 3442",
   "showreelUrl": "https://www.youtube.com/watch?v=kPqnJMdCEFI",
   "showreelThumbnail": "assets/showreel.png",
-  "videos": [],
+  "videos": [
+    {
+      "title": "ICC T20 World Cup | Work done for PSN",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/Azjv0NRnMA4",
+      "thumbnail": "assets/work/youtube-Azjv0NRnMA4.jpg"
+    },
+    {
+      "title": "NWC | Work done for PSN",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/c8mtXrNnRsE",
+      "thumbnail": "assets/work/youtube-c8mtXrNnRsE.jpg"
+    },
+    {
+      "title": "3 Mistakes | Nirvana Counselling Center",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/gxHrEn1mjro",
+      "thumbnail": "assets/work/youtube-gxHrEn1mjro.jpg"
+    },
+    {
+      "title": "Nomination Approved | Insta Education and Visa Services",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/0b6M5SWm99Q",
+      "thumbnail": "assets/work/youtube-0b6M5SWm99Q.jpg"
+    },
+    {
+      "title": "Combined Visa | Insta Education and Visa Services",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/1l5ZRg2qxgA",
+      "thumbnail": "assets/work/youtube-1l5ZRg2qxgA.jpg"
+    },
+    {
+      "title": "Imposter challenge",
+      "platform": "tiktok",
+      "category": "PARADYGM TV · TikTok",
+      "aspectRatio": "9:16",
+      "url": "https://www.tiktok.com/@paradygmtv/video/7532489106115398920",
+      "thumbnail": "/assets/work/tiktok-7532489106115398920.svg",
+      "posterType": "graphic"
+    },
+    {
+      "title": "The loudest person at PARADYGM",
+      "platform": "tiktok",
+      "category": "PARADYGM TV · TikTok",
+      "aspectRatio": "9:16",
+      "url": "https://www.tiktok.com/@paradygmtv/video/7530658815037934855",
+      "thumbnail": "/assets/work/tiktok-7530658815037934855.svg",
+      "posterType": "graphic"
+    },
+    {
+      "title": "Guras Nani",
+      "platform": "tiktok",
+      "category": "PARADYGM TV · TikTok",
+      "aspectRatio": "9:16",
+      "url": "https://www.tiktok.com/@paradygmtv/video/7527674913390415111",
+      "thumbnail": "/assets/work/tiktok-7527674913390415111.svg",
+      "posterType": "graphic"
+    },
+    {
+      "title": "Can you win against them?",
+      "platform": "tiktok",
+      "category": "PARADYGM TV · TikTok",
+      "aspectRatio": "9:16",
+      "url": "https://www.tiktok.com/@paradygmtv/video/7523227539209260309",
+      "thumbnail": "/assets/work/tiktok-7523227539209260309.svg",
+      "posterType": "graphic"
+    },
+    {
+      "title": "FASAIDEU with the team",
+      "platform": "tiktok",
+      "category": "PARADYGM TV · TikTok",
+      "aspectRatio": "9:16",
+      "url": "https://www.tiktok.com/@paradygmtv/video/7532117307649281288",
+      "thumbnail": "/assets/work/tiktok-7532117307649281288.svg",
+      "posterType": "graphic"
+    },
+    {
+      "title": "Find out their dream Miss Nepal | What goes BTS of Miss Nepal?",
+      "platform": "youtube",
+      "category": "PARADYGM TV · YouTube",
+      "aspectRatio": "16:9",
+      "url": "https://www.youtube.com/watch?v=Nc7TZD0Gs6E",
+      "thumbnail": "assets/work/youtube-Nc7TZD0Gs6E.jpg"
+    },
+    {
+      "title": "GD and the gang guesses GEN Z SLANGS | @Ganesh_GD",
+      "platform": "youtube",
+      "category": "PARADYGM TV · YouTube",
+      "aspectRatio": "16:9",
+      "url": "https://www.youtube.com/watch?v=Ay1AsXX3A7A",
+      "thumbnail": "assets/work/youtube-Ay1AsXX3A7A.jpg"
+    },
+    {
+      "title": "Questions asked in Interview | Nirvana",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/1ZdkExSjrnY",
+      "thumbnail": "assets/work/youtube-1ZdkExSjrnY.jpg"
+    },
+    {
+      "title": "Community Welfare | Nirvana",
+      "platform": "youtube",
+      "category": "YouTube Shorts",
+      "aspectRatio": "9:16",
+      "url": "https://www.youtube.com/shorts/Wk4XjiY39kY",
+      "thumbnail": "assets/work/youtube-Wk4XjiY39kY.jpg"
+    },
+    {
+      "title": "One of my recent works",
+      "platform": "instagram",
+      "category": "Instagram Reels",
+      "aspectRatio": "9:16",
+      "url": "https://www.instagram.com/reel/DV_Hu9kjDkD/",
+      "thumbnail": "assets/work/instagram-DV_Hu9kjDkD.jpg"
+    },
+    {
+      "title": "EP1 — Let the journey begin",
+      "platform": "instagram",
+      "category": "Instagram Reels",
+      "aspectRatio": "9:16",
+      "url": "https://www.instagram.com/reel/DRet11KCD-P/",
+      "thumbnail": "assets/work/instagram-DRet11KCD-P.jpg"
+    },
+    {
+      "title": "Had fun doing this!",
+      "platform": "instagram",
+      "category": "Instagram Reels",
+      "aspectRatio": "9:16",
+      "url": "https://www.instagram.com/reel/DTKKhwljQxV/",
+      "thumbnail": "assets/work/instagram-DTKKhwljQxV.jpg"
+    },
+    {
+      "title": "Oliveira vs Holloway — Live Watch Party",
+      "platform": "instagram",
+      "category": "Instagram Reels",
+      "aspectRatio": "9:16",
+      "url": "https://www.instagram.com/reel/DVBxybhgbKn/",
+      "thumbnail": "assets/work/instagram-DVBxybhgbKn.jpg"
+    }
+  ],
   "gifts": [
     {
       "title": "Sony Alpha 6700",
@@ -59,16 +209,49 @@
     }
   ],
   "socials": [
-    { "label": "YouTube", "url": "https://www.youtube.com/@KhostaTuts" },
-    { "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" },
-    { "label": "Behance", "url": "https://www.behance.net/khostaa" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/khostaa/" },
-    { "label": "Facebook · Khosta", "url": "https://www.facebook.com/khostaaa/" },
-    { "label": "GitHub", "url": "https://github.com/Khostaa" },
-    { "label": "Medium", "url": "https://khostaa.medium.com" },
-    { "label": "X", "url": "https://x.com/Sunil_Poudel17" },
-    { "label": "Discord", "url": "https://discord.gg/AsnMswFT25" },
-    { "label": "Instagram · Personal", "url": "https://www.instagram.com/sunil_poudel17/" },
-    { "label": "Facebook · Personal", "url": "https://www.facebook.com/sunil.poudel17" }
+    {
+      "label": "YouTube",
+      "url": "https://www.youtube.com/@KhostaTuts"
+    },
+    {
+      "label": "Instagram · Khosta",
+      "url": "https://www.instagram.com/khosta.np/"
+    },
+    {
+      "label": "Behance",
+      "url": "https://www.behance.net/khostaa"
+    },
+    {
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/khostaa/"
+    },
+    {
+      "label": "Facebook · Khosta",
+      "url": "https://www.facebook.com/khostaaa/"
+    },
+    {
+      "label": "GitHub",
+      "url": "https://github.com/Khostaa"
+    },
+    {
+      "label": "Medium",
+      "url": "https://khostaa.medium.com"
+    },
+    {
+      "label": "X",
+      "url": "https://x.com/Sunil_Poudel17"
+    },
+    {
+      "label": "Discord",
+      "url": "https://discord.gg/AsnMswFT25"
+    },
+    {
+      "label": "Instagram · Personal",
+      "url": "https://www.instagram.com/sunil_poudel17/"
+    },
+    {
+      "label": "Facebook · Personal",
+      "url": "https://www.facebook.com/sunil.poudel17"
+    }
   ]
 }

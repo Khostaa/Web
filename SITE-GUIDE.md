@@ -15,6 +15,8 @@ src/pages/index.astro            Document head, four screens, navigation, dialog
 src/components/WorkGallery.astro  Work cards and showreel, rendered at build time
 src/components/SocialLinks.astro  Social links, rendered at build time
 src/data/portfolio.json          Contact, showreel, videos, gifts, socials
+src/assets/work/                Cached public YouTube/Instagram covers
+public/assets/work/             Lightweight TikTok graphic covers
 src/scripts/app.js               Screen routing, rollout, pagination, playback
 src/scripts/theme.js             Saved theme before first paint
 src/styles/global.css           Tokens, layout, transitions, responsive rules
@@ -174,4 +176,14 @@ Cosmos (https://www.cosmos.so/) is a user-selected visual and interaction refere
 
 Drag or swipe horizontally over the stage (60px minimum). app.js advances available Work pages, Gift pages (six cards), or Contact social pages (four profiles) first, then the adjacent screen. Dragging a link suppresses the subsequent click; ordinary clicks still activate links. Buttons, form fields, and the opening menu keep their normal interactions. Pointer capture ends on release or cancellation, and no frame loop runs while idle. Arrows, keyboard controls, and browser history remain available.
 
-Gift entrances use the same transform/opacity rollout style as Work and respect reduced motion. Change rollout in app.js to tune it. Home Work preview posters come from the showreel and configured work thumbnails, then gallery placeholder images; platform icons live in PlatformIcon.astro. The Reach out preview uses a flex column so its logo and text do not overlap. The footer wording is in index.astro.
+Gift entrances use the same transform/opacity rollout style as Work and respect reduced motion. Change rollout in app.js to tune it. Home Work preview posters use the first configured thumbnail for each platform, with the showreel and gallery artwork as empty-platform fallbacks; platform icons live in PlatformIcon.astro. The Reach out preview uses a flex column so its logo and text do not overlap. The footer wording is in index.astro.
+
+## Current work collection
+
+18 supplied projects are configured in portfolio.json: nine YouTube videos (seven Shorts at 9:16 and two long videos at 16:9), five PARADYGM TV TikToks, and four Instagram reels at 9:16. The showreel remains separate, for 19 playable cards. Platform filters and existing pagination handle the full collection. No coming-soon cards remain while every platform has real projects.
+
+YouTube titles were read from public oEmbed metadata. Instagram titles are concise labels based on public captions; TikTok titles use the captions supplied with the links. Edit title and category freely in portfolio.json. Links are canonicalized without share/tracking parameters. Paste a TikTok video's URL into url; never paste its blockquote or embed.js script into the site.
+
+13 public YouTube/Instagram cover images are cached in src/assets/work. Astro generates WebP variants locally, so visiting the portfolio makes no thumbnail request to those platforms. Keep image sizing at contain to preserve complete image borders. TikTok metadata did not supply covers, so five editable SVG graphic covers in public/assets/work use the site's colors and supplied captions; these are labeled internally with posterType: graphic. Replace any thumbnail path with a preferred local poster later.
+
+For a new optimized poster, add it to src/assets/work and set thumbnail to assets/work/filename.jpg (PNG/WebP also supported). index.astro imports that directory automatically; filenames must be unique. Public vector posters use /assets/work/filename.svg. Players and their platform requests load only when clicked; the original-platform link is available if an embed is restricted. This site cannot override a creator's embed restrictions, platform sign-in requirements, or removed videos.

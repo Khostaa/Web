@@ -22,14 +22,18 @@ for (const [name, source] of Object.entries({ reel, story, social, motion })) {
 }
 const showreelVariants = await Promise.all([480, 960].map(width => getImage({ src: showreel, width, format: 'webp', quality: 82 })));
 images['assets/showreel.png'] = { src: showreelVariants[1].src, small: showreelVariants[0].src, srcset: showreelVariants.map((image, index) => image.src + ' ' + [480, 960][index] + 'w').join(', '), width: showreel.width, height: showreel.height };
+const workSources = import.meta.glob('../assets/work/*.{jpg,jpeg,png,webp}', { eager: true, import: 'default' });
+await Promise.all(Object.entries(workSources).map(async ([path,source]) => {
+  const widths = source.width <= 480 ? [240,480] : [360,720];
+  const variants = await Promise.all(widths.map(width => getImage({ src: source, width, format: 'webp', quality: 80 })));
+  images['assets/work/' + path.split('/').pop()] = { src: variants[1].src, small: variants[0].src, srcset: variants.map((image,index) => image.src + ' ' + widths[index] + 'w').join(', '), width: source.width, height: source.height };
+}));
 const portraitImages = await Promise.all([360, 640].map(width => getImage({ src: portrait, width, format: 'webp', quality: 82 })));
-const homePosters = [
-  { image: portfolio.showreelThumbnail || 'assets/reel.jpg', platform: 'youtube' },
-  ...portfolio.videos.filter(video => safeUrl(video.url)).map(video => ({ image: video.thumbnail, platform: video.platform || 'youtube' })),
-  { image: 'assets/social.jpg', platform: 'instagram' },
-  { image: 'assets/motion.jpg', platform: 'tiktok' },
-  { image: 'assets/story.jpg', platform: 'youtube' }
-].filter(poster => poster.image).slice(0, 3);
+const validWork = portfolio.videos.filter(video => safeUrl(video.url) && video.thumbnail);
+const homePosters = ['youtube','instagram','tiktok'].map(platform => {
+  const work = validWork.find(video => video.platform === platform);
+  return { image: work?.thumbnail || ({ youtube: portfolio.showreelThumbnail || 'assets/reel.jpg', instagram: 'assets/social.jpg', tiktok: 'assets/motion.jpg' }[platform]), platform };
+});
 const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
 ---
 <!doctype html>

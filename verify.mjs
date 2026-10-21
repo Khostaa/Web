@@ -26,7 +26,7 @@ assert.ok(html.includes('Astro v7.4.1'),'Astro static build');
 assert.ok(!html.includes('<iframe'),'Players only load on demand');
 assert.ok(!html.includes('astro-island'),'No hydrated framework runtime');
 assert.ok(html.includes('data-prerendered'),'Gallery is present in initial HTML');
-for(const ratio of ['9:16','16:9','4:3','1:1','3:4']) assert.ok(html.includes(`data-ratio="${ratio}"`),ratio);
+// Actual project ratios are checked below; all five supported ratios are covered by parser tests above.
 assert.ok(html.includes('srcset=')&&html.includes('.webp'),'Responsive optimized images');
 assert.ok(html.includes('logo-static'),'Tan mark stays static');
 assert.ok(fs.readdirSync('dist/_astro').filter(file=>file.endsWith('.webp')).length>=10);
@@ -65,3 +65,18 @@ console.log('Passed: regional gift destinations, locale fallback, safe URLs and 
 assert.ok(html.includes('Freelance video editor/ filmmaker'),'Footer profession updated');
 assert.ok(html.includes('class="platform-icon"'),'Platform filters have vector icons');
 assert.ok(html.includes('class="work-body"'),'Work rail and gallery are grouped');
+
+const workUrls=new Set();
+for(const video of content.videos){
+ const parsed=parseVideo(video.url);assert.ok(parsed, 'Valid work URL: '+video.url);assert.equal(parsed.platform,video.platform);
+ assert.ok(!workUrls.has(video.url),'No duplicate work URL');workUrls.add(video.url);
+ assert.ok(html.includes('data-video-url="'+video.url+'"'),'Work is playable: '+video.title);
+ assert.ok(html.includes('data-ratio="'+videoRatio(video.aspectRatio,video.platform,video.url)+'"'),'Correct project ratio');
+ const file=video.thumbnail.startsWith('/assets/') ? 'public'+video.thumbnail : 'src/'+video.thumbnail;
+ assert.ok(fs.existsSync(file),'Local cover exists: '+video.title);
+}
+if(['youtube','instagram','tiktok'].every(platform=>content.videos.some(video=>video.platform===platform)))assert.ok(!html.includes('COMING SOON'),'No placeholder cards when all platforms have real work');
+console.log('Passed: configured work URLs, platform matches, local cover assets and native project ratios.');
+
+assert.equal([...html.matchAll(/data-video-url=/g)].length,content.videos.filter(video=>parseVideo(video.url)).length+(parseVideo(content.showreelUrl)?1:0),'One playable card per project, plus showreel');
+assert.ok(!html.includes('tiktok.com/embed.js'),'No eager TikTok embed script');

@@ -39,7 +39,7 @@ Run the build before tests. Default dev/preview address: http://127.0.0.1:4321.
 | Pre-paint theme | `src/scripts/theme.js` |
 | Native-ratio parsing and supported platform URLs | `src/lib/media.js` |
 
-See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The showreel is [Make it Exist](https://www.youtube.com/watch?v=kPqnJMdCEFI). Real gallery work remains empty until added. Five gifts are configured; update products, images and country links using SITE-GUIDE.md.
+See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The showreel is [Make it Exist](https://www.youtube.com/watch?v=kPqnJMdCEFI). The gallery includes 18 supplied projects across YouTube, Instagram and TikTok, plus the showreel. Five gifts are configured; update products, images and country links using SITE-GUIDE.md.
 
 ## Performance and accessibility
 
