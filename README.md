@@ -69,7 +69,7 @@ Add objects to the `videos` array in `src/data/portfolio.json`:
 
 Platforms: `youtube`, `instagram`, and `tiktok`. Supported ratios: `9:16`, `16:9`, `4:3`, `1:1`, and `3:4`. Use full public links; expand shortened TikTok links. Players load on click and provide an original-platform link if embedding is blocked. Put your poster in `public/assets/`, or import new source images through Astro for optimization.
 
-Set `showreelUrl` to replace the hero's labeled sample reel. The real work list is currently empty, so coming-soon placeholders appear. Sample footage is not presented as Khosta's work.
+The current showreel is [Khosta’s YouTube video](https://www.youtube.com/watch?v=kPqnJMdCEFI). Change `showreelUrl` to replace it. An empty or invalid value uses clearly labeled sample footage. The work gallery remains separate and currently displays coming-soon placeholders.
 
 ## Wishlist and social links
 
@@ -86,6 +86,12 @@ Add social profile objects to `socials`:
 ```
 
 Delete an object to remove it; move it within the array to change its order. The wishlist is intentionally empty. There are 11 social profile links, including labeled personal accounts. Setting `socials` to `[]` hides the social row. No payments are collected by the website.
+
+## Opening portrait
+
+The supplied editor photo is `src/assets/sunil-portrait.png`. Astro creates 360px and 640px WebP versions. Its markup is in `src/pages/index.astro`; `.paper-portrait`, `.paper-sheet`, and `.paper-fold` in `src/styles/global.css` control the paper treatment. `public/assets/paper-grain.svg` supplies a small static texture.
+
+Two paper flaps unfold to reveal the portrait on each page load or refresh, without blocking navigation. Motion lasts about 1.75 seconds, uses CSS transforms and opacity, and stays still when reduced motion is preferred. Replace the source image and update its alt text to change the portrait.
 
 ## Design and performance
 

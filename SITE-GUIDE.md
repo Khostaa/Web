@@ -2,7 +2,7 @@
 
 This guide describes the site as it is currently implemented, including the details that are not controlled by the content file.
 
-**Documentation updated:** 20 October 2026. Includes Libre Caslon Condensed, 11 social links, GitHub Pages deployment, and the completed Cloudflare cleanup.
+**Documentation updated:** 21 October 2026. Includes Libre Caslon Condensed, 11 social links, GitHub Pages deployment, the completed Cloudflare cleanup, the folded-paper portrait, and the selected YouTube showreel.
 
 **Project folder:** `C:\Users\sunil\OneDrive\Documents\sites\khosta-web-github`  
 **Production domain:** https://www.sunil17.com.np/
@@ -154,7 +154,7 @@ Open `src/data/portfolio.json`. The current structure is:
   "email": "mailkhosta@gmail.com",
   "phone": "+9779825833442",
   "phoneDisplay": "+977 982 583 3442",
-  "showreelUrl": "",
+  "showreelUrl": "https://www.youtube.com/watch?v=kPqnJMdCEFI",
   "videos": [],
   "gifts": [],
   "socials": [
@@ -355,9 +355,19 @@ The hero uses widths 640, 960, 1280, and 1800. These are declared twice in `inde
 
 Actual video posters use `object-fit: contain` to retain the whole image; mismatched proportions can leave empty space. Coming-soon photos use `cover` for decorative crops. Change these rules in `global.css` if desired.
 
+### Opening portrait and folded-paper reveal
+
+The editor photo is `src/assets/sunil-portrait.png`. Replace this file to change it. `src/pages/index.astro` imports it as `portrait`, generates 360px and 640px WebP variants, and renders `.paper-portrait` at the beginning of the hero. Update its image alt text when changing the subject. The portrait has explicit dimensions so the entrance does not shift the page layout.
+
+The paper effect is built in CSS: `.paper-sheet` is the cream frame; `.paper-grain` and the sheet overlay use the small `public/assets/paper-grain.svg` texture; `.paper-fold-top` and `.paper-fold-bottom` unfold away from the middle. The `portrait-arrive`, `portrait-emerge`, `paper-open-top`, and `paper-open-bottom` keyframes control the motion. Change their durations and delays together if adjusting timing. The paper flaps disappear after the reveal.
+
+The reveal replays with each full load or refresh. It uses no timer, animation library, storage flag, or blocking overlay. With `prefers-reduced-motion: reduce`, the photo appears immediately and the flaps stay hidden. The desktop hero uses a two-column `.hero-stage`; on screens up to 700px wide, the photo sits above the text.
+
 ## 8. Main showreel
 
-Set `showreelUrl` in `portfolio.json` to a supported video URL. An empty or unsupported value keeps the clearly labeled sample reel.
+The current selection is `https://www.youtube.com/watch?v=kPqnJMdCEFI`. Set `showreelUrl` in `portfolio.json` to another supported video URL to replace it. An empty or unsupported value keeps the clearly labeled sample reel.
+
+The real showreel label and caption are rendered in the initial HTML, and the YouTube iframe is created only when the play button is clicked. The work gallery is configured separately from the showreel.
 
 The large background photo is separate from the playable video: change `src/assets/reel.jpg` to replace it. Replacing the photo does not change the video, and replacing the video does not change the photo.
 

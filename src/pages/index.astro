@@ -10,6 +10,10 @@ import reel from '../assets/reel.jpg';
 import story from '../assets/story.jpg';
 import social from '../assets/social.jpg';
 import motion from '../assets/motion.jpg';
+import portrait from '../assets/sunil-portrait.png';
+import { parseVideo } from '../lib/media.js';
+const hasShowreel = Boolean(parseVideo(portfolio.showreelUrl));
+const portraitVariants = await Promise.all([360, 640].map(width => getImage({ src: portrait, width, format: 'webp', quality: 82 })));
 const heroVariants = await Promise.all([640, 960, 1280, 1800].map(width => getImage({ src: reel, width, format: 'webp', quality: 78 })));
 const heroSrcset = heroVariants.map((image, index) => image.src + ' ' + [640, 960, 1280, 1800][index] + 'w').join(', ');
 const optimizedImages = {};
@@ -51,20 +55,31 @@ for (const [name, source] of Object.entries({ reel, story, social, motion })) {
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="hero-stage">
+      <figure class="paper-portrait">
+        <div class="paper-sheet">
+          <div class="portrait-window"><img src={portraitVariants[1].src} srcset={`${portraitVariants[0].src} 360w, ${portraitVariants[1].src} 640w`} sizes="(max-width: 700px) 180px, 280px" width={portrait.width} height={portrait.height} alt="Sunil Paudel, also known as Khosta, video editor" loading="eager" fetchpriority="high" decoding="async"><span class="paper-grain" aria-hidden="true"></span></div>
+          <figcaption>SUNIL PAUDEL <span>behind the cut.</span></figcaption>
+          <span class="paper-fold paper-fold-top" aria-hidden="true"></span><span class="paper-fold paper-fold-bottom" aria-hidden="true"></span>
+        </div>
+      </figure>
+      <div class="hero-copy">
       <div class="eyebrow"><span class="tiny-line"></span> SUNIL PAUDEL / A.K.A KHOSTA</div>
       <h1 id="hero-title"><span class="sans-lead">Good footage.</span><br><em>Unforgettable stories.</em></h1>
       <p>I turn moments into something you feel.<br>Video editing, with a little more soul.</p>
       <div class="hero-actions"><a class="button primary" href="#work">Explore my work <span>↘</span></a><a class="text-link" href="#contact">Have a story in mind? <span>↗</span></a></div>
       <div class="hero-note"><span class="status-dot"></span> Independent video editor <span class="note-separator">/</span> Made with intention.</div>
+      </div>
+      </div>
     </section>
 
     <section class="reel-section wrap" aria-label="Featured reel">
-      <button class="reel" id="reel-button" aria-label="Play sample reel">
+      <button class="reel" id="reel-button" aria-label={hasShowreel ? 'Play Khosta’s showreel' : 'Play sample reel'}>
         <img class="reel-image" src={heroVariants[2].src} srcset={heroSrcset} sizes="(max-width: 700px) calc(100vw - 38px), (max-width: 1280px) calc(100vw - 96px), 1184px" width={reel.width} height={reel.height} decoding="async" alt="Sunlight breaking through clouds over a dramatic mountain landscape" fetchpriority="high">
         <div class="reel-shade"></div><div class="reel-top"><span class="mini-mark brand-logo logo-static" aria-hidden="true"></span><span id="reel-type">A LITTLE TASTE OF THE FEELING</span></div>
         <span class="reel-title">Every frame.<br><em>A feeling.</em></span>
         <span class="play-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z"/></svg></span>
-        <span class="reel-bottom"><span id="reel-label">PLAY SAMPLE REEL <span>↗</span></span><span id="reel-caption">DEMO FOOTAGE · NOT MY WORK</span></span>
+        <span class="reel-bottom"><span id="reel-label">{hasShowreel ? 'PLAY SHOWREEL' : 'PLAY SAMPLE REEL'} <span>↗</span></span><span id="reel-caption">{hasShowreel ? 'SUNIL PAUDEL / KHOSTA' : 'DEMO FOOTAGE · NOT MY WORK'}</span></span>
       </button>
       <div class="reel-under"><span>THE CUT. THE COLOR. THE FEELING.</span><span>Sound on. World off. <span class="sound-icon">▂▅▃▇▂</span></span></div>
     </section>
