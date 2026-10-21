@@ -1,4 +1,5 @@
-import { parseVideo, platforms, videoRatio } from '../lib/media.js';
+import { parseVideo, platforms, videoRatio, safeUrl } from '../lib/media.js';
+import { giftDestination, giftMarkets, suggestedGiftCountry } from '../lib/gifts.js';
 const config = window.PORTFOLIO;
 const ids = ['home', 'work', 'wishlist', 'about'];
 const screens = ids.map(id => document.getElementById(id));
@@ -161,15 +162,42 @@ document.querySelector('#social-next').addEventListener('click', () => { socialP
 renderSocials();
 
 const giftItems = [...document.querySelectorAll('.gift-item')];
-if (giftItems.length > 2) {
-  let giftPage = 0;
-  const pager = document.createElement('div'); pager.className = 'gallery-pager';
-  const previous = document.createElement('button'); previous.textContent = '←'; previous.setAttribute('aria-label', 'Previous gifts');
-  const label = document.createElement('span'); label.setAttribute('aria-live', 'polite');
-  const next = document.createElement('button'); next.textContent = '→'; next.setAttribute('aria-label', 'Next gifts');
-  pager.append(previous, label, next); document.querySelector('#gifts').after(pager);
-  const render = () => { const pages = Math.ceil(giftItems.length / 2); giftItems.forEach((item,index) => item.hidden = Math.floor(index / 2) !== giftPage); previous.disabled = !giftPage; next.disabled = giftPage === pages - 1; label.textContent = number(giftPage + 1) + ' / ' + number(pages); };
-  previous.addEventListener('click', () => { giftPage--; render(); }); next.addEventListener('click', () => { giftPage++; render(); }); render();
+const countryPicker = document.querySelector('#gift-country');
+let giftPage = 0;
+function renderGifts() {
+  if (!giftItems.length) return;
+  const capacity = compact.matches ? 1 : 3;
+  const pages = Math.ceil(giftItems.length / capacity);
+  giftPage = Math.max(0, Math.min(giftPage, pages - 1));
+  giftItems.forEach((item,index) => { item.hidden = Math.floor(index / capacity) !== giftPage; });
+  document.querySelector('#gift-page').textContent = number(giftPage + 1) + ' / ' + number(pages);
+  document.querySelector('#gift-prev').disabled = giftPage === 0;
+  document.querySelector('#gift-next').disabled = giftPage === pages - 1;
+  document.querySelector('#gift-pager').hidden = pages <= 1;
+}
+if (countryPicker) {
+  let country;
+  try { country = localStorage.getItem('khosta-gift-country'); } catch {}
+  if (!giftMarkets[country]) country = suggestedGiftCountry(navigator.languages || [navigator.language], Intl.DateTimeFormat().resolvedOptions().timeZone);
+  countryPicker.value = country;
+  const updateStores = () => {
+    const region = countryPicker.value;
+    giftItems.forEach(item => {
+      const gift = config.gifts.filter(gift => safeUrl(gift.url))[Number(item.dataset.giftIndex)];
+      const destination = giftDestination(gift, region);
+      const link = item.querySelector('a');
+      link.href = destination.url;
+      link.setAttribute('aria-label', gift.title + (gift.variant ? ', ' + gift.variant : '') + ': ' + destination.label.replace(' ↗', '') + ' (opens in new tab)');
+      item.querySelector('.gift-store').textContent = destination.label;
+    });
+    document.querySelector('#gift-store-note').textContent = region === 'GLOBAL' ? 'Choose a country for local store results. Other regions: choose your location on the brand website.' : 'Stores for ' + giftMarkets[region][0] + '. Check the model, configuration and availability at the store.';
+  };
+  updateStores();
+  countryPicker.addEventListener('change', () => { updateStores(); try { localStorage.setItem('khosta-gift-country', countryPicker.value); } catch {} });
+  document.querySelector('#gift-prev').addEventListener('click', () => { giftPage--; renderGifts(); });
+  document.querySelector('#gift-next').addEventListener('click', () => { giftPage++; renderGifts(); });
+  compact.addEventListener('change', () => { giftPage = 0; renderGifts(); });
+  renderGifts();
 }
 
 // Load a video only on demand, and remove it on close to stop playback.

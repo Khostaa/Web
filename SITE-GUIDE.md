@@ -110,13 +110,23 @@ Decorative photos are imported from src/assets/reel.jpg, story.jpg, social.jpg, 
 
 ## Gifts / wishlist
 
-The gifts array is intentionally empty. Add entries like:
+Five gifts are configured in portfolio.json: Sony Alpha 6700, DJI Osmo Action 6 Adventure Combo, DJI Mic 3, Samsung Galaxy Watch 7 44 mm, and MacBook Pro M5 Pro 48 GB / 1 TB.
+
+Each gift has title, optional variant, note, category, image (filename stem in src/assets/gifts), query (the exact model/configuration to search for), and url (a brand fallback). Add/remove/reorder objects to manage the list. GiftGallery.astro imports local images and generates responsive 360px / 720px WebP assets. Original product photos are retained; CSS gives them paper-toned plates and crops the Sony promotional image. No AI-generated replacement products are used.
+
+The gallery shows three gifts per page on desktop and one on phones. Pagination is in app.js. An empty array restores the friendly empty state. Product cards are full links opening new tabs; the images and titles are clickable. Without JavaScript, all gifts and brand links remain available.
+
+Country handling lives in src/lib/gifts.js. The browser suggests a market from its language region (with a Nepal timezone correction); this is a suggestion, not IP geolocation. Visitors can change the selector, and their selection is saved locally as khosta-gift-country. No location service or external request runs on page load. Supported markets open product searches at the matching Amazon store or Daraz Nepal. Search links retain the requested configuration but cannot guarantee stock, seller, or exact variant. The MacBook has a direct Oliz Store Nepal override. Other country / region uses each gift's brand fallback; select the destination region on that website.
+
+Add a market to giftMarkets as [country label, store label, HTTPS search URL, query parameter]. To use an exact regional listing, add regionalUrls to that gift, for example:
 
 ```json
-{ "title": "Gift name", "note": "A short note", "url": "https://example.com/item" }
+{ "regionalUrls": { "NP": { "url": "https://example.com/product", "label": "View at local store ↗" } } }
 ```
 
-Remove or reorder objects to change the list. Only HTTP/HTTPS links are rendered. Empty gifts show a friendly empty state. More than two gifts get pagination, two per page. Markup is generated in index.astro; pagination lives in app.js; colors and layout are in global.css. This site collects no payments.
+Only HTTP/HTTPS links pass validation. Check store destinations and configurations periodically. The site takes no payments, adds no affiliate codes and makes no stock claims. Reference product pages: [Sony](https://electronics.sony.com/imaging/interchangeable-lens-cameras/aps-c/p/ilce6700-b), [Osmo Action 6](https://store.dji.com/product/osmo-action-6-adventure-combo), [DJI Mic 3](https://store.dji.com/product/dji-mic-3), [Samsung](https://www.samsung.com/us/watches/galaxy-watch7/buy/), [Apple](https://www.apple.com/shop/buy-mac/macbook-pro), [Oliz Nepal](https://www.olizstore.com/product/apple-macbook-pro-m5-pro-16%22).
+
+Horizontal dividers between the header, content and footer, and within contact/wishlist content, are removed in global.css. Control outlines and paper-fold details remain part of their components.
 
 ## Social profiles
 

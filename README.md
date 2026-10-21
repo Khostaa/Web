@@ -8,7 +8,7 @@ An experimental, screen-by-screen video editor portfolio on the **revamp** branc
 
 - **Start:** “What do you want?” with three large choices, changing image compositions on hover or keyboard focus.
 - **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Filters and pagination accommodate more videos.
-- **Gifts:** the wishlist and its current empty state. Additional gifts paginate.
+- **Gifts:** five image-led product wishes, country-aware store links, and pagination.
 - **Reach out:** the editor's paper portrait, animated copy, contact information, and paginated social links.
 
 The navy, green, tan, Inter, and Libre Caslon Condensed styling remains. Cosmos is the user-selected interaction reference: its brand selector informs the menu, and its color-search demonstration informs the gallery entrance.
@@ -39,7 +39,7 @@ Run the build before tests. Default dev/preview address: http://127.0.0.1:4321.
 | Pre-paint theme | `src/scripts/theme.js` |
 | Native-ratio parsing and supported platform URLs | `src/lib/media.js` |
 
-See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The showreel is [Make it Exist](https://www.youtube.com/watch?v=kPqnJMdCEFI). Real gallery work and gifts remain empty until added.
+See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The showreel is [Make it Exist](https://www.youtube.com/watch?v=kPqnJMdCEFI). Real gallery work remains empty until added. Five gifts are configured; update products, images and country links using SITE-GUIDE.md.
 
 ## Performance and accessibility
 

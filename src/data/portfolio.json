@@ -7,7 +7,57 @@
   "showreelUrl": "https://www.youtube.com/watch?v=kPqnJMdCEFI",
   "showreelThumbnail": "assets/showreel.png",
   "videos": [],
-  "gifts": [],
+  "gifts": [
+    {
+      "title": "Sony Alpha 6700",
+      "note": "A new perspective on the everyday.",
+      "image": "sony-a6700",
+      "category": "FOR THE NEXT FRAME",
+      "query": "Sony Alpha a6700 camera",
+      "url": "https://electronics.sony.com/imaging/interchangeable-lens-cameras/aps-c/p/ilce6700-b"
+    },
+    {
+      "title": "DJI Osmo Action 6",
+      "variant": "Adventure Combo",
+      "note": "For stories beyond the editing desk.",
+      "image": "osmo-action-6",
+      "category": "FOR THE ADVENTURE",
+      "query": "DJI Osmo Action 6 Adventure Combo",
+      "url": "https://store.dji.com/product/osmo-action-6-adventure-combo"
+    },
+    {
+      "title": "DJI Mic 3",
+      "note": "Every good story deserves to be heard.",
+      "image": "dji-mic-3",
+      "category": "FOR THE SOUND",
+      "query": "DJI Mic 3 2 TX 1 RX Charging Case",
+      "url": "https://store.dji.com/product/dji-mic-3"
+    },
+    {
+      "title": "Samsung Galaxy Watch 7",
+      "variant": "44 mm",
+      "note": "A little rhythm for life away from the screen.",
+      "image": "galaxy-watch-7",
+      "category": "FOR THE EVERYDAY",
+      "query": "Samsung Galaxy Watch 7 44mm",
+      "url": "https://www.samsung.com/us/watches/galaxy-watch7/buy/galaxy-watch7-44mm-silver-wifi-bluetooth-sm-l310nzsaxaa?modelCode=SM-L310NZSAXAA"
+    },
+    {
+      "title": "MacBook Pro M5 Pro",
+      "variant": "48 GB / 1 TB",
+      "note": "A little more room for the next big idea.",
+      "image": "macbook-pro",
+      "category": "FOR WHAT COMES NEXT",
+      "query": "Apple MacBook Pro M5 Pro 48GB 1TB",
+      "url": "https://www.apple.com/shop/buy-mac/macbook-pro",
+      "regionalUrls": {
+        "NP": {
+          "url": "https://www.olizstore.com/product/apple-macbook-pro-m5-pro-16%22",
+          "label": "View at Oliz Store ↗"
+        }
+      }
+    }
+  ],
   "socials": [
     { "label": "YouTube", "url": "https://www.youtube.com/@KhostaTuts" },
     { "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" },

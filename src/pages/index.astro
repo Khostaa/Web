@@ -4,6 +4,7 @@ import caslonItalicUrl from '../assets/fonts/LibreCaslonCondensed-Italic.woff2?u
 import { getImage } from 'astro:assets';
 import '../styles/global.css';
 import WorkGallery from '../components/WorkGallery.astro';
+import GiftGallery from '../components/GiftGallery.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import portfolio from '../data/portfolio.json';
 import reel from '../assets/reel.jpg';
@@ -77,14 +78,9 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
       <p class="work-footnote reveal" id="work-footnote">Start with the showreel. Stay for the feeling.</p>
     </section>
 
-    <section class="screen gifts-screen" id="wishlist" aria-labelledby="wishlist-title">
-      <div class="gift-scene reveal" aria-hidden="true"><span class="gift-ring"></span><span class="gift-star">✳</span><span class="gift-scene-label">SMALL THINGS. BIG FEELINGS.</span></div>
-      <div class="gifts-copy"><div class="eyebrow reveal">02 / A LITTLE SOMETHING</div><h2 id="wishlist-title" class="reveal" tabindex="-1">Good stories.<br><em>Kind gestures.</em></h2><p class="reveal">For the kind souls who asked.<br>A small corner for things I’d love.</p>
-        <div class:list={['gifts-content', gifts.length ? 'gift-list' : 'wishlist-empty']} id="gifts">
-          {gifts.length ? gifts.map(gift => <article class="gift-item reveal"><h3>{gift.title}</h3><p>{gift.note}</p><a href={gift.url} target="_blank" rel="noopener noreferrer">View gift ↗</a></article>) : <div class="reveal"><span class="empty-dot"></span><h3>Nothing on the list. Just good energy.</h3><p>A few wishes might find their way here soon.<br>Until then, thanks for being here.</p></div>}
-        </div>
-        <a class="text-link reveal" href="#about">A kind word works, too <span>↗</span></a>
-      </div>
+    <section class:list={['screen gifts-screen', { 'has-gifts': gifts.length }]} id="wishlist" aria-labelledby="wishlist-title">
+      <div class="screen-heading"><div><div class="eyebrow reveal">02 / A LITTLE SOMETHING</div><h2 id="wishlist-title" class="reveal" tabindex="-1">Good stories. <em>Kind gestures.</em></h2></div><p class="section-note reveal">A few things for the next chapter.<br>Thank you for thinking of me.</p></div>
+      {gifts.length ? <GiftGallery gifts={gifts} /> : <div class="wishlist-empty reveal" id="gifts"><h3>Nothing on the list. Just good energy.</h3><p>A few wishes might find their way here soon.</p><a class="text-link" href="#about">A kind word works, too ↗</a></div>}
     </section>
 
     <section class="screen about-screen" id="about" aria-labelledby="about-title">
