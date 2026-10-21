@@ -14,7 +14,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/Azjv0NRnMA4",
       "thumbnail": "assets/work/youtube-Azjv0NRnMA4.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "sports",
+      "tags": []
     },
     {
       "title": "NWC | Work done for PSN",
@@ -23,7 +25,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/c8mtXrNnRsE",
       "thumbnail": "assets/work/youtube-c8mtXrNnRsE.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "sports",
+      "tags": []
     },
     {
       "title": "3 Mistakes | Nirvana Counselling Center",
@@ -32,7 +36,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/gxHrEn1mjro",
       "thumbnail": "assets/work/youtube-gxHrEn1mjro.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "education",
+      "tags": []
     },
     {
       "title": "Nomination Approved | Insta Education and Visa Services",
@@ -41,7 +47,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/0b6M5SWm99Q",
       "thumbnail": "assets/work/youtube-0b6M5SWm99Q.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "education",
+      "tags": []
     },
     {
       "title": "Combined Visa | Insta Education and Visa Services",
@@ -50,7 +58,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/1l5ZRg2qxgA",
       "thumbnail": "assets/work/youtube-1l5ZRg2qxgA.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "education",
+      "tags": []
     },
     {
       "title": "Imposter challenge",
@@ -59,7 +69,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.tiktok.com/@paradygmtv/video/7532489106115398920",
       "thumbnail": "assets/work/tiktok-7532489106115398920.png",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "The loudest person at PARADYGM",
@@ -68,7 +80,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.tiktok.com/@paradygmtv/video/7530658815037934855",
       "thumbnail": "assets/work/tiktok-7530658815037934855.png",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "Guras Nani",
@@ -77,7 +91,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.tiktok.com/@paradygmtv/video/7527674913390415111",
       "thumbnail": "assets/work/tiktok-7527674913390415111.png",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "Can you win against them?",
@@ -86,7 +102,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.tiktok.com/@paradygmtv/video/7523227539209260309",
       "thumbnail": "assets/work/tiktok-7523227539209260309.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "FASAIDEU with the team",
@@ -95,7 +113,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.tiktok.com/@paradygmtv/video/7532117307649281288",
       "thumbnail": "assets/work/tiktok-7532117307649281288.png",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "Find out their dream Miss Nepal | What goes BTS of Miss Nepal?",
@@ -104,7 +124,9 @@
       "aspectRatio": "16:9",
       "url": "https://www.youtube.com/watch?v=Nc7TZD0Gs6E",
       "thumbnail": "assets/work/youtube-Nc7TZD0Gs6E.jpg",
-      "format": "long"
+      "format": "long",
+      "collection": "long",
+      "tags": []
     },
     {
       "title": "GD and the gang guesses GEN Z SLANGS | @Ganesh_GD",
@@ -113,7 +135,9 @@
       "aspectRatio": "16:9",
       "url": "https://www.youtube.com/watch?v=Ay1AsXX3A7A",
       "thumbnail": "assets/work/youtube-Ay1AsXX3A7A.jpg",
-      "format": "long"
+      "format": "long",
+      "collection": "long",
+      "tags": []
     },
     {
       "title": "Questions asked in Interview | Nirvana",
@@ -122,7 +146,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/1ZdkExSjrnY",
       "thumbnail": "assets/work/youtube-1ZdkExSjrnY.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "education",
+      "tags": []
     },
     {
       "title": "Community Welfare | Nirvana",
@@ -131,7 +157,9 @@
       "aspectRatio": "9:16",
       "url": "https://www.youtube.com/shorts/Wk4XjiY39kY",
       "thumbnail": "assets/work/youtube-Wk4XjiY39kY.jpg",
-      "format": "short"
+      "format": "short",
+      "collection": "education",
+      "tags": []
     },
     {
       "title": "One of my recent works",
@@ -141,7 +169,9 @@
       "url": "https://www.instagram.com/reel/DV_Hu9kjDkD/",
       "thumbnail": "assets/work/instagram-DV_Hu9kjDkD.jpg",
       "mediaUrl": "/media/fusion-node-tree.mp4",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "EP1 — Let the journey begin",
@@ -151,7 +181,9 @@
       "url": "https://www.instagram.com/reel/DRet11KCD-P/",
       "thumbnail": "assets/work/instagram-DRet11KCD-P.jpg",
       "mediaUrl": "/media/let-the-journey-begin.mp4",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "Had fun doing this!",
@@ -161,7 +193,9 @@
       "url": "https://www.instagram.com/reel/DTKKhwljQxV/",
       "thumbnail": "assets/work/instagram-DTKKhwljQxV.jpg",
       "mediaUrl": "/media/stop-motion.mp4",
-      "format": "short"
+      "format": "short",
+      "collection": "social",
+      "tags": []
     },
     {
       "title": "Oliveira vs Holloway — Live Watch Party",
@@ -171,7 +205,9 @@
       "url": "https://www.instagram.com/reel/DVBxybhgbKn/",
       "thumbnail": "assets/work/instagram-DVBxybhgbKn.jpg",
       "mediaUrl": "/media/ufc-event-promo.mp4",
-      "format": "short"
+      "format": "short",
+      "collection": "sports",
+      "tags": []
     }
   ],
   "gifts": [
@@ -227,11 +263,7 @@
   ],
   "socials": [
     {
-      "label": "YouTube",
-      "url": "https://www.youtube.com/@KhostaTuts"
-    },
-    {
-      "label": "Instagram · Khosta",
+      "label": "Instagram",
       "url": "https://www.instagram.com/khosta.np/"
     },
     {
@@ -243,32 +275,24 @@
       "url": "https://www.linkedin.com/in/khostaa/"
     },
     {
-      "label": "Facebook · Khosta",
-      "url": "https://www.facebook.com/khostaaa/"
-    },
-    {
-      "label": "GitHub",
-      "url": "https://github.com/Khostaa"
-    },
-    {
-      "label": "Medium",
-      "url": "https://khostaa.medium.com"
-    },
-    {
-      "label": "X",
-      "url": "https://x.com/Sunil_Poudel17"
-    },
-    {
-      "label": "Discord",
-      "url": "https://discord.gg/AsnMswFT25"
-    },
-    {
-      "label": "Instagram · Personal",
-      "url": "https://www.instagram.com/sunil_poudel17/"
-    },
-    {
-      "label": "Facebook · Personal",
-      "url": "https://www.facebook.com/sunil.poudel17"
+      "label": "WhatsApp me",
+      "url": "https://wa.me/9779825833442"
     }
+  ],
+  "location": "Nepal",
+  "tools": [
+    "DaVinci Resolve",
+    "Fusion Studio",
+    "Canva",
+    "Affinity by Canva",
+    "Illustrator"
+  ],
+  "services": [
+    "Video Editing",
+    "Color Grading",
+    "Sound Design",
+    "Podcast/Multicam Editing",
+    "Teasers",
+    "Promos"
   ]
 }

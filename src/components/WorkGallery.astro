@@ -15,7 +15,7 @@ for (const platform of Object.keys(platforms)) {
     const ratio = videoRatio(video.aspectRatio || video.ratio, video.platform, video.url);
     const image = images[video.thumbnail || preset.image];
     const Cover = real ? 'button' : 'div';
-    return <article class="work-card" data-platform={video.platform} data-format={video.format || 'short'} data-ratio={ratio} data-work-index={index}>
+    return <article class="work-card" data-platform={video.platform} data-format={video.format || 'short'} data-collection={video.collection || 'social'} data-ratio={ratio} data-work-index={index}>
       <Cover class:list={['work-media', { 'has-video': real, 'is-showreel': video.showreel }]} style={{ aspectRatio: ratio.replace(':',' / ') }} aria-label={real ? (video.showreel ? 'Play Khosta’s showreel' : 'Play ' + video.title) : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined} data-video-source={real ? video.mediaUrl : undefined}>
         <img src={image?.small || video.thumbnail || preset.image} srcset={image?.srcset} sizes="(max-width: 700px) 44vw, 360px" width={image?.width} height={image?.height} alt="" loading="lazy" decoding="async" />
         <span class="cover-shade"></span><span class="platform-tag">{video.showreel ? 'SHOWREEL' : platforms[video.platform]}</span><span class="ratio-tag">{ratio}</span>
@@ -23,7 +23,7 @@ for (const platform of Object.keys(platforms)) {
         {real ? <span class="play-circle" aria-hidden="true">▶</span> : <span class="placeholder-caption">{preset.line}<em>{preset.italic}</em></span>}
         {!real && <span class="coming-badge">COMING SOON</span>}
       </Cover>
-      <div class="work-card-info"><h3>{real ? video.title : preset.title}</h3><span>{real ? video.category || platforms[video.platform] : 'Coming soon'} {real ? '↗' : ''}</span></div>
+      <div class="work-card-info"><h3>{real ? video.title : preset.title}</h3><span>{real ? video.category || platforms[video.platform] : 'Coming soon'} {real ? '↗' : ''}</span>{video.tags?.length > 0 && <ul class="contribution-tags" aria-label="My contribution">{video.tags.map(tag => <li>{tag}</li>)}</ul>}</div>
     </article>;
   })}
 </div>

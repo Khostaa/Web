@@ -41,7 +41,7 @@ if (parseVideo(content.showreelUrl)) {
   assert.ok(!html.includes('DEMO FOOTAGE · NOT MY WORK'),'Real showreel has no demo disclaimer');
 }
 assert.ok(html.includes('alt="Sunil Paudel, also known as Khosta, video editor"'),'Portrait has accessible description');
-assert.ok(fs.readdirSync('dist/_astro').some(file=>file.startsWith('sunil-portrait.')&&file.endsWith('.webp')),'Portrait is optimized');
+assert.ok(fs.readdirSync('dist/_astro').some(file=>file.startsWith('sunil-cutout.')&&file.endsWith('.webp')),'Portrait is optimized');
 for (const gift of content.gifts) { assert.ok(html.includes(gift.title), 'Gift prerendered: '+gift.title); assert.ok(gift.url.startsWith('https://')); }
 if(content.gifts.length) assert.ok(html.includes('id="gift-country"'), 'Country selector is prerendered');
 for(const gift of content.gifts.filter(gift=>gift.image)) assert.ok(fs.readdirSync('dist/_astro').some(file=>file.startsWith(gift.image+'.')&&file.endsWith('.webp')), 'Gift photography is optimized: '+gift.image);
@@ -84,5 +84,12 @@ assert.ok(!html.includes('tiktok.com/embed.js'),'No eager TikTok embed script');
 for(const video of content.videos){assert.ok(['short','long'].includes(video.format));if(video.mediaUrl){assert.equal(parseVideo(video.mediaUrl)?.platform,'file');assert.ok(fs.statSync('public'+video.mediaUrl).size<24*1024*1024);assert.ok(html.includes('data-video-source="'+video.mediaUrl+'"'));}}
 assert.equal(content.videos.filter(v=>v.format==='long').length,2);
 assert.ok(!html.includes('<video'),'Native players also load on demand');
-for(const name of ['DaVinci Resolve','Fusion','Canva','Affinity','Illustrator','Photoshop'])assert.ok(html.includes('aria-label="'+name+'"'));
+for(const name of content.tools)assert.ok(html.includes(name));
 assert.equal(parseVideo('/media/../secret.mp4'),null);
+
+for(const v of content.videos){assert.ok(['sports','education','social','long'].includes(v.collection));assert.ok(Array.isArray(v.tags));assert.ok(html.includes('data-collection="'+v.collection+'"'));}
+for(const service of content.services)assert.ok(html.includes(service));
+assert.deepEqual(content.socials.map(s=>new URL(s.url).hostname),['www.instagram.com','www.behance.net','www.linkedin.com','wa.me']);
+assert.equal(content.socials.at(-1).url,'https://wa.me/'+content.phone.replace(/\D/g,''));
+assert.ok(html.includes('id="home-showreel"'));
+assert.ok(!html.includes('paper-sheet'),'Portrait is frameless');
