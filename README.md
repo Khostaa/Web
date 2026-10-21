@@ -34,7 +34,7 @@ Hire me includes Instagram (khosta.np), Behance, LinkedIn and WhatsApp me, plus 
 
 ## Performance and accessibility
 
-Static HTML, responsive WebP, no hydrated framework or animation package. CSS handles continuous motion; reduced-motion settings disable it. Hover/focus, explicit pause, keyboard browsing and drag/arrow controls provide alternatives. Players load only when clicked and are removed on close. Four supplied Instagram exports use native H.264/AAC MP4 playback (~14.5 MiB total), retaining their original credit links. The transparent portrait is derived from the supplied original; asset/edit details are in the guide.
+Static HTML, responsive WebP, no hydrated framework or animation package. CSS handles continuous motion; reduced-motion settings disable it. Hover/focus, keyboard browsing and drag/arrow controls provide alternatives. Players load only when clicked and are removed on close. Four supplied Instagram exports use native H.264/AAC MP4 playback (~14.5 MiB total), retaining their original credit links. The transparent portrait is derived from the supplied original; asset/edit details are in the guide.
 
 ## Release
 
@@ -47,3 +47,9 @@ User-supplied portrait, logo, showreel and product imagery are retained. Fonts i
 Edit VIDEO-LABELS.md, then run `pnpm labels` (or `node scripts/sync-video-labels.mjs`), build and test. The script matches each section by its original video URL, so deleting a worksheet section does not accidentally delete or relabel another project. Remove projects directly from portfolio.json. Blank tags render no contribution badges; completed tags appear on hover/focus. The worksheet is preserved as entered.
 
 Label update: the supplied worksheet titles and contribution tags have been applied. Guras Nani and Imposter challenge were removed at the editor’s request. A project omitted from the worksheet remains in the portfolio unless explicitly removed.
+
+### Experience stats and wheel browsing
+
+The `stats` array in portfolio.json controls the three supplied figures: 1.5+ Years Experience, 500+ Shorts Delivered and 6+ Million Views Generated. Update value/label independently. They render above the services list.
+
+The Work showreel shortcut, pause button and collection arrows are removed. The Home showreel and screen navigation remain. Moving tiles run at twice their previous speed. Scrolling over tiles advances their CSS timeline in its existing direction, including alternating vertical columns and sideways category strips. Both wheel directions advance the existing animation; trackpad/line/page deltas are normalized and large gestures bounded. Wheel input outside the tiles and Ctrl/Meta wheel zoom are not intercepted. Hover pauses automatic movement while wheel input still lets you browse. Reduced-motion/keyboard browsing uses ordinary still-column scrolling (horizontal strips translate wheel input to horizontal scroll). Long-form films remain stationary. The pure wheel/time helpers are in src/lib/work-motion.js; the listener runs only on wheel input, with no persistent JavaScript animation loop.

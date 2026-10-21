@@ -1,3 +1,4 @@
+import { wheelDistance, advanceLoopTime } from './src/lib/work-motion.js';
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { parseVideo, videoRatio } from './src/lib/media.js';
@@ -37,7 +38,7 @@ for(const file of ['logo.svg','logo-center.svg','logo-outer.svg']) {
 }
 const content=JSON.parse(fs.readFileSync('src/data/portfolio.json','utf8'));
 if (parseVideo(content.showreelUrl)) {
-  assert.ok(html.includes('Play Khosta’s showreel'),'Real showreel is prerendered');
+  assert.ok(html.includes('Watch showreel'),'Home showreel is prerendered');
   assert.ok(!html.includes('DEMO FOOTAGE · NOT MY WORK'),'Real showreel has no demo disclaimer');
 }
 assert.ok(html.includes('alt="Sunil Paudel, also known as Khosta, video editor"'),'Portrait has accessible description');
@@ -78,7 +79,7 @@ for(const video of content.videos){
 if(['youtube','instagram','tiktok'].every(platform=>content.videos.some(video=>video.platform===platform)))assert.ok(!html.includes('COMING SOON'),'No placeholder cards when all platforms have real work');
 console.log('Passed: configured work URLs, platform matches, local cover assets and native project ratios.');
 
-assert.equal([...html.matchAll(/data-video-url=/g)].length,content.videos.filter(video=>parseVideo(video.url)).length+(parseVideo(content.showreelUrl)?1:0),'One playable card per project, plus showreel');
+assert.equal([...html.matchAll(/data-video-url=/g)].length,content.videos.filter(video=>parseVideo(video.url)).length,'One playable card per project; showreel stays on Home');
 assert.ok(!html.includes('tiktok.com/embed.js'),'No eager TikTok embed script');
 
 for(const video of content.videos){assert.ok(['short','long'].includes(video.format));if(video.mediaUrl){assert.equal(parseVideo(video.mediaUrl)?.platform,'file');assert.ok(fs.statSync('public'+video.mediaUrl).size<24*1024*1024);assert.ok(html.includes('data-video-source="'+video.mediaUrl+'"'));}}
@@ -100,3 +101,14 @@ for(const v of content.videos)for(const tag of v.tags)assert.ok(html.includes(ta
 
 assert.ok(!content.videos.some(v=>v.url.includes('7532489106115398920')),'Imposter challenge is removed');
 assert.ok(!html.includes('7532489106115398920'),'Imposter challenge is absent from the built page');
+
+for(const stat of content.stats){assert.ok(html.includes(stat.label));assert.ok(html.includes(stat.value));}
+for(const id of ['showreel-shortcut','work-motion','work-prev','work-next'])assert.ok(!html.includes('id="'+id+'"'),'Removed Work control: '+id);
+
+assert.equal(wheelDistance(0,100),135);
+assert.equal(wheelDistance(0,-100),135,'Either wheel direction follows the existing animation');
+assert.equal(wheelDistance(0,3,1),64.80000000000001);
+assert.equal(wheelDistance(0,0),0);
+assert.equal(wheelDistance(0,99999),405,'Large gestures are bounded');
+assert.equal(advanceLoopTime(9000,10000,100,50),1000,'Loop scrubbing wraps forward without a gap');
+assert.equal(advanceLoopTime(3000,10000,50,50),4000);

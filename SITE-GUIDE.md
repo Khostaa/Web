@@ -41,7 +41,7 @@ The Home heading and description say: Hi! I’m Sunil Paudel, a freelance video 
 
 ## Showreel
 
-Change showreelUrl and showreelThumbnail in portfolio.json. Current showreel: https://www.youtube.com/watch?v=kPqnJMdCEFI. Current source thumbnail: src/assets/showreel.png, the supplied restart artwork. Replace that image or point to another imported asset. The Home button and Work shortcut share the same configured video and open the on-demand dialog. The Home button label is Watch showreel; its thumbnail is optimized to WebP.
+Change showreelUrl and showreelThumbnail in portfolio.json. Current showreel: https://www.youtube.com/watch?v=kPqnJMdCEFI. Current source thumbnail: src/assets/showreel.png, the supplied restart artwork. Replace that image or point to another imported asset. The Home button opens the configured showreel in the on-demand dialog. The Work sidebar has no showreel shortcut. The Home button label is Watch showreel; its thumbnail is optimized to WebP.
 
 ## Work: add, remove, classify or label videos
 
@@ -72,7 +72,7 @@ This example illustrates the schema; contribution tags must describe your actual
 - `tags`: an array of your contribution labels. Empty arrays render no tags.
 - `mediaUrl`: optional owned video file for a native video-only player.
 
-The current category assignment is based on visible project subjects: three sports promos, five educational edits, six social/creative edits and two long films. Change collection freely if a project belongs elsewhere. All short form shows every short video; specific categories include only their own videos. Long form shows the two stationary films. The showreel is separate from these counts.
+The current category assignment is based on visible project subjects: three sports promos, five educational edits, six social/creative edits and two long films. Change collection freely if a project belongs elsewhere. All short form shows every short video; specific categories include only their own videos. Long form shows the two stationary films. The Home showreel is separate from these counts.
 
 To add an optimized poster, save JPG/PNG/WebP in src/assets/work and set thumbnail to assets/work/filename.ext. index.astro imports the directory automatically. Keep filenames unique. Astro creates responsive local WebP variants, so visitors do not request cover images from social platforms. Existing TikTok posters are real player frames; native Instagram posters were extracted from the supplied video exports. Images use contain sizing so their borders are preserved.
 
@@ -80,9 +80,9 @@ To add an optimized poster, save JPG/PNG/WebP in src/assets/work and set thumbna
 
 All short form uses compact vertical masonry columns, alternating down/up. Individual categories use a horizontal looping strip. Long films have no continuous motion. work-wall.js filters the original cards, packs them and repeats aria-hidden, non-tabbable copies for a seamless loop. Category counts refer to original videos, not copies.
 
-Change the 10px gap, width thresholds, column count and speed in work-wall.js. Vertical speed is 14 + columnIndex × 2 pixels/second; horizontal speed is 24 pixels/second. `wall-fall` is in global.css; `wall-sideways` and upward-column direction are in glass.css. Keep identical gap/padding at both duplicated-group seams.
+Change the 10px gap, width thresholds, column count and speed in work-wall.js. Vertical speed is 28 + columnIndex × 4 pixels/second; horizontal speed is 48 pixels/second. `wall-fall` is in global.css; `wall-sideways` and upward-column direction are in glass.css. Keep identical gap/padding at both duplicated-group seams.
 
-Hover/focus pauses motion. Pause motion explicitly stops it. Hidden documents, inactive screens and open players also pause it. Reduced-motion settings stop continuous motion, entrances and logo rotation. Keyboard browsing shows still tracks; arrows/drag browse collections without activating a video. Keep these alternatives when changing animation.
+Hover/focus pauses motion. There is no separate pause button; hover/focus and reduced-motion preferences stop automatic movement. Hidden documents, inactive screens and open players also pause it. Reduced-motion settings stop continuous motion, entrances and logo rotation. Keyboard browsing shows still tracks; arrows/drag browse collections without activating a video. Keep these alternatives when changing animation.
 
 The work-viewport wrapper contains pointer-transparent top/bottom overlays using small masked backdrop blurs. Change `.grid-soft-edge` for their strength/height. Long form hides these overlays. Keep the overlays out of pointer hit-testing. They do not animate their blur radius.
 
@@ -128,7 +128,7 @@ The unused perf-metrics-f208 Worker and its route, obsolete _openai-site-verific
 
 ## Verify changes
 
-Build, run tests, then check both themes and desktop/phone sizes. Check intro, showreel opening/closing, category counts, alternating/horizontal motion, pause/focus, stationary long films, contribution labels, the four social destinations and gift country links. On a short screen, Home/Hire me allow internal scrolling to keep content accessible. Inactive screens remain hidden and inert.
+Build, run tests, then check both themes and desktop/phone sizes. Check intro, showreel opening/closing, category counts, alternating/horizontal motion, hover/focus pause, wheel input, stationary long films, contribution labels, the four social destinations and gift country links. On a short screen, Home/Hire me allow internal scrolling to keep content accessible. Inactive screens remain hidden and inert.
 
 If old content persists, check the exact main deployment commit/status, then refresh browser/CDN cache. If a category is empty, check format/collection and URL validity. If a poster is missing, check its asset key and rebuild. If a native video fails, verify H.264/AAC, MIME type/range support and mediaUrl. If glass contrast is weak, adjust surface opacity rather than increasing blur everywhere.
 
@@ -137,3 +137,9 @@ If old content persists, check the exact main deployment commit/status, then ref
 Edit VIDEO-LABELS.md, then run `pnpm labels` (or `node scripts/sync-video-labels.mjs`), build and test. The script matches each section by its original video URL, so deleting a worksheet section does not accidentally delete or relabel another project. Remove projects directly from portfolio.json. Blank tags render no contribution badges; completed tags appear on hover/focus. The worksheet is preserved as entered.
 
 Label update: the supplied worksheet titles and contribution tags have been applied. Guras Nani and Imposter challenge were removed at the editor’s request. A project omitted from the worksheet remains in the portfolio unless explicitly removed.
+
+### Experience stats and wheel browsing
+
+The `stats` array in portfolio.json controls the three supplied figures: 1.5+ Years Experience, 500+ Shorts Delivered and 6+ Million Views Generated. Update value/label independently. They render above the services list.
+
+The Work showreel shortcut, pause button and collection arrows are removed. The Home showreel and screen navigation remain. Moving tiles run at twice their previous speed. Scrolling over tiles advances their CSS timeline in its existing direction, including alternating vertical columns and sideways category strips. Both wheel directions advance the existing animation; trackpad/line/page deltas are normalized and large gestures bounded. Wheel input outside the tiles and Ctrl/Meta wheel zoom are not intercepted. Hover pauses automatic movement while wheel input still lets you browse. Reduced-motion/keyboard browsing uses ordinary still-column scrolling (horizontal strips translate wheel input to horizontal scroll). Long-form films remain stationary. The pure wheel/time helpers are in src/lib/work-motion.js; the listener runs only on wheel input, with no persistent JavaScript animation loop.

@@ -1,16 +1,15 @@
+import { wheelDistance, advanceLoopTime } from '../lib/work-motion.js';
 // Native layouts and CSS-only loops; no persistent JavaScript animation loop.
 export function createWorkWall({board,cards,motionPreference,onPlay}) {
-  let active=false,filter='short',category='all',paused=false,playing=false,keyboard=false;
-  const toggle=document.querySelector('#work-motion'),count=document.querySelector('#work-page');
+  let active=false,filter='short',category='all',playing=false,keyboard=false;
+  const count=document.querySelector('#work-page');
   const categoryBar=document.querySelector('.work-subfilters');
   const selected=()=>cards.filter(card=>card.dataset.format===filter&&(filter==='long'||category==='all'||card.dataset.collection===category));
   function sync(){
-    board.dataset.motion=active&&filter==='short'&&!paused&&!playing&&!document.hidden&&!motionPreference.matches?'running':'paused';
+    board.dataset.motion=active&&filter==='short'&&!playing&&!document.hidden&&!motionPreference.matches?'running':'paused';
     board.classList.toggle('keyboard-browsing',keyboard);
-    categoryBar.hidden=filter==='long';toggle.hidden=filter==='long';
-    for(const id of ['work-prev','work-next'])document.getElementById(id).hidden=filter==='long';
-    toggle.disabled=motionPreference.matches;toggle.textContent=motionPreference.matches?'Motion off':paused?'Resume motion':'Pause motion';
-    toggle.setAttribute('aria-pressed',String(paused||motionPreference.matches));
+    categoryBar.hidden=filter==='long';
+    board.dataset.reducedMotion=String(motionPreference.matches);
   }
   function copy(card){const clone=card.cloneNode(true);clone.dataset.clone='true';clone.setAttribute('aria-hidden','true');clone.querySelectorAll('button,a').forEach(el=>el.tabIndex=-1);return clone;}
   function layout(animate=false){
@@ -47,7 +46,7 @@ export function createWorkWall({board,cards,motionPreference,onPlay}) {
       const originals=[...group.children];if(!originals.length)return;let n=0;
       const measure=()=>horizontal?group.offsetWidth:group.offsetHeight;
       while(measure()<(horizontal?width:height)+80&&n<24)group.append(copy(originals[n++%originals.length]));
-      const distance=measure(),track=group.parentElement,speed=horizontal?24:14+index*2;
+      const distance=measure(),track=group.parentElement,speed=horizontal?48:28+index*4;
       track.style.setProperty('--loop-distance',distance+'px');track.style.setProperty('--loop-duration',distance/speed+'s');track.dataset.speed=String(speed);
       const duplicate=group.cloneNode(true);duplicate.setAttribute('aria-hidden','true');duplicate.querySelectorAll('button,a').forEach(el=>el.tabIndex=-1);track.append(duplicate);
       if(animate&&!motionPreference.matches)track.parentElement.animate([{opacity:0,transform:'translateY(24px)'},{opacity:1,transform:'none'}],{duration:600,delay:index*45,easing:'cubic-bezier(.2,.75,.2,1)',fill:'backwards'});
@@ -55,16 +54,33 @@ export function createWorkWall({board,cards,motionPreference,onPlay}) {
     count.textContent=items.length+' edits';sync();
     if(focused?.isConnected){focused.focus({preventScroll:true});focused.scrollIntoView({block:'nearest',inline:'nearest'});}
   }
-  function step(direction){
+  function advance(pixels){
+    const horizontal=board.dataset.axis==='horizontal';
     board.querySelectorAll('.masonry-track').forEach(track=>{
-      const horizontal=board.dataset.axis==='horizontal',animation=track.getAnimations().find(a=>a instanceof CSSAnimation);
-      if(animation&&!keyboard&&!motionPreference.matches){const duration=Number(animation.effect.getTiming().duration),delta=(horizontal?board.clientWidth:board.clientHeight)*.65/Number(track.dataset.speed)*1000;animation.currentTime=((Number(animation.currentTime||0)+(horizontal?1:-1)*direction*delta)%duration+duration)%duration;}
-      else {const col=track.parentElement,property=horizontal?'scrollLeft':'scrollTop',size=horizontal?col.clientWidth:col.clientHeight;col[property]=Math.max(0,col[property]+direction*size*.65);}
+      const animation=track.getAnimations().find(a=>a instanceof CSSAnimation);
+      if(animation&&!keyboard&&!motionPreference.matches){
+        animation.currentTime=advanceLoopTime(Number(animation.currentTime||0),Number(animation.effect.getTiming().duration),pixels,Number(track.dataset.speed));
+      } else {
+        const column=track.parentElement,property=horizontal?'scrollLeft':'scrollTop';
+        const limit=Math.max(0,(horizontal?track.scrollWidth:track.scrollHeight)-(horizontal?column.clientWidth:column.clientHeight));
+        column[property]=Math.min(limit,Math.max(0,column[property]+pixels));
+      }
     });
   }
+  function step(direction){advance(direction*(board.dataset.axis==='horizontal'?board.clientWidth:board.clientHeight)*.65);}
+  // Wheel input scrubs the existing CSS timeline forward, including reversed columns.
+  board.addEventListener('wheel',event=>{
+    if(!active||filter==='long'||playing||event.ctrlKey||event.metaKey)return;
+    const distance=wheelDistance(event.deltaX,event.deltaY,event.deltaMode,board.dataset.axis==='horizontal'?board.clientWidth:board.clientHeight);
+    if(!distance)return;
+    if(motionPreference.matches||keyboard){
+      if(board.dataset.axis==='horizontal'){event.preventDefault();advance(Math.sign(event.deltaY||event.deltaX)*distance);}
+      return;
+    }
+    event.preventDefault();advance(distance);
+  },{passive:false});
   document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{filter=button.dataset.filter;category='all';keyboard=false;document.querySelectorAll('[data-filter]').forEach(el=>{el.classList.toggle('active',el===button);el.setAttribute('aria-pressed',String(el===button));});document.querySelectorAll('[data-category]').forEach(el=>{el.classList.toggle('active',el.dataset.category==='all');el.setAttribute('aria-pressed',String(el.dataset.category==='all'));});layout(true);}));
   document.querySelectorAll('[data-category]').forEach(button=>button.addEventListener('click',()=>{category=button.dataset.category;keyboard=false;document.querySelectorAll('[data-category]').forEach(el=>{el.classList.toggle('active',el===button);el.setAttribute('aria-pressed',String(el===button));});layout(true);}));
-  document.querySelector('#work-prev').addEventListener('click',()=>step(-1));document.querySelector('#work-next').addEventListener('click',()=>step(1));toggle.addEventListener('click',()=>{paused=!paused;sync();});
   board.addEventListener('click',event=>{const button=event.target.closest('[data-video-url]');if(button)onPlay(button);});
   board.addEventListener('focusin',event=>{if(event.target.matches(':focus-visible')){keyboard=true;sync();requestAnimationFrame(()=>event.target.scrollIntoView({block:'nearest',inline:'nearest'}));}});
   board.addEventListener('focusout',()=>requestAnimationFrame(()=>{if(!board.contains(document.activeElement)){keyboard=false;board.querySelectorAll('.masonry-column').forEach(col=>{col.scrollTop=0;col.scrollLeft=0;});sync();}}));

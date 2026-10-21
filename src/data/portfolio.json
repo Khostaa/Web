@@ -362,5 +362,19 @@
     "Multi-Cam Editing",
     "Teasers",
     "Promos"
+  ],
+  "stats": [
+    {
+      "value": "1.5+",
+      "label": "Years Experience"
+    },
+    {
+      "value": "500+",
+      "label": "Shorts Delivered"
+    },
+    {
+      "value": "6+",
+      "label": "Million Views Generated"
+    }
   ]
 }

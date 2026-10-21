@@ -211,7 +211,6 @@ stage.addEventListener('click',event => {
 },true);
 
 document.querySelector('#home-showreel').addEventListener('click',()=>playVideo(config.showreelUrl,'Make it Exist','16:9'));
-document.querySelector('#showreel-shortcut').addEventListener('click',event=>{const button=event.currentTarget;playVideo(button.dataset.videoUrl,button.dataset.videoTitle,button.dataset.videoRatio);});
 
 // Load a video only on demand, and remove it on close to stop playback.
 const dialog = document.querySelector('#video-dialog');
