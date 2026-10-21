@@ -2,7 +2,6 @@
 import { platforms, defaults, placeholderRatios, videoRatio, parseVideo } from '../lib/media.js';
 const { portfolio, images } = Astro.props;
 const entries = [];
-if (parseVideo(portfolio.showreelUrl)) entries.push({ title: 'Make it Exist', category: 'SHOWREEL', platform: parseVideo(portfolio.showreelUrl).platform, aspectRatio: '16:9', url: portfolio.showreelUrl, thumbnail: portfolio.showreelThumbnail || 'assets/reel.jpg', showreel: true });
 for (const platform of Object.keys(platforms)) {
   const videos = portfolio.videos.filter(video => parseVideo(video.url) && (video.platform || parseVideo(video.url).platform) === platform);
   if (videos.length) entries.push(...videos.map(video => ({ ...video, platform })));
@@ -16,8 +15,8 @@ for (const platform of Object.keys(platforms)) {
     const ratio = videoRatio(video.aspectRatio || video.ratio, video.platform, video.url);
     const image = images[video.thumbnail || preset.image];
     const Cover = real ? 'button' : 'div';
-    return <article class="work-card" data-platform={video.platform} data-ratio={ratio} data-work-index={index}>
-      <Cover class:list={['work-media', { 'has-video': real, 'is-showreel': video.showreel }]} style={{ aspectRatio: ratio.replace(':',' / ') }} aria-label={real ? (video.showreel ? 'Play Khosta’s showreel' : 'Play ' + video.title) : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined}>
+    return <article class="work-card" data-platform={video.platform} data-format={video.format || 'short'} data-ratio={ratio} data-work-index={index}>
+      <Cover class:list={['work-media', { 'has-video': real, 'is-showreel': video.showreel }]} style={{ aspectRatio: ratio.replace(':',' / ') }} aria-label={real ? (video.showreel ? 'Play Khosta’s showreel' : 'Play ' + video.title) : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined} data-video-source={real ? video.mediaUrl : undefined}>
         <img src={image?.small || video.thumbnail || preset.image} srcset={image?.srcset} sizes="(max-width: 700px) 44vw, 360px" width={image?.width} height={image?.height} alt="" loading="lazy" decoding="async" />
         <span class="cover-shade"></span><span class="platform-tag">{video.showreel ? 'SHOWREEL' : platforms[video.platform]}</span><span class="ratio-tag">{ratio}</span>
         {video.showreel && <span class="reel-mark brand-logo logo-static" aria-hidden="true"></span>}

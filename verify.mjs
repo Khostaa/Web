@@ -62,7 +62,7 @@ assert.equal(suggestedGiftCountry(['not_a_locale']),'GLOBAL');
 assert.equal(giftDestination({title:'Example',url:'javascript:alert(1)'},'GLOBAL').url,null);
 console.log('Passed: regional gift destinations, locale fallback, safe URLs and optimized gift assets.');
 
-assert.ok(html.includes('Freelance video editor/ filmmaker'),'Footer profession updated');
+assert.ok(html.includes('Freelance Video Editor / Filmmaker'),'Footer profession updated');
 assert.ok(html.includes('class="platform-icon"'),'Platform filters have vector icons');
 assert.ok(html.includes('class="work-body"'),'Work rail and gallery are grouped');
 
@@ -80,3 +80,9 @@ console.log('Passed: configured work URLs, platform matches, local cover assets 
 
 assert.equal([...html.matchAll(/data-video-url=/g)].length,content.videos.filter(video=>parseVideo(video.url)).length+(parseVideo(content.showreelUrl)?1:0),'One playable card per project, plus showreel');
 assert.ok(!html.includes('tiktok.com/embed.js'),'No eager TikTok embed script');
+
+for(const video of content.videos){assert.ok(['short','long'].includes(video.format));if(video.mediaUrl){assert.equal(parseVideo(video.mediaUrl)?.platform,'file');assert.ok(fs.statSync('public'+video.mediaUrl).size<24*1024*1024);assert.ok(html.includes('data-video-source="'+video.mediaUrl+'"'));}}
+assert.equal(content.videos.filter(v=>v.format==='long').length,2);
+assert.ok(!html.includes('<video'),'Native players also load on demand');
+for(const name of ['DaVinci Resolve','Fusion','Canva','Affinity','Illustrator','Photoshop'])assert.ok(html.includes('aria-label="'+name+'"'));
+assert.equal(parseVideo('/media/../secret.mp4'),null);

@@ -14,6 +14,7 @@ function videoRatio(value, platform = 'youtube', url = '') {
 }
 function safeUrl(value) { try { const u = new URL(value); return u.protocol === 'https:' || u.protocol === 'http:' ? u : null; } catch { return null; } }
 function parseVideo(value) {
+  if (typeof value === 'string' && /^\/media\/[\w.-]+\.mp4$/i.test(value)) return { platform: 'file', src: value, original: value };
   const u = safeUrl(value); if (!u) return null;
   const host = u.hostname.toLowerCase().replace(/^www\./, '');
   if (['youtube.com', 'm.youtube.com', 'youtube-nocookie.com', 'youtu.be'].includes(host)) {

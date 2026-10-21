@@ -7,9 +7,9 @@ An experimental, screen-by-screen video editor portfolio on the **revamp** branc
 ## Experience
 
 - **Start:** “What do you want?” with three large choices, changing image compositions on hover or keyboard focus.
-- **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Vertical platform icons and pagination accommodate more videos.
+- **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. A compact masonry wall moves short-form cards downward, pauses on hover/focus, and reveals details. The two long-form films remain stationary.
 - **Gifts:** five image-only product wishes in a 3 × 2 grid, hover/focus details, and country-aware store links.
-- **Reach out:** the editor's paper portrait, animated copy, contact information, and paginated social links.
+- **Reach out:** the editor's paper portrait with six scattered tool badges, animated copy, contact information, and paginated social links.
 
 The navy, green, tan, Inter, and Libre Caslon Condensed styling remains. Cosmos is the user-selected interaction reference: its brand selector informs the menu, and its color-search demonstration informs the gallery entrance.
 
@@ -35,7 +35,8 @@ Run the build before tests. Default dev/preview address: http://127.0.0.1:4321.
 | Four screens, copy, selector previews, head metadata | `src/pages/index.astro` |
 | Server-rendered work cards | `src/components/WorkGallery.astro` |
 | Colors, typography, screen layout, paper and selector effects | `src/styles/global.css` |
-| Navigation, gallery rollout, pagination, video dialog | `src/scripts/app.js` |
+| Navigation, video-only dialog, drag and social paging | `src/scripts/app.js` |
+| Short/long filtering, masonry packing, downward CSS loops and pause controls | `src/scripts/work-wall.js` |
 | Pre-paint theme | `src/scripts/theme.js` |
 | Native-ratio parsing and supported platform URLs | `src/lib/media.js` |
 
@@ -43,7 +44,7 @@ See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The sho
 
 ## Performance and accessibility
 
-Static HTML; no hydrated framework, animation package, scroll listener, animation loop, or preloaded video player. Images are responsive WebP. Transitions use transform and opacity. The video iframe is inserted only on demand and removed on close. Inactive screens are hidden and inert. Screen changes move focus to their heading. Reduced-motion preferences disable the entrance effects. Arrow buttons, URL hashes, browser history, and keyboard controls support navigation. Without JavaScript, the screens become ordinary document sections.
+Static HTML; no hydrated framework, animation package, scroll listener, animation loop, or preloaded video player. Images are responsive WebP. Transitions use transform and opacity. Players load only on demand and are removed on close. Four supplied Instagram exports are local H.264/AAC MP4 files; Instagram post controls are not loaded. Inactive screens are hidden and inert. Screen changes move focus to their heading. Reduced-motion preferences disable entrance effects and continuous motion. Keyboard users can browse still columns. Arrow buttons, URL hashes, browser history, and keyboard controls support navigation. Without JavaScript, the screens become ordinary document sections.
 
 ## Branch workflow
 
@@ -60,4 +61,6 @@ Use main only when ready to replace production. Do not merge or push revamp into
 
 User-supplied portrait and native SVG logo. Inter is loaded from Google Fonts; Libre Caslon Condensed is local, with its license and authors in `public/fonts/`. Decorative placeholder photography: Unsplash. The same Cloudflare DNS and GitHub Pages configuration documented in the guide continue to serve production.
 
-Drag/swipe to page through work, gifts, or social profiles, then move between screens. Keyboard and arrow navigation remain available. All photographs use uncropped contain sizing.
+Drag/swipe to browse the short-form wall, gifts, or social profiles, then move between screens. Keyboard and arrow navigation remain available. All photographs use uncropped contain sizing.
+
+Video exports live in `public/media/` (~14.5 MiB total); individual files load only when played. Real video cover frames are cached in `src/assets/work/`. Tool badges are lightweight local marks, with names on hover/focus.

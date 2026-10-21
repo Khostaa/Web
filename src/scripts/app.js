@@ -1,4 +1,5 @@
 import { parseVideo, platforms, videoRatio, safeUrl } from '../lib/media.js';
+import { createWorkWall } from './work-wall.js';
 import { giftDestination, giftMarkets, suggestedGiftCountry } from '../lib/gifts.js';
 const config = window.PORTFOLIO;
 const ids = ['home', 'work', 'wishlist', 'about'];
@@ -7,8 +8,6 @@ const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const compact = matchMedia('(max-width: 700px)');
 const stage = document.querySelector('#stage');
 let active = null;
-let workPage = 0;
-let workFilter = 'all';
 const cards = [...document.querySelectorAll('.work-card')];
 const board = document.querySelector('#projects');
 const normalize = value => ({ contact: 'about', gifts: 'wishlist', start: 'home' }[value] || (ids.includes(value) ? value : 'home'));
@@ -54,7 +53,7 @@ function showScreen(id, { focus = true, animate = true } = {}) {
   document.querySelector('#screen-next').disabled = index === ids.length - 1;
   document.title = id === 'home' ? 'Khosta — Sunil Paudel · Video Editor' : ({ work: 'Work', wishlist: 'Gifts', about: 'Reach out' }[id]) + ' — Khosta';
   if (focus) next.querySelector('h1, h2').focus({ preventScroll: true });
-  if (id === 'work') requestAnimationFrame(() => layoutWork(animate));
+  wall.setActive(id === 'work', animate);
   if (id === 'wishlist') requestAnimationFrame(() => renderGifts(animate));
 }
 function navigate(id) {
@@ -89,63 +88,7 @@ choices.forEach(choice => {
   });
 });
 
-// Six desktop or four mobile cards fit their native ratios into the available screen.
-function layoutWork(animate = true) {
-  const filtered = cards.filter(card => workFilter === 'all' || card.dataset.platform === workFilter);
-  const capacity = compact.matches ? 4 : 6;
-  const pages = Math.max(1, Math.ceil(filtered.length / capacity));
-  workPage = Math.min(workPage, pages - 1);
-  const visible = filtered.slice(workPage * capacity, (workPage + 1) * capacity);
-  cards.forEach(card => { card.getAnimations().forEach(animation => animation.cancel()); card.hidden = !visible.includes(card); });
-  document.querySelector('#work-page').textContent = number(workPage + 1) + ' / ' + number(pages);
-  document.querySelector('#work-prev').disabled = workPage === 0;
-  document.querySelector('#work-next').disabled = workPage === pages - 1;
-  if (active?.id !== 'work') return;
-  const tallCards = visible.filter(card => { const [w,h] = card.dataset.ratio.split(':').map(Number); return w / h < 1; }).slice(-2);
-  const stacked = !compact.matches && visible.length >= 5 && tallCards.length === 2;
-  const columns = stacked ? 4 : Math.max(1, Math.min(compact.matches ? 2 : 3, visible.length));
-  const rows = stacked ? 2 : Math.max(1, Math.ceil(visible.length / columns));
-  board.style.gridTemplateColumns = stacked ? '1.15fr 1.15fr 1fr .8fr' : 'repeat(' + columns + ', minmax(0, 1fr))';
-  board.style.gridTemplateRows = 'repeat(' + rows + ', minmax(0, 1fr))';
-  let shortIndex = 0;
-  visible.forEach(card => {
-    if (stacked && tallCards.includes(card)) {
-      card.style.gridColumn = String(3 + tallCards.indexOf(card)); card.style.gridRow = '1 / 3';
-    } else if (stacked) {
-      card.style.gridColumn = String(1 + Math.floor(shortIndex / 2)); card.style.gridRow = String(1 + shortIndex % 2); shortIndex++;
-    } else { card.style.gridColumn = ''; card.style.gridRow = ''; }
-  });
-  const bounds = board.getBoundingClientRect();
-  visible.forEach(card => {
-    const [w,h] = card.dataset.ratio.split(':').map(Number);
-    const box = card.getBoundingClientRect();
-    const height = Math.max(30, Math.floor(Math.min(box.height - 48, box.width * h / w)));
-    card.style.setProperty('--media-h', height + 'px');
-    card.style.setProperty('--media-w', Math.floor(height * w / h) + 'px');
-  });
-  if (animate && !motionPreference.matches) {
-    const originX = bounds.left + bounds.width * .5;
-    const originY = bounds.top + bounds.height * .5;
-    visible.forEach((card, index) => {
-      const box = card.getBoundingClientRect();
-      const dx = originX - box.left - box.width / 2;
-      const dy = originY - box.top - box.height / 2;
-      card.animate([
-        { transform: 'translate(' + dx + 'px,' + dy + 'px) rotate(' + (index % 2 ? 18 : -18) + 'deg) scale(.08)', opacity: 0 },
-        { transform: 'translate(0,0) rotate(0) scale(1)', opacity: 1 }
-      ], { duration: 950, delay: index * 55, easing: 'cubic-bezier(.16,.85,.2,1)', fill: 'backwards' });
-    });
-  }
-}
-document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
-  workFilter = button.dataset.filter; workPage = 0;
-  document.querySelectorAll('[data-filter]').forEach(item => { item.classList.toggle('active', item === button); item.setAttribute('aria-pressed', String(item === button)); });
-  layoutWork();
-}));
-document.querySelector('#work-prev').addEventListener('click', () => { workPage--; layoutWork(); });
-document.querySelector('#work-next').addEventListener('click', () => { workPage++; layoutWork(); });
-let resizeFrame;
-new ResizeObserver(() => { cancelAnimationFrame(resizeFrame); resizeFrame = requestAnimationFrame(() => layoutWork(false)); }).observe(stage);
+const wall = createWorkWall({ board, cards, motionPreference, onPlay: button => playVideo(button.dataset.videoUrl,button.dataset.videoTitle,button.dataset.videoRatio,button.dataset.videoSource) });
 
 // The social collection stays within the slide, including small phone screens.
 const socialLinks = [...document.querySelectorAll('.social-links a')];
@@ -218,11 +161,7 @@ function rollout(items, container) {
 
 // A swipe pages the active collection first, then moves to the adjacent screen.
 function advanceCollection(direction) {
-  if (active.id === 'work') {
-    const count = cards.filter(card => workFilter === 'all' || card.dataset.platform === workFilter).length;
-    const pages = Math.ceil(count / (compact.matches ? 4 : 6));
-    if (workPage + direction >= 0 && workPage + direction < pages) { workPage += direction; layoutWork(); return; }
-  }
+  if (active.id === 'work') { wall.step(direction); return; }
   if (active.id === 'wishlist') {
     const pages = Math.ceil(giftItems.length / 6);
     if (giftPage + direction >= 0 && giftPage + direction < pages) { giftPage += direction; renderGifts(); return; }
@@ -271,26 +210,30 @@ stage.addEventListener('click',event => {
   }
 },true);
 
+document.querySelector('#showreel-shortcut').addEventListener('click',event=>{const button=event.currentTarget;playVideo(button.dataset.videoUrl,button.dataset.videoTitle,button.dataset.videoRatio);});
+
 // Load a video only on demand, and remove it on close to stop playback.
 const dialog = document.querySelector('#video-dialog');
 const player = document.querySelector('#video-player');
-function playVideo(url, title, aspectRatio) {
-  const parsed = parseVideo(url); if (!parsed) return;
+function playVideo(url, title, aspectRatio, mediaUrl) {
+  const originalVideo = parseVideo(url); if (!originalVideo) return;
+  const directVideo = parseVideo(mediaUrl);
+  const parsed = directVideo?.platform === 'file' ? directVideo : originalVideo;
+  wall.setPlaying(true);
   document.querySelector('#video-title').textContent = title;
-  document.querySelector('#video-platform').textContent = (platforms[parsed.platform] || 'SHOWREEL').toUpperCase();
-  document.querySelector('#video-description').textContent = 'If the player is unavailable, open the video on its original platform.';
-  const original = document.querySelector('#original-link'); original.href = parsed.original; original.textContent = 'Watch on ' + (platforms[parsed.platform] || 'original platform') + ' ↗';
-  const [w,h] = videoRatio(aspectRatio, parsed.platform, url).split(':').map(Number);
+  document.querySelector('#video-platform').textContent = (platforms[originalVideo.platform] || 'SHOWREEL').toUpperCase();
+  document.querySelector('#video-description').textContent = directVideo?.platform === 'file' ? 'Watch here, or open the original project below.' : 'If the player is unavailable, open the video on its original platform.';
+  const original = document.querySelector('#original-link'); original.href = originalVideo.original; original.textContent = 'Watch on ' + (platforms[originalVideo.platform] || 'original platform') + ' ↗';
+  const [w,h] = videoRatio(aspectRatio, originalVideo.platform, url).split(':').map(Number);
   player.style.setProperty('--video-aspect', w + ' / ' + h); player.style.setProperty('--video-ratio', String(w / h));
   const media = document.createElement(parsed.platform === 'file' ? 'video' : 'iframe');
   if (parsed.platform === 'file') { media.controls = true; media.autoplay = true; media.playsInline = true; media.preload = 'none'; }
   else { media.title = title; media.allow = 'autoplay; fullscreen; encrypted-media; picture-in-picture'; media.allowFullscreen = true; media.referrerPolicy = 'strict-origin-when-cross-origin'; }
   media.src = parsed.src; player.replaceChildren(media); dialog.showModal();
 }
-document.querySelectorAll('[data-video-url]').forEach(button => button.addEventListener('click', () => playVideo(button.dataset.videoUrl, button.dataset.videoTitle, button.dataset.videoRatio)));
 dialog.querySelector('.close-dialog').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => { if (event.target === dialog) { const box = dialog.getBoundingClientRect(); if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close(); } });
-dialog.addEventListener('close', () => { player.querySelector('video')?.pause(); player.replaceChildren(); });
+dialog.addEventListener('close', () => { const video = player.querySelector('video'); if (video) { video.pause(); video.removeAttribute('src'); video.load(); } player.replaceChildren(); wall.setPlaying(false); });
 document.addEventListener('keydown', event => {
   if (dialog.open || event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input, textarea, select, [contenteditable]')) return;
   if (event.key === 'Escape' && active.id !== 'home') { event.preventDefault(); navigate('home'); }

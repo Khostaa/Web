@@ -16,7 +16,8 @@ src/components/WorkGallery.astro  Work cards and showreel, rendered at build tim
 src/components/SocialLinks.astro  Social links, rendered at build time
 src/data/portfolio.json          Contact, showreel, videos, gifts, socials
 src/assets/work/                Cached public YouTube/Instagram covers
-public/assets/work/             Lightweight TikTok graphic covers
+public/media/                   Optimized video-only Instagram exports
+src/scripts/work-wall.js        Short/long layouts, downward masonry and pause controls
 src/scripts/app.js               Screen routing, rollout, pagination, playback
 src/scripts/theme.js             Saved theme before first paint
 src/styles/global.css           Tokens, layout, transitions, responsive rules
@@ -44,7 +45,7 @@ git commit -m "Refine revamp"
 git push origin revamp
 ```
 
-Dev/preview uses port 4321. The optional node preview.mjs serves the last dist build on port 4173. Preview does not rebuild on edits. Check both themes, a narrow/short screen, every intent choice, gallery filters/pages, social pages, and opening/closing video. Tests read dist/index.html and include demo-specific assertions; update those when intentionally changing gifts, placeholders, assets, or the current email.
+Dev/preview uses port 4321. The optional node preview.mjs serves the last dist build on port 4173. Preview does not rebuild on edits. Check both themes, a narrow/short screen, every intent choice, format tabs, masonry motion and pause controls, social pages, and opening/closing video. Tests read dist/index.html and include demo-specific assertions; update those when intentionally changing gifts, placeholders, assets, or the current email.
 
 ## Four screens
 
@@ -98,9 +99,9 @@ Edit the videos array in portfolio.json. Each entry is an object:
 
 Supported platform values are youtube, instagram, and tiktok. Use full URLs. Expand TikTok short links before adding them. Supported aspectRatio values are 9:16, 16:9, 4:3, 1:1, and 3:4. Without an explicit ratio, platform and URL type provide defaults. Direct MP4 URLs are supported by the parser. URL validation rejects unsupported schemes and lookalike hosts.
 
-Delete an object to remove work; reorder the objects to change order within each platform. Work is grouped in YouTube, Instagram, then TikTok order, with the showreel first. Adjust the entries builder in WorkGallery.astro to change this grouping. A platform with no real work displays clearly labeled coming-soon placeholders in the five supported ratios. Change defaults and placeholderRatios in src/lib/media.js to change these placeholders.
+Delete an object to remove work; reorder objects to change order within a format. The wall interleaves platforms for visual variety. Use format: short or long; the showreel is separate.
 
-The gallery shows up to six cards on desktop and four on mobile. Platform filters form a vertical rail with inline SVG logos. When two portrait cards share a six-card desktop page, they span both rows; the remaining cards occupy the two stacked columns. All cards are present in the static HTML. Filters and previous/next buttons determine which cards are visible. layoutWork in app.js measures the available grid and calculates a cover height/width that preserves each ratio. It then animates cards from the grid center with translation, rotation, and scale. This is inspired by the Cosmos color-search demonstration. No continuous JavaScript loop is used. ResizeObserver recalculates sizes without replaying the entrance.
+The gallery uses a compact responsive masonry wall for Short form and a still grid for Long form. All original cards are present in the static HTML. See the masonry section below for controls and motion settings.
 
 ## Photos and paper portrait
 
@@ -161,8 +162,8 @@ When ready to make this design production, review it first, merge revamp into ma
 | New content not visible | Rebuild after JSON changes; check which branch is running |
 | Domain still shows the old design | Production uses main; revamp is intentionally separate |
 | Blank slideshow | Check browser console, module loading, and screen IDs |
-| Work cover ratio looks wrong | Use a supported aspectRatio; inspect layoutWork and media dimensions |
-| Missing gallery items | Check filter, pagination, and URL validation |
+| Work cover ratio looks wrong | Use a supported aspectRatio; inspect work-wall.js and media dimensions |
+| Missing gallery items | Check format, masonry columns, and URL validation |
 | Social profile missing | Check pagination, label, and full HTTP/HTTPS URL |
 | Video refuses to embed | Use the original-platform link; platform restrictions are external |
 | Motion does not play | Check reduced-motion preference and active screen |
@@ -180,10 +181,33 @@ Gift entrances use the same transform/opacity rollout style as Work and respect 
 
 ## Current work collection
 
-18 supplied projects are configured in portfolio.json: nine YouTube videos (seven Shorts at 9:16 and two long videos at 16:9), five PARADYGM TV TikToks, and four Instagram reels at 9:16. The showreel remains separate, for 19 playable cards. Platform filters and existing pagination handle the full collection. No coming-soon cards remain while every platform has real projects.
+18 supplied projects are configured in portfolio.json: nine YouTube videos (seven Shorts at 9:16 and two long videos at 16:9), five PARADYGM TV TikToks, and four Instagram reels (two portrait and two landscape). The showreel remains separate, for 19 playable players. Short/long tabs and the masonry wall handle the full collection. No coming-soon cards remain while every platform has real projects.
 
 YouTube titles were read from public oEmbed metadata. Instagram titles are concise labels based on public captions; TikTok titles use the captions supplied with the links. Edit title and category freely in portfolio.json. Links are canonicalized without share/tracking parameters. Paste a TikTok video's URL into url; never paste its blockquote or embed.js script into the site.
 
-13 public YouTube/Instagram cover images are cached in src/assets/work. Astro generates WebP variants locally, so visiting the portfolio makes no thumbnail request to those platforms. Keep image sizing at contain to preserve complete image borders. TikTok metadata did not supply covers, so five editable SVG graphic covers in public/assets/work use the site's colors and supplied captions; these are labeled internally with posterType: graphic. Replace any thumbnail path with a preferred local poster later.
+Real YouTube/TikTok cover frames and frames extracted from the four supplied Instagram exports are cached in src/assets/work. Astro generates responsive WebP variants locally. Keep object-fit: contain to preserve full borders.
 
 For a new optimized poster, add it to src/assets/work and set thumbnail to assets/work/filename.jpg (PNG/WebP also supported). index.astro imports that directory automatically; filenames must be unique. Public vector posters use /assets/work/filename.svg. Players and their platform requests load only when clicked; the original-platform link is available if an embed is restricted. This site cannot override a creator's embed restrictions, platform sign-in requirements, or removed videos.
+
+
+## Revamp: masonry, formats and native videos
+
+The Work sidebar now has **Short form** and **Long form** tabs. Set each video’s `format` to `short` or `long` in `src/data/portfolio.json`; this is independent of `aspectRatio` (a short film can be landscape). The current gallery has 16 short edits and two long films. The showreel has a separate sidebar button.
+
+`src/scripts/work-wall.js` packs short edits into compact columns and repeats decorative, keyboard-hidden copies for a seamless downward CSS loop. Adjust the 10px gap, column-width thresholds, and the `14 + index * 2` pixels/second speed there. The `wall-fall` keyframes in `src/styles/global.css` move from negative column height to zero. Hover or focus pauses the wall; Pause motion stops it explicitly; hidden pages, open players and reduced-motion settings also pause it. Arrows/drag move through the wall. Long form uses a stationary two-card layout, stacked on narrow screens.
+
+All covers use contain sizing. Home’s Work composition uses one landscape YouTube card and portrait TikTok/Instagram cards, with rounded badges and a gentle CSS side-to-side roll. Change those positions in the `.preview-work` rules.
+
+### Video-only Instagram playback
+
+Keep `url` as the original credited project link. Add `mediaUrl` pointing to an owned export in `public/media/`, for example `/media/fusion-node-tree.mp4`. Local file names may use letters, digits, underscores, hyphens and dots, ending in .mp4. The dialog prefers this file and retains the original-platform link. Native controls replace the Instagram post interface. Removing mediaUrl restores the platform embed fallback.
+
+Current files: fusion-node-tree.mp4 (One of my recent works), let-the-journey-begin.mp4 (EP1), stop-motion.mp4 (Had fun doing this!), and ufc-event-promo.mp4 (Oliveira vs Holloway). They are H.264/yuv420p with AAC audio, maximum 1280px on the long edge, and fast-start metadata. Originals are untouched. Keep each file below 24 MiB for this hosting path. Videos are not fetched on initial load.
+
+To replace a poster, export a JPEG frame from your video into `src/assets/work/` and set thumbnail to `assets/work/filename.jpg`. The four native videos currently use frames at two seconds; TikTok uses real frames captured from the public player, with its nonblank cover used where available. Signed CDN URLs are not stored in the site.
+
+### Reach out tool badges
+
+Six small local marks surround the paper portrait: DaVinci Resolve, Fusion, Canva, Affinity, Illustrator and Photoshop. They are decorative tool references, not links or a visible tools list. Edit the tool array inside the paper-portrait figure in `src/pages/index.astro`; edit their colors, positions and mobile sizes in `.tool-badge`, `.tool-orbit` and `.tool-*` rules in `src/styles/global.css`. Names appear on hover or keyboard focus. Leave the portrait’s reserved padding so badges stay clear of the contact copy. No external icon library or additional requests are used.
+
+The exact footer is `Freelance Video Editor / Filmmaker`. Update it in index.astro.

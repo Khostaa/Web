@@ -86,3 +86,56 @@ html:not(.js) .gift-list{grid-auto-rows:240px;flex:none}html:not(.js) .gift-deta
 .preview-filter-rail{position:absolute;left:0;top:18%;display:flex;flex-direction:column;gap:19px;color:var(--muted)}.preview-filter-rail .platform-icon{width:17px;height:17px}.art-large{left:15%;width:77%}.art-small{width:39%;right:4%;top:53%}.art-wide{left:15%;width:37%}
 
 .choice-thumbnail.gift-thumbnail{background:var(--sand);color:var(--bg)}
+
+/* Compact, continuously drifting masonry. Complete images stay contained. */
+.work-body{gap:16px;margin-top:18px}.work-toolbar{justify-content:flex-start;padding-top:18px;gap:22px}.motion-control{font-size:9px;color:var(--muted);padding:8px 4px;border:1px solid var(--line);border-radius:20px}.motion-control:hover{color:var(--green)}
+.work-grid{display:grid!important;grid-template-rows:minmax(0,1fr)!important;gap:10px!important;height:100%;width:100%;min-height:0;overflow:hidden;isolation:isolate}
+.masonry-column{height:100%;min-height:0;overflow:hidden}.masonry-track{animation:wall-fall var(--loop-duration,60s) linear infinite;animation-play-state:paused;will-change:transform}.masonry-group{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
+.work-grid[data-motion=running] .masonry-track{animation-play-state:running}.work-grid:hover .masonry-track,.work-grid:focus-within .masonry-track{animation-play-state:paused}
+@keyframes wall-fall{from{transform:translateY(calc(-1 * var(--loop-distance,0px)))}to{transform:translateY(0)}}
+.work-card{position:relative;display:block;height:var(--tile-height,240px);width:100%;min-height:0;flex-shrink:0}
+.work-media{width:100%!important;height:100%!important;max-width:none;border:0;border-radius:7px;aspect-ratio:auto!important;container-type:normal;background:#11111b;cursor:pointer}
+.work-media img{filter:none;object-fit:contain;border-radius:0}.work-media.has-video img{background:transparent}.work-media.has-video:hover img{filter:none;transform:none}
+.work-card .platform-tag,.work-card .ratio-tag,.work-card .play-circle,.work-card .reel-mark{opacity:0;transition:opacity .2s}.work-card .cover-shade{background:linear-gradient(transparent 20%,#070710e8);opacity:0;transition:opacity .2s}
+.work-card-info{position:absolute;left:0;right:0;bottom:0;width:100%!important;padding:16px 12px;pointer-events:none;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;color:#f0efec}
+.work-card-info h3{font-size:12px;line-height:1.35;-webkit-line-clamp:3;white-space:normal}.work-card-info>span{font-size:9px;color:#d3d1dd;margin-top:6px}
+.work-card:hover .work-card-info,.work-card:focus-within .work-card-info{opacity:1;transform:none}
+.work-card:hover :is(.platform-tag,.ratio-tag,.play-circle),.work-card:focus-within :is(.platform-tag,.ratio-tag,.play-circle),.work-card:hover .cover-shade,.work-card:focus-within .cover-shade{opacity:1}
+.work-card .play-circle{width:36px;height:36px;font-size:12px;top:35%;left:50%;right:auto;bottom:auto;transform:translate(-50%,-50%)}
+.work-card .platform-tag,.work-card .ratio-tag{font-size:8px}.work-card .reel-mark{display:none}
+.work-grid.keyboard-browsing .masonry-track{animation:none!important;transform:none!important;will-change:auto}
+.work-grid.keyboard-browsing .masonry-column{scrollbar-width:none}
+html:not(.js) .work-grid{display:block!important;columns:4;overflow:visible;height:auto}html:not(.js) .work-card{break-inside:avoid;margin-bottom:10px;height:auto}html:not(.js) .work-media{height:auto!important;aspect-ratio:9/16!important}html:not(.js) .work-card-info{position:static;opacity:1;transform:none}
+/* Rounded choice icons and three rolling video cards on Home. */
+.choice-thumbnail{border-radius:9px!important}.choice-thumbnail img{border-radius:9px}.choice-thumbnail.gift-thumbnail{border-radius:9px}.choice-thumbnail.about-thumbnail{border-radius:9px;background:var(--surface)}
+.preview-work .art-photo{border-radius:11px;padding:0;box-shadow:0 16px 35px #0003;animation:preview-card-roll 10s ease-in-out infinite;animation-play-state:paused}
+.home-screen[data-preview=work].is-active .preview-work .art-photo{animation-play-state:running}
+.preview-work .art-large{width:70%;height:auto;aspect-ratio:16/9;top:27%;left:12%;bottom:auto;right:auto;--card-tilt:-5deg;animation-delay:-1s;z-index:1}
+.preview-work .art-small{width:29%;height:auto;aspect-ratio:9/16;top:45%;left:8%;right:auto;bottom:auto;--card-tilt:-9deg;animation-delay:-4s;z-index:3}
+.preview-work .art-wide{width:29%;height:auto;aspect-ratio:9/16;top:8%;right:7%;left:auto;bottom:auto;--card-tilt:8deg;animation-delay:-7s;z-index:2}
+.preview-work .art-photo img{object-fit:contain;filter:none;border-radius:0}.preview-work .art-photo .preview-platform{bottom:9px;left:9px;padding:5px}.preview-work .art-photo .preview-platform .platform-icon{width:15px;height:15px}
+@keyframes preview-card-roll{0%{opacity:0;transform:translateX(-24px) rotate(calc(var(--card-tilt) - 9deg))}18%,72%{opacity:1;transform:translateX(0) rotate(var(--card-tilt))}100%{opacity:0;transform:translateX(24px) rotate(calc(var(--card-tilt) + 9deg))}}
+@media(max-width:700px){.work-body{gap:10px;margin-top:18px}.work-toolbar{padding-top:8px;gap:16px}.work-grid{gap:8px!important}.masonry-group{gap:8px;padding-bottom:8px}.motion-control{font-size:7px;padding:7px 3px;line-height:1.5}.work-card-info{padding:12px 8px}.work-card-info h3{font-size:10px}.work-card-info>span{font-size:7px}.work-card .platform-tag,.work-card .ratio-tag{font-size:6px}.work-card .play-circle{width:29px;height:29px;font-size:10px}.work-footnote{font-size:8px}}
+@media(prefers-reduced-motion:reduce){.masonry-track{animation:none!important;transform:none!important;will-change:auto}.preview-work .art-photo{animation:none!important;opacity:1;transform:rotate(var(--card-tilt))}.work-card-info{transition:none}}
+
+/* Long films stay still; orientation is independent of editorial format. */
+.work-grid[data-layout=static]{grid-template-rows:minmax(0,1fr)!important;align-items:center;overflow:auto}
+.work-grid[data-layout=static] .work-card{height:auto!important;max-height:100%;aspect-ratio:16/9;min-height:0}
+.work-grid[data-layout=static] .work-media{height:100%;aspect-ratio:16/9}
+.showreel-shortcut{display:flex;align-items:center;gap:9px;padding:8px 0;font-size:10px;text-align:left}
+.showreel-shortcut img{width:65px;height:auto;aspect-ratio:16/9;object-fit:contain;border-radius:6px}
+.paper-portrait{position:relative;padding:20px}
+.tool-orbit{position:absolute;inset:0;pointer-events:none;z-index:7}
+.tool-badge{position:absolute;width:38px;height:38px;display:grid;place-items:center;border-radius:11px;box-shadow:0 5px 18px #0002;font-family:Inter,sans-serif;font-weight:650;font-size:20px;pointer-events:auto;transform:rotate(4deg);cursor:default}
+.tool-resolve{left:0;top:12%;background:#222c39;color:#70c6ec}.tool-resolve>span:first-child{background:conic-gradient(#e95656 0 33%,#f0ce5d 33% 66%,#66c6e9 66%);color:transparent;background-clip:text;font-size:32px}
+.tool-fusion{right:0;top:2%;background:#252731;color:#f09bc8;font-size:29px}
+.tool-canva{right:0;top:45%;background:linear-gradient(135deg,#00c4cc,#7d2ae8);color:white;font-family:Georgia,serif;font-style:italic;font-size:29px}
+.tool-affinity{left:0;top:56%;background:#142751;color:#7ec8ff;font-size:32px}
+.tool-illustrator{left:18%;bottom:0;background:#330c00;color:#ff9a00}
+.tool-photoshop{right:11%;bottom:0;background:#001e36;color:#31a8ff}
+.tool-tooltip{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);border-radius:5px;padding:5px 7px;font-size:9px;white-space:nowrap;opacity:0;visibility:hidden;transition:opacity .15s}
+.tool-badge:hover .tool-tooltip,.tool-badge:focus-visible .tool-tooltip{opacity:1;visibility:visible}
+@media(max-width:700px){.work-grid[data-layout=static]{grid-template-rows:repeat(2,minmax(0,1fr))!important}.paper-portrait{padding:12px}.tool-badge{width:24px;height:24px;border-radius:7px;font-size:13px}.tool-resolve>span:first-child{font-size:23px}.tool-canva{font-size:20px}.tool-fusion,.tool-affinity{font-size:21px}.showreel-shortcut{font-size:8px}.showreel-shortcut img{width:44px}}
+
+.work-screen:has([data-layout=static]) .work-footnote{visibility:hidden}
+@media(max-width:700px){.work-body{grid-template-columns:78px minmax(0,1fr)}.work-toolbar .filters button{width:100%;min-width:0}.showreel-shortcut{flex-direction:column;align-items:flex-start;gap:5px}.showreel-shortcut span{font-size:8px}.showreel-shortcut img{width:62px}.work-grid[data-layout=static] .work-card{width:100%;max-width:100%}}
