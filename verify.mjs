@@ -36,10 +36,14 @@ for(const file of ['logo.svg','logo-center.svg','logo-outer.svg']) {
 }
 const content=JSON.parse(fs.readFileSync('src/data/portfolio.json','utf8'));
 if (parseVideo(content.showreelUrl)) {
-  assert.ok(html.includes('PLAY SHOWREEL'),'Real showreel label is prerendered');
+  assert.ok(html.includes('Play Khosta’s showreel'),'Real showreel is prerendered');
   assert.ok(!html.includes('DEMO FOOTAGE · NOT MY WORK'),'Real showreel has no demo disclaimer');
 }
 assert.ok(html.includes('alt="Sunil Paudel, also known as Khosta, video editor"'),'Portrait has accessible description');
 assert.ok(fs.readdirSync('dist/_astro').some(file=>file.startsWith('sunil-portrait.')&&file.endsWith('.webp')),'Portrait is optimized');
 assert.equal(content.gifts.length,0);assert.equal(content.email,'mailkhosta@gmail.com');
+const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+assert.equal(new Set(ids).size,ids.length,'Unique section and control IDs');
+for(const screen of ['home','work','wishlist','about']) assert.ok(html.includes('id="'+screen+'"'), 'Screen exists: '+screen);
+assert.ok(html.includes('data-preview-choice="work"'),'Intent selector exists');
 console.log('Passed: URL parsing, all five ratios, prerendered gallery, responsive WebP assets, no hydrated framework, contact details, and SVG logo assets.');

@@ -11,105 +11,86 @@ import story from '../assets/story.jpg';
 import social from '../assets/social.jpg';
 import motion from '../assets/motion.jpg';
 import portrait from '../assets/sunil-portrait.png';
-import { parseVideo } from '../lib/media.js';
-const hasShowreel = Boolean(parseVideo(portfolio.showreelUrl));
-const portraitVariants = await Promise.all([360, 640].map(width => getImage({ src: portrait, width, format: 'webp', quality: 82 })));
-const heroVariants = await Promise.all([640, 960, 1280, 1800].map(width => getImage({ src: reel, width, format: 'webp', quality: 78 })));
-const heroSrcset = heroVariants.map((image, index) => image.src + ' ' + [640, 960, 1280, 1800][index] + 'w').join(', ');
-const optimizedImages = {};
+import { safeUrl } from '../lib/media.js';
+const images = {};
 for (const [name, source] of Object.entries({ reel, story, social, motion })) {
-  const variants = await Promise.all([400, 800].map(width => getImage({ src: source, width, format: 'webp', quality: 78 })));
-  optimizedImages['assets/' + name + '.jpg'] = { src: variants[1].src, srcset: variants.map((image, index) => image.src + ' ' + [400, 800][index] + 'w').join(', '), width: source.width, height: source.height };
+  const variants = await Promise.all([480, 960].map(width => getImage({ src: source, width, format: 'webp', quality: 76 })));
+  images['assets/' + name + '.jpg'] = { src: variants[1].src, small: variants[0].src, srcset: variants.map((image, index) => image.src + ' ' + [480, 960][index] + 'w').join(', '), width: source.width, height: source.height };
 }
+const portraitImages = await Promise.all([360, 640].map(width => getImage({ src: portrait, width, format: 'webp', quality: 82 })));
+const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en" class="slideshow">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1d1d35">
-  <meta name="generator" content={Astro.generator}>
+  <meta name="theme-color" content="#1d1d35"><meta name="generator" content={Astro.generator}>
   <script is:inline set:html={themeCode}></script>
+  <script is:inline>document.documentElement.classList.add('js');</script>
   <title>Khosta — Sunil Paudel · Video Editor</title>
-  <meta name="description" content="Sunil Paudel, a.k.a Khosta. Video editing with a feeling. Explore the work, start a conversation, or find a little something on the wishlist.">
+  <meta name="description" content="Choose your next frame. Films, small gestures, and the person behind the cut. Sunil Paudel, a.k.a Khosta.">
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;550;600;650;700&display=swap" rel="stylesheet">
   <link rel="preload" href={caslonItalicUrl} as="font" type="font/woff2" crossorigin="anonymous">
-
-  <script is:inline define:vars={{ portfolio, optimizedImages }}>window.PORTFOLIO = portfolio; window.PORTFOLIO_IMAGES = optimizedImages;</script>
+  <script is:inline define:vars={{ portfolio }}>window.PORTFOLIO = portfolio;</script>
   <script src="../scripts/app.js"></script>
 </head>
 <body>
   <a class="skip" href="#work">Skip to work</a>
-  <header class="header wrap">
-    <a class="wordmark" href="#" aria-label="Khosta home"><span class="brand-logo" aria-hidden="true"></span><span>khosta</span></a>
-    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#wishlist">Wishlist <span class="nav-gift">↗</span></a></nav>
-    <div class="header-actions">
-      <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode" title="Switch to light mode">
-        <span class="theme-thumb" aria-hidden="true"></span>
-        <svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg>
-        <svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
-      </button>
-      <a class="nav-contact" href="#contact">Let’s talk <span>↗</span></a>
-    </div>
+  <header class="header">
+    <a class="wordmark" href="#home" aria-label="Khosta home"><span class="brand-logo" aria-hidden="true"></span>khosta</a>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#wishlist">Gifts</a><a href="#about">About & contact</a></nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode" title="Switch to light mode"><span class="theme-thumb" aria-hidden="true"></span><svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
   </header>
-  <main>
-    <section class="hero wrap" aria-labelledby="hero-title">
-      <div class="hero-stage">
-      <figure class="paper-portrait">
-        <div class="paper-sheet">
-          <div class="portrait-window"><img src={portraitVariants[1].src} srcset={`${portraitVariants[0].src} 360w, ${portraitVariants[1].src} 640w`} sizes="(max-width: 700px) 180px, 280px" width={portrait.width} height={portrait.height} alt="Sunil Paudel, also known as Khosta, video editor" loading="eager" fetchpriority="high" decoding="async"><span class="paper-grain" aria-hidden="true"></span></div>
-          <figcaption>SUNIL PAUDEL <span>behind the cut.</span></figcaption>
-          <span class="paper-fold paper-fold-top" aria-hidden="true"></span><span class="paper-fold paper-fold-bottom" aria-hidden="true"></span>
+  <main class="stage" id="stage">
+    <section class="screen home-screen is-active" id="home" aria-labelledby="home-title" data-preview="work">
+      <div class="home-copy">
+        <div class="eyebrow reveal"><span class="status-dot"></span> SUNIL PAUDEL / A.K.A KHOSTA</div>
+        <h1 class="reveal" id="home-title" tabindex="-1">What do you<br><em>want?</em></h1>
+        <nav class="choices" aria-label="What do you want?">
+          <a class="choice is-selected reveal" href="#work" data-preview-choice="work"><span class="choice-number">01</span><span class="choice-thumbnail"><img src={images['assets/story.jpg'].small} width="48" height="48" alt=""></span><span class="choice-text">Look at my works</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+          <a class="choice reveal" href="#wishlist" data-preview-choice="wishlist"><span class="choice-number">02</span><span class="choice-thumbnail gift-thumbnail" aria-hidden="true">✳</span><span class="choice-text">Gift me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+          <a class="choice reveal" href="#about" data-preview-choice="about"><span class="choice-number">03</span><span class="choice-thumbnail about-thumbnail brand-logo logo-static" aria-hidden="true"></span><span class="choice-text">About and Contact me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+        </nav>
+        <p class="home-caption reveal">A little curiosity goes a long way.</p>
+      </div>
+      <div class="home-art" aria-hidden="true">
+        <div class="intent-preview preview-work">
+          <div class="art-photo art-large"><img src={images['assets/reel.jpg'].src} srcset={images['assets/reel.jpg'].srcset} sizes="420px" width="420" height="310" alt="" fetchpriority="high"><span>EVERY FRAME, A FEELING.</span></div>
+          <div class="art-photo art-small"><img src={images['assets/social.jpg'].small} width="160" height="210" alt=""><span>FIND THE RHYTHM.</span></div>
+          <div class="art-photo art-wide"><img src={images['assets/motion.jpg'].small} width="250" height="140" alt=""></div>
+          <span class="art-marker">01 / SELECTED MOMENTS</span>
         </div>
-      </figure>
-      <div class="hero-copy">
-      <div class="eyebrow"><span class="tiny-line"></span> SUNIL PAUDEL / A.K.A KHOSTA</div>
-      <h1 id="hero-title"><span class="sans-lead">Good footage.</span><br><em>Unforgettable stories.</em></h1>
-      <p>I turn moments into something you feel.<br>Video editing, with a little more soul.</p>
-      <div class="hero-actions"><a class="button primary" href="#work">Explore my work <span>↘</span></a><a class="text-link" href="#contact">Have a story in mind? <span>↗</span></a></div>
-      <div class="hero-note"><span class="status-dot"></span> Independent video editor <span class="note-separator">/</span> Made with intention.</div>
-      </div>
+        <div class="intent-preview preview-wishlist"><div class="gift-note"><span class="eyebrow">A LITTLE SOMETHING</span><span class="gift-drawing">✳</span><p>Good stories.<br><em>Kind gestures.</em></p><span class="note-signature">with a little gratitude, khosta</span></div><span class="art-marker">02 / GOOD ENERGY ONLY</span></div>
+        <div class="intent-preview preview-about"><span class="about-orbit brand-logo" aria-hidden="true"></span><p>Behind<br><em>the cut.</em></p><span class="art-marker">03 / THE PERSON, THE PROCESS</span></div>
       </div>
     </section>
 
-    <section class="reel-section wrap" aria-label="Featured reel">
-      <button class="reel" id="reel-button" aria-label={hasShowreel ? 'Play Khosta’s showreel' : 'Play sample reel'}>
-        <img class="reel-image" src={heroVariants[2].src} srcset={heroSrcset} sizes="(max-width: 700px) calc(100vw - 38px), (max-width: 1280px) calc(100vw - 96px), 1184px" width={reel.width} height={reel.height} decoding="async" alt="Sunlight breaking through clouds over a dramatic mountain landscape" fetchpriority="high">
-        <div class="reel-shade"></div><div class="reel-top"><span class="mini-mark brand-logo logo-static" aria-hidden="true"></span><span id="reel-type">A LITTLE TASTE OF THE FEELING</span></div>
-        <span class="reel-title">Every frame.<br><em>A feeling.</em></span>
-        <span class="play-circle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7z"/></svg></span>
-        <span class="reel-bottom"><span id="reel-label">{hasShowreel ? 'PLAY SHOWREEL' : 'PLAY SAMPLE REEL'} <span>↗</span></span><span id="reel-caption">{hasShowreel ? 'SUNIL PAUDEL / KHOSTA' : 'DEMO FOOTAGE · NOT MY WORK'}</span></span>
-      </button>
-      <div class="reel-under"><span>THE CUT. THE COLOR. THE FEELING.</span><span>Sound on. World off. <span class="sound-icon">▂▅▃▇▂</span></span></div>
+    <section class="screen work-screen" id="work" aria-labelledby="work-title">
+      <div class="screen-heading"><div><div class="eyebrow reveal">01 / SELECTED WORK</div><h2 id="work-title" class="reveal" tabindex="-1">Less noise. <em>More story.</em></h2></div><p class="section-note reveal">Long stories. Quick moments.<br>The same care in every cut.</p></div>
+      <div class="work-toolbar reveal"><div class="filters" role="group" aria-label="Filter videos"><button class="active" data-filter="all" aria-pressed="true">All work</button><button data-filter="youtube" aria-pressed="false">YouTube</button><button data-filter="instagram" aria-pressed="false">Instagram</button><button data-filter="tiktok" aria-pressed="false">TikTok</button></div><div class="gallery-pager"><button id="work-prev" aria-label="Previous works">←</button><span id="work-page" aria-live="polite">01 / 01</span><button id="work-next" aria-label="Next works">→</button></div></div>
+      <WorkGallery portfolio={portfolio} images={images} />
+      <p class="work-footnote reveal" id="work-footnote">Start with the showreel. Stay for the feeling.</p>
     </section>
 
-    <section class="work-section wrap section" id="work" aria-labelledby="work-title">
-      <div class="section-heading"><div><div class="eyebrow">01 / SELECTED WORK</div><h2 id="work-title"><span class="sans-lead">Less noise.</span><br><em>More story.</em></h2></div><p>Long stories. Quick moments.<br>A different canvas. The same care.</p></div>
-      <div class="work-toolbar"><div class="filters" role="group" aria-label="Filter videos"><button class="active" data-filter="all" aria-pressed="true">All work <span id="work-count">00</span></button><button data-filter="youtube" aria-pressed="false">YouTube</button><button data-filter="instagram" aria-pressed="false">Instagram</button><button data-filter="tiktok" aria-pressed="false">TikTok</button></div><span class="toolbar-note">A FEW FRAMES OF WHAT’S NEXT ↙</span></div>
-      <WorkGallery portfolio={portfolio} images={optimizedImages} />
-      <p class="work-footnote" id="work-footnote">The next chapter is on its way. Original work coming soon.</p>
+    <section class="screen gifts-screen" id="wishlist" aria-labelledby="wishlist-title">
+      <div class="gift-scene reveal" aria-hidden="true"><span class="gift-ring"></span><span class="gift-star">✳</span><span class="gift-scene-label">SMALL THINGS. BIG FEELINGS.</span></div>
+      <div class="gifts-copy"><div class="eyebrow reveal">02 / A LITTLE SOMETHING</div><h2 id="wishlist-title" class="reveal" tabindex="-1">Good stories.<br><em>Kind gestures.</em></h2><p class="reveal">For the kind souls who asked.<br>A small corner for things I’d love.</p>
+        <div class:list={['gifts-content', gifts.length ? 'gift-list' : 'wishlist-empty']} id="gifts">
+          {gifts.length ? gifts.map(gift => <article class="gift-item reveal"><h3>{gift.title}</h3><p>{gift.note}</p><a href={gift.url} target="_blank" rel="noopener noreferrer">View gift ↗</a></article>) : <div class="reveal"><span class="empty-dot"></span><h3>Nothing on the list. Just good energy.</h3><p>A few wishes might find their way here soon.<br>Until then, thanks for being here.</p></div>}
+        </div>
+        <a class="text-link reveal" href="#about">A kind word works, too <span>↗</span></a>
+      </div>
     </section>
 
-    <section class="about-section wrap section" id="about" aria-labelledby="about-title">
-      <div class="about-label"><div class="eyebrow">02 / BEHIND THE TIMELINE</div><span class="big-spark brand-logo" aria-hidden="true"></span></div>
-      <div class="about-content"><h2 id="about-title">Hi, I’m Sunil.<br>You can call me <em>Khosta.</em></h2><p>For me, editing is about finding the story hidden between the frames. The right pause. A cut that clicks. A moment that makes you feel something.</p><p>I bring that eye to every timeline, from a story told in seconds to one that needs a little more room.</p><div class="disciplines"><span>Video editing</span><span>Color & mood</span><span>Sound & rhythm</span></div><a class="text-link" href="#contact">Let’s make something worth watching <span>↗</span></a></div>
-    </section>
-
-    <section class="wishlist-section wrap section" id="wishlist" aria-labelledby="wishlist-title">
-      <div class="section-heading"><div><div class="eyebrow">03 / A LITTLE SOMETHING</div><h2 id="wishlist-title">Good stories.<br><em>Kind gestures.</em></h2></div><p>For the kind souls who asked.<br>A small corner for things I’d love.</p></div>
-      <div id="gifts"></div>
-    </section>
-
-    <section class="contact-section wrap section" id="contact" aria-labelledby="contact-title">
-      <div class="eyebrow"><span class="status-dot"></span> 04 / LET’S CREATE SOMETHING</div>
-      <h2 id="contact-title">Your story.<br><em>Our next great cut.</em></h2>
-      <a class="contact-email" id="email-link" href="mailto:mailkhosta@gmail.com">mailkhosta@gmail.com <span>↗</span></a>
-      <div class="contact-details"><a id="phone-link" href="tel:+9779825833442">+977 982 583 3442</a><span class="contact-divider">/</span><button id="copy-email">Copy email <span>⧉</span></button><span id="copy-status" role="status" aria-live="polite"></span></div>
-      <SocialLinks links={portfolio.socials || []} />
+    <section class="screen about-screen" id="about" aria-labelledby="about-title">
+      <figure class="paper-portrait"><div class="paper-sheet"><div class="portrait-window"><img src={portraitImages[1].src} srcset={portraitImages[0].src + ' 360w, ' + portraitImages[1].src + ' 640w'} sizes="(max-width: 700px) 150px, 300px" width={portrait.width} height={portrait.height} alt="Sunil Paudel, also known as Khosta, video editor" loading="lazy" decoding="async"><span class="paper-grain" aria-hidden="true"></span></div><figcaption>SUNIL PAUDEL <span>behind the cut.</span></figcaption><span class="paper-fold paper-fold-top" aria-hidden="true"></span><span class="paper-fold paper-fold-bottom" aria-hidden="true"></span></div></figure>
+      <div class="about-copy"><div class="eyebrow reveal">03 / THE PERSON BEHIND THE TIMELINE</div><h2 class="reveal" id="about-title" tabindex="-1">Hi, I’m Sunil.<br>Call me <em>Khosta.</em></h2><p class="about-intro reveal">I find the story hidden between the frames.<br>The right pause. A cut that clicks. A feeling that stays.</p><div class="disciplines reveal"><span>Video editing</span><span>Color & mood</span><span>Sound & rhythm</span></div><div class="contact-block reveal"><span class="eyebrow">HAVE A STORY IN MIND?</span><a class="contact-email" id="email-link" href={'mailto:' + portfolio.email}>{portfolio.email}<span>↗</span></a><div class="contact-details"><a id="phone-link" href={'tel:' + portfolio.phone}>{portfolio.phoneDisplay}</a><button id="copy-email">Copy email ⧉</button><span id="copy-status" role="status" aria-live="polite"></span></div></div><div class="social-window reveal"><SocialLinks links={portfolio.socials || []} /><div class="social-pager"><button id="social-prev" aria-label="Previous social profiles">←</button><span id="social-page"></span><button id="social-next" aria-label="Next social profiles">→</button></div></div></div>
     </section>
   </main>
-  <footer class="footer wrap"><a class="wordmark" href="#"><span class="brand-logo" aria-hidden="true"></span><span>khosta</span></a><span>© <span id="year">2026</span> Sunil Paudel. Every frame, with care.</span><a href="#">Back to top ↑</a></footer>
+  <footer class="screen-footer"><span class="footer-note"><span class="status-dot"></span> Independent video editor</span><nav class="screen-dots" aria-label="Choose a screen"><a href="#home" aria-label="Start" aria-current="page"></a><a href="#work" aria-label="Work"></a><a href="#wishlist" aria-label="Gifts"></a><a href="#about" aria-label="About and contact"></a></nav><div class="screen-controls"><span id="screen-position" aria-live="polite">01 / 04</span><button id="screen-prev" aria-label="Previous screen">←</button><button id="screen-next" aria-label="Next screen">→</button></div></footer>
   <dialog class="video-dialog" id="video-dialog" aria-labelledby="video-title"><div class="dialog-head"><div><span class="eyebrow" id="video-platform"></span><h3 id="video-title"></h3></div><button class="close-dialog" aria-label="Close video">✕</button></div><div id="video-player"></div><div class="dialog-foot"><span id="video-description"></span><a id="original-link" target="_blank" rel="noopener noreferrer">Watch on original platform ↗</a></div></dialog>
+  <noscript><p class="no-script-note">JavaScript enables the animated slideshow. All content is available below without it.</p></noscript>
 </body>
 </html>

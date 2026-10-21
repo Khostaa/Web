@@ -1,126 +1,61 @@
-# Khosta — Sunil Paudel
+# Khosta — revamp
 
-A minimal video editor portfolio built with Astro 7.4.1 and published as a static website through GitHub Pages.
+An experimental, screen-by-screen video editor portfolio on the **revamp** branch. Built with Astro 7.4.1, native CSS, and a small browser script.
 
-- **Live website:** [www.sunil17.com.np](https://www.sunil17.com.np/)
-- **Source:** [Khostaa/Web](https://github.com/Khostaa/Web)
-- **Deployments:** [GitHub Actions](https://github.com/Khostaa/Web/actions)
-- **Complete editing guide:** [SITE-GUIDE.md](SITE-GUIDE.md)
+**Production remains on main:** [www.sunil17.com.np](https://www.sunil17.com.np/). Pushing revamp does not deploy to that domain. The existing GitHub Pages workflow runs only for main.
 
-## Hosting
+## Experience
 
-GitHub Pages hosts the website. GitHub Actions builds and tests every push to `main`, then publishes the generated `dist/` directory. Cloudflare manages the domain's DNS and proxy. The original ChatGPT Sites preview is a separate copy; it does not synchronize with this repository.
+- **Start:** “What do you want?” with three large choices, changing image compositions on hover or keyboard focus.
+- **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Filters and pagination accommodate more videos.
+- **Gifts:** the wishlist and its current empty state. Additional gifts paginate.
+- **About & Contact:** the editor's paper portrait, animated copy, contact information, and paginated social links.
 
-Keep GitHub Settings → Pages → Source set to **GitHub Actions**, and its custom domain set to **www.sunil17.com.np**. Both `public/CNAME` and `astro.config.mjs` use this domain. No `/Web` base path is needed with the custom domain. Deployment uses temporary GitHub workflow credentials; no permanent deployment token is stored in this project.
+The navy, green, tan, Inter, and Libre Caslon Condensed styling remains. Cosmos is the user-selected interaction reference: its brand selector informs the menu, and its color-search demonstration informs the gallery entrance.
 
-## Run locally
+## Development
 
-Use Node.js 24 and pnpm 11.25.0, matching the deployment workflow.
+Node.js 24 and pnpm 11.25.0:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
-```
-
-Development runs at http://127.0.0.1:4321. To check production output:
-
-```sh
 pnpm build
 pnpm test
 pnpm preview
 ```
 
-Run the build before tests: verification reads the generated HTML. Preview also uses the most recent build.
+Run the build before tests. Default dev/preview address: http://127.0.0.1:4321.
 
-## What to edit
+## Edit
 
-| Change | File |
+| What | Where |
 | --- | --- |
-| Name, email, phone, showreel, work, gifts, social links | `src/data/portfolio.json` |
-| Page copy, navigation, sections, metadata | `src/pages/index.astro` |
-| Work gallery markup | `src/components/WorkGallery.astro` |
-| Social link markup | `src/components/SocialLinks.astro` |
-| Colors, typography, layout, logo animation | `src/styles/global.css` |
-| Filters, players, theme control, copy email | `src/scripts/app.js` |
-| Theme before page paint | `src/scripts/theme.js` |
-| Video URL parsing and aspect ratios | `src/lib/media.js` |
-| Logo SVG files and custom public images | `public/assets/` |
-| Optimized source photos and local fonts | `src/assets/` |
-| Build origin and settings | `astro.config.mjs` |
-| Automatic publishing | `.github/workflows/deploy.yml` |
+| Contacts, videos, showreel, gifts, socials | `src/data/portfolio.json` |
+| Four screens, copy, selector previews, head metadata | `src/pages/index.astro` |
+| Server-rendered work cards | `src/components/WorkGallery.astro` |
+| Colors, typography, screen layout, paper and selector effects | `src/styles/global.css` |
+| Navigation, gallery rollout, pagination, video dialog | `src/scripts/app.js` |
+| Pre-paint theme | `src/scripts/theme.js` |
+| Native-ratio parsing and supported platform URLs | `src/lib/media.js` |
 
-Edit source files, not generated `dist/` output. The full guide explains adding, removing, reordering, and hiding content and sections.
+See [SITE-GUIDE.md](SITE-GUIDE.md) for examples and maintenance details. The showreel is [Make it Exist](https://www.youtube.com/watch?v=kPqnJMdCEFI). Real gallery work and gifts remain empty until added.
 
-## Add work
+## Performance and accessibility
 
-Add objects to the `videos` array in `src/data/portfolio.json`:
+Static HTML; no hydrated framework, animation package, scroll listener, animation loop, or preloaded video player. Images are responsive WebP. Transitions use transform and opacity. The video iframe is inserted only on demand and removed on close. Inactive screens are hidden and inert. Screen changes move focus to their heading. Reduced-motion preferences disable the entrance effects. Arrow buttons, URL hashes, browser history, and keyboard controls support navigation. Without JavaScript, the screens become ordinary document sections.
 
-```json
-{
-  "title": "Film title",
-  "category": "Travel film",
-  "platform": "youtube",
-  "aspectRatio": "16:9",
-  "url": "https://www.youtube.com/watch?v=VIDEO_ID",
-  "thumbnail": "/assets/your-poster.jpg",
-  "year": "2026"
-}
-```
-
-Platforms: `youtube`, `instagram`, and `tiktok`. Supported ratios: `9:16`, `16:9`, `4:3`, `1:1`, and `3:4`. Use full public links; expand shortened TikTok links. Players load on click and provide an original-platform link if embedding is blocked. Put your poster in `public/assets/`, or import new source images through Astro for optimization.
-
-The current showreel is [Khosta’s YouTube video](https://www.youtube.com/watch?v=kPqnJMdCEFI). Change `showreelUrl` to replace it. An empty or invalid value uses clearly labeled sample footage. The work gallery remains separate and currently displays coming-soon placeholders.
-
-## Wishlist and social links
-
-Add wishlist objects to `gifts`:
-
-```json
-{ "title": "Gift name", "note": "A short note", "url": "https://example.com/item" }
-```
-
-Add social profile objects to `socials`:
-
-```json
-{ "label": "Instagram · Khosta", "url": "https://www.instagram.com/khosta.np/" }
-```
-
-Delete an object to remove it; move it within the array to change its order. The wishlist is intentionally empty. There are 11 social profile links, including labeled personal accounts. Setting `socials` to `[]` hides the social row. No payments are collected by the website.
-
-## Opening portrait
-
-The supplied editor photo is `src/assets/sunil-portrait.png`. Astro creates 360px and 640px WebP versions. Its markup is in `src/pages/index.astro`; `.paper-portrait`, `.paper-sheet`, and `.paper-fold` in `src/styles/global.css` control the paper treatment. `public/assets/paper-grain.svg` supplies a small static texture.
-
-Two paper flaps unfold to reveal the portrait on each page load or refresh, without blocking navigation. Motion lasts about 1.75 seconds, uses CSS transforms and opacity, and stays still when reduced motion is preferred. Replace the source image and update its alt text to change the portrait.
-
-## Design and performance
-
-- Green `#2cac6d`, navy `#1d1d35`, and tan `#deb887`, with corresponding light-mode colors.
-- Inter for regular headings and interface text; local Libre Caslon Condensed for tan italic text.
-- Static HTML, responsive WebP images, minified assets, and no hydrated client framework.
-- Theme selection persists in the browser; dark is the default.
-- Only green logo centers rotate clockwise in a seamless 14-second CSS loop. Tan logos stay static. Off-screen and hidden-tab animations pause; reduced-motion settings disable rotation.
-
-## Publish an update
+## Branch workflow
 
 ```sh
-pnpm build
-pnpm test
+git switch revamp
 git add .
-git commit -m "Update portfolio"
-git push origin main
+git commit -m "Refine revamp"
+git push origin revamp
 ```
 
-Check the [Actions run](https://github.com/Khostaa/Web/actions) until both build and deployment succeed, then verify the live website. A failed workflow leaves the previous successful deployment in place. To roll back, revert the relevant commit and push the revert. Older website files remain in Git history.
+Use main only when ready to replace production. Do not merge or push revamp into main merely to preview it. The original Sites preview is independent of both branches.
 
-The current verifier includes demo-specific assertions for the empty wishlist, contact email, placeholders, images, and Astro version. Update those assertions when intentionally changing that content; see the complete guide. Keep dependencies, generated output, and credentials out of Git.
+## Assets and credits
 
-## Cloudflare
-
-The existing four `www` A records route to GitHub Pages (185.199.108.153 through 185.199.111.153); the apex CNAME points to `www.sunil17.com.np`. Domain routing, HTTPS, and any proxy settings are managed separately from repository content. Email records support mail delivery and are not deployment artifacts.
-
-The unused `perf-metrics-f208` Worker and its domain route were removed on 20 October 2026, along with two abandoned Sites verification TXT records and an obsolete Brave verification TXT record. Website routing, proxy/HTTPS settings, email records, and Google verification were preserved. See the full guide for the retained DNS inventory. GitHub Pages does not require a Cloudflare Worker or Cloudflare deployment token.
-
-## Credits
-
-[Inter](https://fonts.google.com/specimen/Inter) is loaded from Google Fonts. [Libre Caslon Condensed](https://github.com/ertekinno/libre-caslon-condensed) is hosted locally, with license and authors under `public/fonts/`. Atmosphere photos: Unsplash. Demo video: Google sample footage.
+User-supplied portrait and native SVG logo. Inter is loaded from Google Fonts; Libre Caslon Condensed is local, with its license and authors in `public/fonts/`. Decorative placeholder photography: Unsplash. The same Cloudflare DNS and GitHub Pages configuration documented in the guide continue to serve production.

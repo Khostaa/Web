@@ -1,33 +1,30 @@
 ---
 import { platforms, defaults, placeholderRatios, videoRatio, parseVideo } from '../lib/media.js';
 const { portfolio, images } = Astro.props;
-const videos = portfolio.videos.filter(video => parseVideo(video.url));
-const lanes = Object.keys(platforms).map(platform => {
-  const matching = videos.filter(video => (video.platform || parseVideo(video.url)?.platform) === platform);
-  return { platform, projects: matching.length ? matching : placeholderRatios[platform].map(aspectRatio => ({ aspectRatio, placeholder: true })) };
-});
+const entries = [];
+if (parseVideo(portfolio.showreelUrl)) entries.push({ title: 'Make it Exist', category: 'SHOWREEL', platform: parseVideo(portfolio.showreelUrl).platform, aspectRatio: '16:9', url: portfolio.showreelUrl, thumbnail: 'assets/reel.jpg', showreel: true });
+for (const platform of Object.keys(platforms)) {
+  const videos = portfolio.videos.filter(video => parseVideo(video.url) && (video.platform || parseVideo(video.url).platform) === platform);
+  if (videos.length) entries.push(...videos.map(video => ({ ...video, platform })));
+  else entries.push(...placeholderRatios[platform].map(aspectRatio => ({ platform, aspectRatio, placeholder: true })));
+}
 ---
-<div class="project-grid" id="projects" data-prerendered>
-  {lanes.map(({ platform, projects }) => (
-    <div class="project-lane">
-      {projects.map(video => {
-        const preset = defaults[platform];
-        const real = !video.placeholder;
-        const ratio = videoRatio(video.aspectRatio || video.ratio, platform, video.url);
-        const imagePath = video.thumbnail || preset.image;
-        const image = images[imagePath];
-        const Cover = real ? 'button' : 'div';
-        return (
-          <article class="project" data-ratio={ratio}>
-            <Cover class:list={['project-cover', { 'has-video': real }]} style={{ aspectRatio: ratio.replace(':', ' / ') }} aria-label={real ? `Play ${video.title}, ${ratio}` : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined}>
-              <img src={image?.src || imagePath} srcset={image?.srcset} sizes="(max-width: 700px) calc(100vw - 38px), 380px" width={image?.width} height={image?.height} alt="" loading="lazy" decoding="async" />
-              <span class="cover-shade"></span><span class="platform-tag">{platforms[platform]}</span><span class="ratio-tag">{ratio}</span>
-              {real ? <span class="play-circle" aria-hidden="true">▶</span> : <><span class="cover-type">{preset.line}<em>{preset.italic}</em></span><span class="coming-badge">COMING SOON</span></>}
-            </Cover>
-            <div class="project-info"><div><h3>{real ? video.title : preset.title}</h3><p>{real ? [video.category, video.year].filter(Boolean).join(' / ') : `${preset.category} / Coming soon`}</p></div><span>{real ? '↗' : '—'}</span></div>
-          </article>
-        );
-      })}
-    </div>
-  ))}
+<div class="work-grid" id="projects" data-prerendered>
+  {entries.map((video, index) => {
+    const preset = defaults[video.platform] || defaults.youtube;
+    const real = !video.placeholder;
+    const ratio = videoRatio(video.aspectRatio || video.ratio, video.platform, video.url);
+    const image = images[video.thumbnail || preset.image];
+    const Cover = real ? 'button' : 'div';
+    return <article class="work-card" data-platform={video.platform} data-ratio={ratio} data-work-index={index}>
+      <Cover class:list={['work-media', { 'has-video': real }]} style={{ aspectRatio: ratio.replace(':',' / ') }} aria-label={real ? (video.showreel ? 'Play Khosta’s showreel' : 'Play ' + video.title) : undefined} data-video-url={real ? video.url : undefined} data-video-title={real ? video.title : undefined} data-video-ratio={real ? ratio : undefined}>
+        <img src={image?.small || video.thumbnail || preset.image} srcset={image?.srcset} sizes="(max-width: 700px) 44vw, 360px" width={image?.width} height={image?.height} alt="" loading="lazy" decoding="async" />
+        <span class="cover-shade"></span><span class="platform-tag">{video.showreel ? 'SHOWREEL' : platforms[video.platform]}</span><span class="ratio-tag">{ratio}</span>
+        {video.showreel && <span class="reel-mark brand-logo logo-static" aria-hidden="true"></span>}
+        {real ? <span class="play-circle" aria-hidden="true">▶</span> : <span class="placeholder-caption">{preset.line}<em>{preset.italic}</em></span>}
+        {!real && <span class="coming-badge">COMING SOON</span>}
+      </Cover>
+      <div class="work-card-info"><h3>{real ? video.title : preset.title}</h3><span>{real ? video.category || platforms[video.platform] : 'Coming soon'} {real ? '↗' : ''}</span></div>
+    </article>;
+  })}
 </div>
