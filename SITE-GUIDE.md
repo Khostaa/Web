@@ -12,6 +12,10 @@ This guide describes the site as it is currently implemented, including the deta
 
 Source changes become public after a push to `main` and a successful GitHub Pages workflow. The original owner-private Sites preview is independent.
 
+## References for future design changes
+
+[Cosmos](https://www.cosmos.so/) is an additional user-selected visual reference, saved on 21 October 2026. Consult it alongside the earlier design direction when planning future changes. This reference does not request an immediate redesign. Preserve Khosta’s colors, typography, content, responsive video ratios, and lightweight motion unless a future request changes them.
+
 ## Contents
 
 1. [Quick editing map](#1-quick-editing-map)
