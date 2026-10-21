@@ -51,7 +51,7 @@ function showScreen(id, { focus = true, animate = true } = {}) {
   document.querySelector('#screen-position').textContent = number(index + 1) + ' / 04';
   document.querySelector('#screen-prev').disabled = index === 0;
   document.querySelector('#screen-next').disabled = index === ids.length - 1;
-  document.title = id === 'home' ? 'Khosta — Sunil Paudel · Video Editor' : ({ work: 'Work', wishlist: 'Gifts', about: 'Hire me' }[id]) + ' — Khosta';
+  document.title = 'Sunil Paudel - Visuals & Editing';
   if (focus) next.querySelector('h1, h2').focus({ preventScroll: true });
   wall.setActive(id === 'work', animate);
   if (id === 'wishlist') requestAnimationFrame(() => renderGifts(animate));
