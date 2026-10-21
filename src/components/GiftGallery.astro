@@ -17,12 +17,12 @@ const cards = await Promise.all(gifts.map(async gift => {
   <div class="gallery-pager gift-pager" id="gift-pager" hidden><button id="gift-prev" aria-label="Previous gifts">←</button><span id="gift-page" aria-live="polite"></span><button id="gift-next" aria-label="Next gifts">→</button></div>
 </div>
 <div class="gifts-content gift-list" id="gifts">
-  {cards.map((gift,index) => <article class="gift-item reveal" data-gift-index={index}>
-    <a class="gift-card-link" href={gift.url} target="_blank" rel="noopener noreferrer" aria-label={'View ' + gift.title + (gift.variant ? ', ' + gift.variant : '') + ' in a store (opens in new tab)'}>
+  {cards.map((gift,index) => <article class="gift-item" data-gift-index={index}>
+    <a class="gift-card-link" draggable="false" href={gift.url} target="_blank" rel="noopener noreferrer" aria-label={'View ' + gift.title + (gift.variant ? ', ' + gift.variant : '') + ' in a store (opens in new tab)'}>
       <div class:list={['gift-product', 'gift-product-' + gift.image]}>
-        <span class="gift-index">{String(index + 1).padStart(2,'0')} / WISHLIST</span>
-        {gift.source && <img src={gift.variants[0].src} srcset={gift.variants.map((image,i) => image.src + ' ' + [360,720][i] + 'w').join(', ')} sizes="(max-width: 700px) 84vw, 30vw" width={gift.source.width} height={gift.source.height} alt={gift.title + (gift.variant ? ', ' + gift.variant : '')} loading="lazy" decoding="async" />}
-        <span class="gift-corner" aria-hidden="true">↗</span>
+
+        {gift.source && <img src={gift.variants[0].src} srcset={gift.variants.map((image,i) => image.src + ' ' + [360,720][i] + 'w').join(', ')} sizes="(max-width: 700px) 30vw, 30vw" width={gift.source.width} height={gift.source.height} alt={gift.title + (gift.variant ? ', ' + gift.variant : '')} loading="lazy" decoding="async" />}
+
       </div>
       <div class="gift-details"><span class="eyebrow">{gift.category || 'A LITTLE SOMETHING'}</span><h3>{gift.title}</h3>{gift.variant && <span class="gift-variant">{gift.variant}</span>}<p>{gift.note}</p><span class="gift-store">View brand website ↗</span></div>
     </a>

@@ -98,7 +98,7 @@ Supported platform values are youtube, instagram, and tiktok. Use full URLs. Exp
 
 Delete an object to remove work; reorder the objects to change order within each platform. Work is grouped in YouTube, Instagram, then TikTok order, with the showreel first. Adjust the entries builder in WorkGallery.astro to change this grouping. A platform with no real work displays clearly labeled coming-soon placeholders in the five supported ratios. Change defaults and placeholderRatios in src/lib/media.js to change these placeholders.
 
-The gallery shows up to six cards on desktop and four on mobile. When two portrait cards share a six-card desktop page, they span both rows; the remaining cards occupy the two stacked columns. All cards are present in the static HTML. Filters and previous/next buttons determine which cards are visible. layoutWork in app.js measures the available grid and calculates a cover height/width that preserves each ratio. It then animates cards from the grid center with translation, rotation, and scale. This is inspired by the Cosmos color-search demonstration. No continuous JavaScript loop is used. ResizeObserver recalculates sizes without replaying the entrance.
+The gallery shows up to six cards on desktop and four on mobile. Platform filters form a vertical rail with inline SVG logos. When two portrait cards share a six-card desktop page, they span both rows; the remaining cards occupy the two stacked columns. All cards are present in the static HTML. Filters and previous/next buttons determine which cards are visible. layoutWork in app.js measures the available grid and calculates a cover height/width that preserves each ratio. It then animates cards from the grid center with translation, rotation, and scale. This is inspired by the Cosmos color-search demonstration. No continuous JavaScript loop is used. ResizeObserver recalculates sizes without replaying the entrance.
 
 ## Photos and paper portrait
 
@@ -112,9 +112,9 @@ Decorative photos are imported from src/assets/reel.jpg, story.jpg, social.jpg, 
 
 Five gifts are configured in portfolio.json: Sony Alpha 6700, DJI Osmo Action 6 Adventure Combo, DJI Mic 3, Samsung Galaxy Watch 7 44 mm, and MacBook Pro M5 Pro 48 GB / 1 TB.
 
-Each gift has title, optional variant, note, category, image (filename stem in src/assets/gifts), query (the exact model/configuration to search for), and url (a brand fallback). Add/remove/reorder objects to manage the list. GiftGallery.astro imports local images and generates responsive 360px / 720px WebP assets. Original product photos are retained; CSS gives them paper-toned plates and crops the Sony promotional image. No AI-generated replacement products are used.
+Each gift has title, optional variant, note, category, image (filename stem in src/assets/gifts), query (the exact model/configuration to search for), and url (a brand fallback). Add/remove/reorder objects to manage the list. GiftGallery.astro imports local images and generates responsive 360px / 720px WebP assets. Original product photos are retained; CSS gives them paper-toned plates. Every image uses contain sizing with no crop, mask, zoom, or rounded clipping; the Sony promotional image is shown in full. No AI-generated replacement products are used.
 
-The gallery shows three gifts per page on desktop and one on phones. Pagination is in app.js. An empty array restores the friendly empty state. Product cards are full links opening new tabs; the images and titles are clickable. Without JavaScript, all gifts and brand links remain available.
+The gallery uses three columns and two rows on desktop and phones, so all five current gifts fit on one screen. Future additions paginate in groups of six. Pagination is in app.js. An empty array restores the friendly empty state. Product cards are full links opening new tabs. Only images show initially; product details appear on hover or keyboard focus. On a touchscreen, the first tap reveals details and the next tap follows the store link. Without JavaScript, all gifts and brand links remain available.
 
 Country handling lives in src/lib/gifts.js. The browser suggests a market from its language region (with a Nepal timezone correction); this is a suggestion, not IP geolocation. Visitors can change the selector, and their selection is saved locally as khosta-gift-country. No location service or external request runs on page load. Supported markets open product searches at the matching Amazon store or Daraz Nepal. Search links retain the requested configuration but cannot guarantee stock, seller, or exact variant. The MacBook has a direct Oliz Store Nepal override. Other country / region uses each gift's brand fallback; select the destination region on that website.
 
@@ -169,3 +169,9 @@ When ready to make this design production, review it first, merge revamp into ma
 ## Future reference
 
 Cosmos (https://www.cosmos.so/) is a user-selected visual and interaction reference. Preserve Khosta's own branding and supplied work. Do not copy third-party brand content into this portfolio.
+
+## Dragging and screen previews
+
+Drag or swipe horizontally over the stage (60px minimum). app.js advances available Work pages, Gift pages (six cards), or Contact social pages (four profiles) first, then the adjacent screen. Dragging a link suppresses the subsequent click; ordinary clicks still activate links. Buttons, form fields, and the opening menu keep their normal interactions. Pointer capture ends on release or cancellation, and no frame loop runs while idle. Arrows, keyboard controls, and browser history remain available.
+
+Gift entrances use the same transform/opacity rollout style as Work and respect reduced motion. Change rollout in app.js to tune it. Home Work preview posters come from the showreel and configured work thumbnails, then gallery placeholder images; platform icons live in PlatformIcon.astro. The Reach out preview uses a flex column so its logo and text do not overlap. The footer wording is in index.astro.

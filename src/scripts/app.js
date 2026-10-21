@@ -55,6 +55,7 @@ function showScreen(id, { focus = true, animate = true } = {}) {
   document.title = id === 'home' ? 'Khosta — Sunil Paudel · Video Editor' : ({ work: 'Work', wishlist: 'Gifts', about: 'Reach out' }[id]) + ' — Khosta';
   if (focus) next.querySelector('h1, h2').focus({ preventScroll: true });
   if (id === 'work') requestAnimationFrame(() => layoutWork(animate));
+  if (id === 'wishlist') requestAnimationFrame(() => renderGifts(animate));
 }
 function navigate(id) {
   id = normalize(id);
@@ -164,9 +165,9 @@ renderSocials();
 const giftItems = [...document.querySelectorAll('.gift-item')];
 const countryPicker = document.querySelector('#gift-country');
 let giftPage = 0;
-function renderGifts() {
+function renderGifts(animate = true) {
   if (!giftItems.length) return;
-  const capacity = compact.matches ? 1 : 3;
+  const capacity = 6;
   const pages = Math.ceil(giftItems.length / capacity);
   giftPage = Math.max(0, Math.min(giftPage, pages - 1));
   giftItems.forEach((item,index) => { item.hidden = Math.floor(index / capacity) !== giftPage; });
@@ -174,6 +175,7 @@ function renderGifts() {
   document.querySelector('#gift-prev').disabled = giftPage === 0;
   document.querySelector('#gift-next').disabled = giftPage === pages - 1;
   document.querySelector('#gift-pager').hidden = pages <= 1;
+  if (animate && active?.id === 'wishlist') rollout(giftItems.filter(item => !item.hidden), document.querySelector('#gifts'));
 }
 if (countryPicker) {
   let country;
@@ -199,6 +201,75 @@ if (countryPicker) {
   compact.addEventListener('change', () => { giftPage = 0; renderGifts(); });
   renderGifts();
 }
+
+// Native transform/opacity animation; no animation library or persistent frame loop.
+function rollout(items, container) {
+  items.forEach(item => item.getAnimations().forEach(animation => animation.cancel()));
+  if (motionPreference.matches) return;
+  const bounds = container.getBoundingClientRect();
+  items.forEach((item,index) => {
+    const box = item.getBoundingClientRect();
+    item.animate([
+      {opacity:0,transform:'translate('+(bounds.left+bounds.width/2-box.left-box.width/2)+'px,'+(bounds.top+bounds.height/2-box.top-box.height/2)+'px) rotate('+(index%2?16:-16)+'deg) scale(.08)'},
+      {opacity:1,transform:'none'}
+    ],{duration:950,delay:index*55,easing:'cubic-bezier(.16,.85,.2,1)',fill:'backwards'});
+  });
+}
+
+// A swipe pages the active collection first, then moves to the adjacent screen.
+function advanceCollection(direction) {
+  if (active.id === 'work') {
+    const count = cards.filter(card => workFilter === 'all' || card.dataset.platform === workFilter).length;
+    const pages = Math.ceil(count / (compact.matches ? 4 : 6));
+    if (workPage + direction >= 0 && workPage + direction < pages) { workPage += direction; layoutWork(); return; }
+  }
+  if (active.id === 'wishlist') {
+    const pages = Math.ceil(giftItems.length / 6);
+    if (giftPage + direction >= 0 && giftPage + direction < pages) { giftPage += direction; renderGifts(); return; }
+  }
+  if (active.id === 'about') {
+    const pages = Math.ceil(socialLinks.length / 4);
+    if (socialPage + direction >= 0 && socialPage + direction < pages) { socialPage += direction; renderSocials(); return; }
+  }
+  const next = ids[ids.indexOf(active.id) + direction];
+  if (next) navigate(next);
+}
+let gesture = null;
+let suppressClickUntil = 0;
+stage.addEventListener('dragstart', event => event.preventDefault());
+stage.addEventListener('pointerdown', event => {
+  if (!event.isPrimary || event.button !== 0 || event.target.closest('input,textarea,select,button:not(.work-media),.choices,[contenteditable]')) return;
+  gesture = { id:event.pointerId, x:event.clientX, y:event.clientY, horizontal:false };
+});
+stage.addEventListener('pointermove', event => {
+  if (!gesture || event.pointerId !== gesture.id) return;
+  const dx=event.clientX-gesture.x, dy=event.clientY-gesture.y;
+  if (!gesture.horizontal && Math.abs(dx)>12 && Math.abs(dx)>Math.abs(dy)*1.4) {
+    gesture.horizontal=true; stage.setPointerCapture(event.pointerId); stage.classList.add('is-dragging');
+  }
+});
+function finishGesture(event) {
+  if (!gesture || event.pointerId !== gesture.id) return;
+  const dx=event.clientX-gesture.x, dy=event.clientY-gesture.y;
+  const dragged=gesture.horizontal;
+  stage.classList.remove('is-dragging');
+  if(stage.hasPointerCapture(event.pointerId)) stage.releasePointerCapture(event.pointerId);
+  gesture=null;
+  if (dragged) {
+    suppressClickUntil=performance.now()+350;
+    if(event.type==='pointerup' && Math.abs(dx)>=60 && Math.abs(dx)>Math.abs(dy)*1.4) advanceCollection(dx<0?1:-1);
+  }
+}
+window.addEventListener('pointerup',finishGesture);
+window.addEventListener('pointercancel',finishGesture);
+stage.addEventListener('lostpointercapture',event => {if(event.target===stage){gesture=null;stage.classList.remove('is-dragging');}});
+stage.addEventListener('click',event => {
+  if(performance.now()<suppressClickUntil){event.preventDefault();event.stopImmediatePropagation();return;}
+  const gift=event.target.closest('.gift-item');
+  if(gift && matchMedia('(hover: none)').matches && !gift.classList.contains('is-inspected')){
+    event.preventDefault(); giftItems.forEach(item=>item.classList.toggle('is-inspected',item===gift));
+  }
+},true);
 
 // Load a video only on demand, and remove it on close to stop playback.
 const dialog = document.querySelector('#video-dialog');

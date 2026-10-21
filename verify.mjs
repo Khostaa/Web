@@ -61,3 +61,7 @@ assert.equal(suggestedGiftCountry(['en-GB'],'Europe/London'),'GB');
 assert.equal(suggestedGiftCountry(['not_a_locale']),'GLOBAL');
 assert.equal(giftDestination({title:'Example',url:'javascript:alert(1)'},'GLOBAL').url,null);
 console.log('Passed: regional gift destinations, locale fallback, safe URLs and optimized gift assets.');
+
+assert.ok(html.includes('Freelance video editor/ filmmaker'),'Footer profession updated');
+assert.ok(html.includes('class="platform-icon"'),'Platform filters have vector icons');
+assert.ok(html.includes('class="work-body"'),'Work rail and gallery are grouped');

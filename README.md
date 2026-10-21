@@ -7,8 +7,8 @@ An experimental, screen-by-screen video editor portfolio on the **revamp** branc
 ## Experience
 
 - **Start:** “What do you want?” with three large choices, changing image compositions on hover or keyboard focus.
-- **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Filters and pagination accommodate more videos.
-- **Gifts:** five image-led product wishes, country-aware store links, and pagination.
+- **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Vertical platform icons and pagination accommodate more videos.
+- **Gifts:** five image-only product wishes in a 3 × 2 grid, hover/focus details, and country-aware store links.
 - **Reach out:** the editor's paper portrait, animated copy, contact information, and paginated social links.
 
 The navy, green, tan, Inter, and Libre Caslon Condensed styling remains. Cosmos is the user-selected interaction reference: its brand selector informs the menu, and its color-search demonstration informs the gallery entrance.
@@ -59,3 +59,5 @@ Use main only when ready to replace production. Do not merge or push revamp into
 ## Assets and credits
 
 User-supplied portrait and native SVG logo. Inter is loaded from Google Fonts; Libre Caslon Condensed is local, with its license and authors in `public/fonts/`. Decorative placeholder photography: Unsplash. The same Cloudflare DNS and GitHub Pages configuration documented in the guide continue to serve production.
+
+Drag/swipe to page through work, gifts, or social profiles, then move between screens. Keyboard and arrow navigation remain available. All photographs use uncropped contain sizing.
