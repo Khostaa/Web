@@ -86,7 +86,7 @@ Hover/focus pauses motion. Pause motion explicitly stops it. Hidden documents, i
 
 The work-viewport wrapper contains pointer-transparent top/bottom overlays using small masked backdrop blurs. Change `.grid-soft-edge` for their strength/height. Long form hides these overlays. Keep the overlays out of pointer hit-testing. They do not animate their blur radius.
 
-Edit the services array in portfolio.json to change Video Editing, Color Grading, Sound Design, Podcast/Multicam Editing, Teasers and Promos above the wall. These describe offered services, not assumed contributions to each project.
+Edit the services array in portfolio.json to change Video Editing, Color Grading, Sound Design, Motion Graphics, Pacing, Podcast Editing, Multi-Cam Editing, Teasers and Promos above the wall. These describe offered services, not assumed contributions to each project.
 
 ## Video-only playback
 
