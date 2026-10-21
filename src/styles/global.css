@@ -30,3 +30,6 @@
 @media(max-height:620px) and (max-width:700px){.about-screen{gap:8px 18px}.about-copy>h2{font-size:30px}.about-copy>.about-intro{font-size:10px;line-height:1.5}.about-copy>.contact-block{margin-top:3px}.about-copy>.social-window{margin-top:5px}.contact-email{font-size:18px}.social-links a{padding:6px 9px}.about-copy>.disciplines span{padding:5px 7px}}
 
 .screen-heading h2 em{margin-left:.1em}
+
+/* Keep the supplied showreel artwork clear of the play control. */
+.work-media.is-showreel img{filter:none}.work-media.is-showreel .cover-shade{display:none}.work-media.is-showreel .play-circle{left:auto;top:auto;right:12px;bottom:12px;transform:none}

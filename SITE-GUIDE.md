@@ -53,8 +53,8 @@ The stage contains home, work, wishlist, and about sections. The outer page does
 | #home | Start / intent selector |
 | #work | Work gallery and showreel |
 | #wishlist | Gifts |
-| #about | About and contact |
-| #contact | Alias for About and contact |
+| #about | Reach out |
+| #contact | Alias for Reach out |
 
 Navigation uses normal anchors and a small client router. Browser Back/Forward works. Inactive screens are hidden, inert, and aria-hidden. The new heading receives focus. Escape returns to Start unless a video dialog is open; then it closes the dialog. Left/Right arrows change screens when focus is not on a link or button. Up/Down arrows move through the three home choices; Enter opens one. Footer arrows and dots always work with touch and keyboard.
 
@@ -76,7 +76,7 @@ Edit name, alias, email, phone, and phoneDisplay in portfolio.json. Contact link
 
 The current showreel URL is https://www.youtube.com/watch?v=kPqnJMdCEFI. Set showreelUrl in portfolio.json to replace it. A valid showreel becomes the first Work card. Its current title “Make it Exist” and category “SHOWREEL” are set in WorkGallery.astro; change them there when replacing the video. An empty or unsupported URL omits this card.
 
-The background poster uses assets/reel.jpg, which is an optimized alias for src/assets/reel.jpg. Poster and playable video are independent. The reel's tan logo is static. Iframes load only after a click, use a privacy-enhanced YouTube embed, and disappear on close. A Watch on original platform link remains available if embedding fails.
+The showreel poster is set by showreelThumbnail in portfolio.json. Its current value, assets/showreel.png, resolves to src/assets/showreel.png (the supplied restart artwork). Replace this source image to change it; Astro generates lightweight 480px and 960px WebP versions. Poster and playable video are independent. The reel's tan logo is static. Iframes load only after a click, use a privacy-enhanced YouTube embed, and disappear on close. A Watch on original platform link remains available if embedding fails.
 
 ## Add, remove, and reorder work
 
@@ -102,7 +102,7 @@ The gallery shows up to six cards on desktop and four on mobile. When two portra
 
 ## Photos and paper portrait
 
-Replace src/assets/sunil-portrait.png to change the editor photo. Update the alt text and figcaption in the About screen. Astro generates 360px and 640px WebP variants, and the image loads lazily when needed. The portrait belongs on About & Contact, not the opening menu.
+Replace src/assets/sunil-portrait.png to change the editor photo. Update the alt text and figcaption in the About screen. Astro generates 360px and 640px WebP variants, and the image loads lazily when needed. The portrait belongs on Reach out, not the opening menu.
 
 The paper sheet, flaps, and entrance are CSS. public/assets/paper-grain.svg is a small static texture. .is-active triggers the paper unfolding on each About entrance; no storage flag suppresses it. Portrait motion is disabled for reduced-motion visitors. Change paper-open-top, paper-open-bottom, portrait-arrive, and portrait-emerge to tune timing.
 

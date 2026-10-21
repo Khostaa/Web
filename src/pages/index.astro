@@ -7,6 +7,7 @@ import WorkGallery from '../components/WorkGallery.astro';
 import SocialLinks from '../components/SocialLinks.astro';
 import portfolio from '../data/portfolio.json';
 import reel from '../assets/reel.jpg';
+import showreel from '../assets/showreel.png';
 import story from '../assets/story.jpg';
 import social from '../assets/social.jpg';
 import motion from '../assets/motion.jpg';
@@ -17,6 +18,8 @@ for (const [name, source] of Object.entries({ reel, story, social, motion })) {
   const variants = await Promise.all([480, 960].map(width => getImage({ src: source, width, format: 'webp', quality: 76 })));
   images['assets/' + name + '.jpg'] = { src: variants[1].src, small: variants[0].src, srcset: variants.map((image, index) => image.src + ' ' + [480, 960][index] + 'w').join(', '), width: source.width, height: source.height };
 }
+const showreelVariants = await Promise.all([480, 960].map(width => getImage({ src: showreel, width, format: 'webp', quality: 82 })));
+images['assets/showreel.png'] = { src: showreelVariants[1].src, small: showreelVariants[0].src, srcset: showreelVariants.map((image, index) => image.src + ' ' + [480, 960][index] + 'w').join(', '), width: showreel.width, height: showreel.height };
 const portraitImages = await Promise.all([360, 640].map(width => getImage({ src: portrait, width, format: 'webp', quality: 82 })));
 const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
 ---
@@ -40,7 +43,7 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
   <a class="skip" href="#work">Skip to work</a>
   <header class="header">
     <a class="wordmark" href="#home" aria-label="Khosta home"><span class="brand-logo" aria-hidden="true"></span>khosta</a>
-    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#wishlist">Gifts</a><a href="#about">About & contact</a></nav>
+    <nav aria-label="Main navigation"><a href="#work">Work</a><a href="#wishlist">Gifts</a><a href="#about">Reach out</a></nav>
     <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode" title="Switch to light mode"><span class="theme-thumb" aria-hidden="true"></span><svg class="theme-moon" aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 13A8.5 8.5 0 0 1 11 3.5 8.5 8.5 0 1 0 20.5 13Z"/></svg><svg class="theme-sun" aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button>
   </header>
   <main class="stage" id="stage">
@@ -51,7 +54,7 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
         <nav class="choices" aria-label="What do you want?">
           <a class="choice is-selected reveal" href="#work" data-preview-choice="work"><span class="choice-number">01</span><span class="choice-thumbnail"><img src={images['assets/story.jpg'].small} width="48" height="48" alt=""></span><span class="choice-text">Look at my works</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
           <a class="choice reveal" href="#wishlist" data-preview-choice="wishlist"><span class="choice-number">02</span><span class="choice-thumbnail gift-thumbnail" aria-hidden="true">✳</span><span class="choice-text">Gift me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
-          <a class="choice reveal" href="#about" data-preview-choice="about"><span class="choice-number">03</span><span class="choice-thumbnail about-thumbnail brand-logo logo-static" aria-hidden="true"></span><span class="choice-text">About and Contact me</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
+          <a class="choice reveal" href="#about" data-preview-choice="about"><span class="choice-number">03</span><span class="choice-thumbnail about-thumbnail brand-logo logo-static" aria-hidden="true"></span><span class="choice-text">Reach out</span><span class="choice-arrow" aria-hidden="true">↗</span></a>
         </nav>
         <p class="home-caption reveal">A little curiosity goes a long way.</p>
       </div>
@@ -89,7 +92,7 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
       <div class="about-copy"><div class="eyebrow reveal">03 / THE PERSON BEHIND THE TIMELINE</div><h2 class="reveal" id="about-title" tabindex="-1">Hi, I’m Sunil.<br>Call me <em>Khosta.</em></h2><p class="about-intro reveal">I find the story hidden between the frames.<br>The right pause. A cut that clicks. A feeling that stays.</p><div class="disciplines reveal"><span>Video editing</span><span>Color & mood</span><span>Sound & rhythm</span></div><div class="contact-block reveal"><span class="eyebrow">HAVE A STORY IN MIND?</span><a class="contact-email" id="email-link" href={'mailto:' + portfolio.email}>{portfolio.email}<span>↗</span></a><div class="contact-details"><a id="phone-link" href={'tel:' + portfolio.phone}>{portfolio.phoneDisplay}</a><button id="copy-email">Copy email ⧉</button><span id="copy-status" role="status" aria-live="polite"></span></div></div><div class="social-window reveal"><SocialLinks links={portfolio.socials || []} /><div class="social-pager"><button id="social-prev" aria-label="Previous social profiles">←</button><span id="social-page"></span><button id="social-next" aria-label="Next social profiles">→</button></div></div></div>
     </section>
   </main>
-  <footer class="screen-footer"><span class="footer-note"><span class="status-dot"></span> Independent video editor</span><nav class="screen-dots" aria-label="Choose a screen"><a href="#home" aria-label="Start" aria-current="page"></a><a href="#work" aria-label="Work"></a><a href="#wishlist" aria-label="Gifts"></a><a href="#about" aria-label="About and contact"></a></nav><div class="screen-controls"><span id="screen-position" aria-live="polite">01 / 04</span><button id="screen-prev" aria-label="Previous screen">←</button><button id="screen-next" aria-label="Next screen">→</button></div></footer>
+  <footer class="screen-footer"><span class="footer-note"><span class="status-dot"></span> Independent video editor</span><nav class="screen-dots" aria-label="Choose a screen"><a href="#home" aria-label="Start" aria-current="page"></a><a href="#work" aria-label="Work"></a><a href="#wishlist" aria-label="Gifts"></a><a href="#about" aria-label="Reach out"></a></nav><div class="screen-controls"><span id="screen-position" aria-live="polite">01 / 04</span><button id="screen-prev" aria-label="Previous screen">←</button><button id="screen-next" aria-label="Next screen">→</button></div></footer>
   <dialog class="video-dialog" id="video-dialog" aria-labelledby="video-title"><div class="dialog-head"><div><span class="eyebrow" id="video-platform"></span><h3 id="video-title"></h3></div><button class="close-dialog" aria-label="Close video">✕</button></div><div id="video-player"></div><div class="dialog-foot"><span id="video-description"></span><a id="original-link" target="_blank" rel="noopener noreferrer">Watch on original platform ↗</a></div></dialog>
   <noscript><p class="no-script-note">JavaScript enables the animated slideshow. All content is available below without it.</p></noscript>
 </body>

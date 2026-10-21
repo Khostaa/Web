@@ -9,7 +9,7 @@ An experimental, screen-by-screen video editor portfolio on the **revamp** branc
 - **Start:** “What do you want?” with three large choices, changing image compositions on hover or keyboard focus.
 - **Work:** cards unfold from a shared point into a native-ratio, screen-sized gallery. Filters and pagination accommodate more videos.
 - **Gifts:** the wishlist and its current empty state. Additional gifts paginate.
-- **About & Contact:** the editor's paper portrait, animated copy, contact information, and paginated social links.
+- **Reach out:** the editor's paper portrait, animated copy, contact information, and paginated social links.
 
 The navy, green, tan, Inter, and Libre Caslon Condensed styling remains. Cosmos is the user-selected interaction reference: its brand selector informs the menu, and its color-search demonstration informs the gallery entrance.
 
@@ -31,7 +31,7 @@ Run the build before tests. Default dev/preview address: http://127.0.0.1:4321.
 
 | What | Where |
 | --- | --- |
-| Contacts, videos, showreel, gifts, socials | `src/data/portfolio.json` |
+| Contacts, videos, showreel URL and thumbnail, gifts, socials | `src/data/portfolio.json` |
 | Four screens, copy, selector previews, head metadata | `src/pages/index.astro` |
 | Server-rendered work cards | `src/components/WorkGallery.astro` |
 | Colors, typography, screen layout, paper and selector effects | `src/styles/global.css` |
