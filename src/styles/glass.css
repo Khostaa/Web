@@ -55,3 +55,40 @@ body{background:radial-gradient(ellipse at 88% 15%,var(--glow-green),transparent
 @media(max-width:700px){.header{width:calc(100% - 28px);min-height:50px;padding:6px 10px;gap:5px}.header nav{font-size:12px;gap:9px}.header nav .hire-link{font-size:11px;padding:9px 10px}.header .theme-toggle{width:42px;height:25px}.header .theme-thumb{width:17px;height:17px}.header .theme-toggle svg{width:10px;height:10px;top:7px}.header .theme-moon{left:5px}.header .theme-sun{right:5px}[data-theme=light] .header .theme-thumb{transform:translateX(17px)}}
 @media(max-width:370px){.header nav{font-size:11px;gap:7px}.header nav .hire-link{padding:8px}.header .wordmark{gap:4px}.header .brand-logo{width:23px;height:23px}.header .theme-toggle{width:35px}[data-theme=light] .header .theme-thumb{transform:translateX(10px)}}
 @media(max-height:500px) and (min-width:701px){.header{min-height:46px;padding-top:4px;padding-bottom:4px}}
+
+/* Keep the invitation prominent and the roles close to the portrait subject. */
+.contact-block .contact-question{font:500 clamp(19px,1.7vw,24px)/1.25 var(--font-body);letter-spacing:-.035em;color:var(--white);margin:0 0 7px}
+.portrait-label{animation:portrait-label-float 6s ease-in-out infinite;animation-play-state:paused}
+.about-screen.is-active .portrait-label{animation-play-state:running}
+.label-video{top:46%;left:2%;animation-delay:-1s}
+.label-motion{top:68%;right:0;animation-delay:-3s}
+.label-available{bottom:7%;left:4%;animation-delay:-5s}
+@keyframes portrait-label-float{0%,100%{translate:0 0}50%{translate:0 -6px}}
+@media(max-width:700px){
+ .about-screen>.editor-portrait{grid-row:2 / 5}
+ .about-copy>.about-location{grid-column:2;grid-row:4;display:flex;align-items:center;justify-content:flex-start;gap:5px;margin:0;font-size:9px;line-height:1.45;white-space:nowrap}
+ .about-location svg{width:12px;height:12px}.about-location>span{font-size:8px;white-space:nowrap}
+ .contact-block .contact-question{font-size:19px;margin-bottom:5px}
+ .label-video{top:32%;left:0}.label-motion{top:78%;right:-6px}.label-available{bottom:-4%;left:0}
+}
+@media(max-height:700px) and (max-width:700px){.contact-block .contact-question{font-size:17px}.about-copy>.about-location{font-size:8px}.about-location>span{font-size:7px}}
+@media(prefers-reduced-motion:reduce){.portrait-label{animation:none;translate:none}}
+
+/* Longer editorial copy stays readable, with local scrolling on smaller screens. */
+.about-copy .about-intro{font-size:12px;line-height:1.7}.about-intro p+p{margin-top:9px}
+.work-screen .section-note{max-width:350px;text-align:left;line-height:1.65}
+.js .about-screen,.js .home-screen{overflow-y:auto;scrollbar-width:thin;overscroll-behavior-y:contain}
+.about-screen{align-content:safe center}
+@media(max-width:700px){
+ .about-screen{align-content:start;padding-top:22px;padding-bottom:28px}
+ .about-screen>.editor-portrait{grid-row:2;height:180px;min-height:0}
+ .about-copy>h2{align-self:center}
+ .about-copy>.about-intro{grid-column:1 / -1;grid-row:3;font-size:12px;line-height:1.7}
+ .about-copy>.about-location{grid-column:2;grid-row:4}
+ .home-copy .intent-heading{font-size:24px}
+ .work-screen .screen-heading{display:block}.work-screen .section-note{display:block;font-size:10px;max-width:100%;margin-top:10px}
+}
+@media(max-height:700px) and (min-width:701px){.about-screen{align-content:start}.about-copy .about-intro{font-size:12px}.about-copy h2{font-size:38px}}
+
+.gift-introduction{max-width:430px}.gift-introduction p+p{margin-top:8px}
+@media(max-width:700px){.gifts-screen .screen-heading{display:block}.gifts-screen .gift-introduction{display:block;font-size:11px;line-height:1.65;max-width:none;margin-top:14px}.gifts-screen .screen-heading h2 em{display:inline}}
