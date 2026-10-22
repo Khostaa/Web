@@ -77,7 +77,7 @@ const gifts = portfolio.gifts.filter(gift => safeUrl(gift.url));
           {homePosters.map((poster,index) => <div class:list={['art-photo', ['art-large','art-small','art-wide'][index]]}><img src={images[poster.image]?.src || poster.image} srcset={images[poster.image]?.srcset} sizes="400px" width={images[poster.image]?.width} height={images[poster.image]?.height} alt="" loading={index ? 'lazy' : 'eager'} /><span class="preview-platform"><PlatformIcon platform={poster.platform} /></span></div>)}
           <span class="art-marker">01 / SELECTED MOMENTS</span>
         </div>
-        <div class="intent-preview preview-wishlist"><div class="gift-note"><span class="eyebrow">A LITTLE SOMETHING</span><span class="gift-drawing">✳</span><p>Good stories.<br><em>Kind gestures.</em></p><span class="note-signature">with a little gratitude, khosta</span></div><span class="art-marker">03 / GOOD ENERGY ONLY</span></div>
+        <div class="intent-preview preview-wishlist"><div class="gift-note"><span class="eyebrow">A LITTLE SOMETHING</span><span class="gift-drawing">✳</span><p>Got something<br><em>in mind?</em></p><span class="note-signature">Explore my wishlist</span></div><span class="art-marker">03 / GOOD ENERGY ONLY</span></div>
         <div class="intent-preview preview-about"><span class="about-orbit brand-logo" aria-hidden="true"></span><p>Behind<br><em>the cut.</em></p><span class="art-marker">02 / THE PERSON, THE PROCESS</span></div>
       </div>
     </section>
