@@ -150,6 +150,8 @@ The landing prompt is “What are you looking for?” and its three labels are s
 
 The Gifts introduction starts “If you're wondering what I'd actually use…” beneath “Got something in mind?”; its closing reassurance lives in GiftGallery.astro below the product grid. The first two sentences of the Hire me biography share one paragraph. The landing introduction starts “I work with creators…” on a new line after “based in Nepal.”
 
-Footer screen navigation uses the four screen dots, header links, keyboard arrows and drag/swipe. The previous/next screen buttons and page count have been removed. Product grid pagination, when needed, remains independent. Transparent gift product edits and prompts are documented in src/assets/gifts/IMAGE-EDITS.md.
+Footer screen navigation uses the four screen dots, header links, keyboard arrows and drag/swipe. Previous/next page arrows are available at the bottom right, with 32px visible chevron buttons and 44px touch targets; the page count stays removed. The arrows disable at the first and last screen. Product grid pagination, when needed, remains independent. Transparent gift product edits and prompts are documented in src/assets/gifts/IMAGE-EDITS.md.
 
 Final layout details: the desktop landing summary stays on one line with a blank-line gap before the collaboration sentence. On mobile, the Hire me biography and inline location sit in the right column beneath the heading. The longer brand/team/creator invitation appears only above the email. Social buttons are ordered WhatsApp me, Instagram, LinkedIn, Behance. Gift cards have rounded frosted-glass surfaces and use transparent product cutouts for the Sony camera, Galaxy Watch and MacBook.
+
+The footer groups Drag / swipe and the screen dots in `.footer-navigation`, centered independently of the side content. Compact chevron controls stay at the bottom right; there is no page number. The hint and dots stack on mobile to avoid the chevrons.

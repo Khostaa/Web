@@ -48,6 +48,8 @@ function showScreen(id, { focus = true, animate = true } = {}) {
     else link.removeAttribute('aria-current');
   });
   const index = ids.indexOf(id);
+  document.querySelector('#screen-prev').disabled = index === 0;
+  document.querySelector('#screen-next').disabled = index === ids.length - 1;
   document.title = 'Sunil Paudel - Visuals & Editing';
   if (focus) next.querySelector('h1, h2').focus({ preventScroll: true });
   wall.setActive(id === 'work', animate);
@@ -66,6 +68,8 @@ document.addEventListener('click', event => {
 });
 addEventListener('popstate', () => showScreen(currentRoute()));
 addEventListener('hashchange', () => showScreen(currentRoute()));
+document.querySelector('#screen-prev').addEventListener('click', () => { const previous = ids[ids.indexOf(active.id) - 1]; if (previous) navigate(previous); });
+document.querySelector('#screen-next').addEventListener('click', () => { const next = ids[ids.indexOf(active.id) + 1]; if (next) navigate(next); });
 
 const home = document.querySelector('#home');
 const choices = [...document.querySelectorAll('[data-preview-choice]')];
