@@ -50,7 +50,7 @@ Label update: the supplied worksheet titles and contribution tags have been appl
 
 ### Experience stats and wheel browsing
 
-The `stats` array in portfolio.json controls the three supplied figures: 1.5+ Years Experience, 500+ Shorts Delivered and 6+ Million Views Generated. Update value/label independently. They render above the services list.
+The `stats` array in portfolio.json controls the three supplied figures: 1.5+ Years Experience, 500+ Shorts Delivered and 6M+ Views Generated. Update value/label independently. They render above the services list.
 
 The Work showreel shortcut, pause button and collection arrows are removed. The Home showreel and screen navigation remain. Moving tiles run at twice their previous speed. Scrolling over tiles advances their CSS timeline in its existing direction, including alternating vertical columns and sideways category strips. Both wheel directions advance the existing animation; trackpad/line/page deltas are normalized and large gestures bounded. Wheel input outside the tiles and Ctrl/Meta wheel zoom are not intercepted. Hover pauses automatic movement while wheel input still lets you browse. Reduced-motion/keyboard browsing uses ordinary still-column scrolling (horizontal strips translate wheel input to horizontal scroll). Long-form films remain stationary. The pure wheel/time helpers are in src/lib/work-motion.js; the listener runs only on wheel input, with no persistent JavaScript animation loop.
 

@@ -90,8 +90,8 @@ assert.equal(parseVideo('/media/../secret.mp4'),null);
 
 for(const v of content.videos){assert.ok(['sports','education','social','long'].includes(v.collection));assert.ok(Array.isArray(v.tags));assert.ok(html.includes('data-collection="'+v.collection+'"'));}
 for(const service of content.services)assert.ok(html.includes(service));
-assert.deepEqual(content.socials.map(s=>new URL(s.url).hostname),['www.instagram.com','www.behance.net','www.linkedin.com','wa.me']);
-assert.equal(content.socials.at(-1).url,'https://wa.me/'+content.phone.replace(/\D/g,''));
+assert.deepEqual(content.socials.map(s=>new URL(s.url).hostname),['wa.me','www.instagram.com','www.linkedin.com','www.behance.net']);
+assert.equal(content.socials[0].url,'https://wa.me/'+content.phone.replace(/\D/g,''));
 assert.ok(html.includes('id="home-showreel"'));
 assert.ok(!html.includes('paper-sheet'),'Portrait is frameless');
 
